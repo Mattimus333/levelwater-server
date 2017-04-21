@@ -13,10 +13,13 @@ if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
 
-app.get('/', (req, res) => {
-  res.send('drunk with POWER');
-});
+// app.get('/', (req, res) => {
+//   res.send('drunk with POWER');
+// });
 
+const users = require('./routes/users');
+
+app.use(users);
 
 const PORT = process.env.PORT || 8000;
 
@@ -30,3 +33,4 @@ app.listen(PORT, () => {
 
 // below ?
 // export default app;
+module.exports = app;

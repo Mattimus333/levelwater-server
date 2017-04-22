@@ -1,8 +1,16 @@
-
-exports.up = function(knex, Promise) {
-  
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('distribution_system', (table) => {
+    table.increments();
+    table.integer('water_systems_id').notNullable().references('id').inTable('water_systems').onDelete('CASCADE');
+    table.integer('total_length').notNullable().defaultTo(0);
+    table.integer('number_of_valves').notNullable().defaultTo(0);
+    table.integer('number_of_meters').notNullable().defaultTo(0);
+    table.integer('number_of_pumping_plants').notNullable().defaultTo(0);
+    table.integer('combined_pumping_capacity').notNullable().defaultTo(0);
+    table.integer('pumps_condition').notNullable().defaultTo(0);
+  });
 };
 
-exports.down = function(knex, Promise) {
-  
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTable('distribution_system');
 };

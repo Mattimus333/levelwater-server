@@ -16,9 +16,9 @@
     "express": "^4.15.2",
     "knex": "^0.12.9",
     "mysql": "^2.13.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
     "body-parser": "^1.17.1",
-    "cookie-parser": "^1.4.3",
+    "cookie-parser": "^1.4.3"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

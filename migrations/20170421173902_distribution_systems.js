@@ -1,7 +1,7 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('distribution_system', (table) => {
     table.increments();
-    table.integer('water_systems_id').notNullable().references('id').inTable('water_systems').onDelete('CASCADE');
+    table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
     table.integer('total_length').notNullable().defaultTo(0);
     table.integer('number_of_valves').notNullable().defaultTo(0);
     table.integer('number_of_meters').notNullable().defaultTo(0);

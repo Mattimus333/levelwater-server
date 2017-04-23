@@ -1,4 +1,3 @@
-
 'use strict';
 
 // refactor to es6

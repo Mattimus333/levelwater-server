@@ -1,5 +1,5 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('rate_finances_fixedcosts', (table) => {
+  return knex.schema.createTable('rates_finances_fixedcosts', (table) => {
     table.increments();
     table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
     table.integer('current_water_rate').notNullable().defaultTo(0);
@@ -15,5 +15,5 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('rate_finances_fixedcosts');
+  return knex.schema.dropTable('rates_finances_fixedcosts');
 };

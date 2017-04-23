@@ -9,12 +9,15 @@ exports.seed = function(knex, Promise) {
         source_name: 'bubbly springs',
         system_source_id: 5,
         source_type: 'gw',
+        critical_to_operations: 'true',
         treatment: true,
+        year_constructed: 1999,
         capacity: 1111,
-        condition: 44,
+        condition: 'great',
         estimated_replacement_cost: 33,
         estimated_time_to_replacement: 45,
-        status_code: 500,
+        rate_increase_sentence: 'Yo you\'re rates suck bro',
+        continuos_clorination: 'false'
       }]);
     });
 };

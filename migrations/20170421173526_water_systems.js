@@ -6,7 +6,6 @@ exports.up = function (knex, Promise) {
     table.integer('population').notNullable().defaultTo(0);
     table.integer('connections').notNullable().defaultTo(0);
     table.integer('max_day_demand').notNullable().defaultTo(0);
-    table.integer('projected_cnxn_growth').notNullable().defaultTo(0);
   });
 };
 

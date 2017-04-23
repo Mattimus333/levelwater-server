@@ -4,6 +4,7 @@ exports.up = function (knex, Promise) {
     table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
     table.integer('target_rate').notNullable().defaultTo(0);
     table.integer('rate_schedule').notNullable().defaultTo(0);
+    table.text('rate_increase_summary').notNullable().defaultTo('');
   });
 };
 

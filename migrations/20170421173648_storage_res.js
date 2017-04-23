@@ -6,7 +6,10 @@ exports.up = function (knex, Promise) {
     table.string('reservoir_name', 'char(120)').notNullable().defaultTo('');
     table.integer('year_constructed').notNullable().defaultTo(0);
     table.integer('capacity').notNullable().defaultTo(0);
-    table.integer('condition').notNullable().defaultTo(0);
+    table.enum('condition', ['great', 'fair', 'poor']).notNullable().defaultTo('great');
+    table.integer('estimated_replacement_cost').notNullable().defaultTo(0);
+    table.integer('estimated_time_to_replacement').notNullable().defaultTo(0);
+    table.text('rate_increase_sentence').notNullable().defaultTo(0);
   });
 };
 

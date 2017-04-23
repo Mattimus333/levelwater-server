@@ -9,7 +9,6 @@ exports.seed = function (knex, Promise) {
         population: 100,
         connections: 444,
         max_day_demand: 444,
-        projected_cnxn_growth: 1,
       }]);
     });
 };

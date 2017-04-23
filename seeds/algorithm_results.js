@@ -7,6 +7,7 @@ exports.seed = function (knex, Promise) {
         water_systems_id: 1,
         target_rate: 10000,
         rate_schedule: 1,
+        rate_increase_summary: 'helloooooooo',
       }]);
     });
 };

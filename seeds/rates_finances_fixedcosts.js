@@ -5,15 +5,15 @@ exports.seed = function(knex, Promise) {
       return knex('rates_finances_fixedcosts').insert([{
         id: 1,
         water_systems_id: 1,
-        current_water_rate: 5,
-        monthly_savings_amount: 77,
-        total_financial_reserves: 88,
-        monthly_debt_financing_costs: 1,
-        personnel_costs: 5,
-        monthly_chem_costs: 3333,
-        monthly_elec_costs: 3,
-        other_monthly_fixed_costs: 6,
-        status_code: 404,
+        current_average_water_rate: 100.33,
+        total_financial_reserves: 10000,
+        annual_revenue_water_sales: 50000,
+        annual_revenue_fees_charged: 2999,
+        annual_revenue_subsidies: 1000,
+        annual_savings_to_financial_reserves: 100000,
+        annual_personnel_costs: 400000,
+        annual_operations_costs: 3333,
+        annual_debt_costs: 4000,
       }]);
     });
 };

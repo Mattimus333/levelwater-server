@@ -24,11 +24,6 @@ app.use(express.static(path.join('public')));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// app.get('/', (req, res) => {
-//   res.send('drunk with POWER');
-// });
-
-
 app.use(users);
 app.use(usersSignup);
 

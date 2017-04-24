@@ -20,9 +20,11 @@ const authorize = (req, res, next) => {
   });
 };
 
-router.get('/users', authorize, test);
-router.post('/signup/step0', authorize, usersSignup);
-
+router.get('/test', test);
+router.post('/signup/step0', usersSignup);
+router.get('/signup/step0', authorize, usersSignup);
+router.put('/signup/step0', authorize, usersSignup);
+router.delete('/signup/step0', authorize, usersSignup);
 // router.get('/water_systems', )
 
 module.exports = router;

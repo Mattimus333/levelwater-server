@@ -8,7 +8,8 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
-function usersSignup(req, res) {
+// ok if we do arrow functions here?
+const usersSignup = (req, res) => {
   console.log('req.body', req.body);
   const { email, password } = req.body;
 

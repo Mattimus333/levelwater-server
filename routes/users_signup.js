@@ -8,8 +8,13 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
-// ok if we do arrow functions here?
-const usersSignup = (req, res) => {
+const getUsers = (req, res) => {
+  const { id } = req.body;
+  knex('users')
+  .where('id', id)
+}
+
+const postUsers = (req, res) => {
   console.log('req.body', req.body);
   const { email, password } = req.body;
 
@@ -70,4 +75,9 @@ const usersSignup = (req, res) => {
     });
 }
 
-module.exports = usersSignup;
+module.exports = {
+  getUsers,
+  postUsers,
+  patchusers,
+  deleteUsers
+}

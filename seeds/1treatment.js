@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('treatment').del().then(() => {
     return knex('treatment').insert([{
@@ -11,6 +11,6 @@ exports.seed = function(knex, Promise) {
       estimated_replacement_cost: 222222,
       estimated_time_to_replacement: 5,
       rate_increase_sentence: 'Hello, my name is treaty the treatment plant',
-      }]);
+    }]);
   });
 };

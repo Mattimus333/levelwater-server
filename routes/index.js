@@ -1,12 +1,9 @@
-'use strict';
-
 const express = require('express');
-
-const router = express.Router();
-
 const test = require('./users');
 const usersSignup = require('./users_signup');
 const jwt = require('jsonwebtoken');
+
+const router = express.Router();
 
 const authorize = (req, res, next) => {
   jwt.verify(req.cookies.token, process.env.JWT_KEY, (err, playload) => {

@@ -1,20 +1,14 @@
-'use strict';
-
 const express = require('express');
-
-const router = express.Router();
 const knex = require('../knex');
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
-// ok if we do arrow functions here?
-const usersSignup = (req, res) => {
-  console.log('req.body', req.body);
-  const { email, password } = req.body;
+const router = express.Router();
 
+const usersSignup = (req, res) => {
+  const { email, password } = req.body;
   if (!email || !email.trim()) {
-    console.log('email', email);
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
 
@@ -32,8 +26,9 @@ const usersSignup = (req, res) => {
         res.send({ status: 400, ErrorMessage: 'Email already exists' });
       } else if (valid.error) {
         res.send({ status: 400, ErrorMessage: 'Improper email format' });
+      } else {
+        return bcrypt.hash(password, 12);
       }
-      return bcrypt.hash(password, 12);
     })
     .then((hashed_password) => {
       const { water_systems_id, first_name, last_name, superuser } = req.body;
@@ -45,28 +40,24 @@ const usersSignup = (req, res) => {
         hashed_password,
         superuser
       };
-
       return knex('users').insert(newUser, '*');
     })
     .then((users) => {
       const user = users[0];
-      const claim = { userId: user.id };
+      const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days'
       });
-
       res.cookie('token', token, {
         httpOnly: true,
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
         secure: router.get('env') === 'production'
       });
-
       delete user.hashed_password;
-
-      res.send(user);
+      res.status(200).json((user));
     })
     .catch((err) => {
-      res.send({ status: 400, ErrorMessage: err });
+      res.sendStatus({ status: 400, ErrorMessage: err });
     });
 }
 

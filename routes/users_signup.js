@@ -1,20 +1,15 @@
-'use strict';
-
 const express = require('express');
-
-const router = express.Router();
 const knex = require('../knex');
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
-// ok if we do arrow functions here?
+const router = express.Router();
+
 const usersSignup = (req, res) => {
-  console.log('req.body', req.body);
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
-    console.log('email', email);
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
 

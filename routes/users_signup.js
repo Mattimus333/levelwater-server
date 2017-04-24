@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+
 const router = express.Router();
 const knex = require('../knex');
 const Joi = require('joi');
@@ -8,9 +9,11 @@ const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
 function usersSignup(req, res) {
+  console.log('req.body', req.body);
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
+    console.log('email', email);
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
 
@@ -19,6 +22,7 @@ function usersSignup(req, res) {
   }
 
   knex('users')
+    // .where('water_systems_id', null)
     .where('email', email)
     .first()
     .then((user) => {
@@ -31,8 +35,15 @@ function usersSignup(req, res) {
       return bcrypt.hash(password, 12);
     })
     .then((hashed_password) => {
-      const { first_name, last_name } = req.body;
-      const newUser = { first_name, last_name, email, hashed_password };
+      const { water_systems_id, first_name, last_name, superuser } = req.body;
+      const newUser = {
+        water_systems_id,
+        first_name,
+        last_name,
+        email,
+        hashed_password,
+        superuser
+      };
 
       return knex('users').insert(newUser, '*');
     })

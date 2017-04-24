@@ -1,11 +1,11 @@
 'use strict';
 
 // refactor to es6
-const express = require('express');
-const router = express.Router();
+// const express = require('express');
+// const router = express.Router();
 
-router.get('/users', (req, res) => {
+function test(req, res) {
   res.send('drunk with POWER');
-});
+};
 
-module.exports = router;
+module.exports = test;

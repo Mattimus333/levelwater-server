@@ -1,6 +1,4 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../knexfile.js')[env];
-const knex = require('knex')(config);
+const knex = require('../../knex');
 const Joi = require('joi');
 const express = require('express');
 const bcrypt = require('bcrypt-as-promised');

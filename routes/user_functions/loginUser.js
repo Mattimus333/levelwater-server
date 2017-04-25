@@ -1,7 +1,5 @@
-const env = process.env.NODE_ENV || 'development';
 const express = require('express');
-const config = require('../../knexfile.js')[env];
-const knex = require('knex')(config);
+const knex = require('../../knex');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
@@ -17,7 +15,7 @@ const loginUsers = (req, res) => {
   }
   knex('users')
   .where('email', req.body.email)
-  .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser')
+  .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id')
   .then((users) => {
     user = users[0];
     if (user.length === 0) {

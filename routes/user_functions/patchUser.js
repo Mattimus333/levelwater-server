@@ -1,7 +1,6 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../knexfile.js')[env];
 const knex = require('knex')(config);
-const bcrypt = require('bcrypt-as-promised');
 
 const patchUser = (req, res) => {
   if (isNaN(req.params.userId) || req.params.userId === undefined) {

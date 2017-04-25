@@ -1,12 +1,12 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../knexfile.js')[env];
 const knex = require('knex')(config);
-const express = require('express');
-
-const router = express.Router();
 const Joi = require('joi');
+const express = require('express');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
+
+const router = express.Router();
 
 const postUsers = (req, res) => {
   const { email, password } = req.body;
@@ -57,7 +57,7 @@ const postUsers = (req, res) => {
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
         secure: router.get('env') === 'production',
       });
-      
+
       delete user.hashed_password;
       return res.status(200).json(user);
     })

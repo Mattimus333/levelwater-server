@@ -1,34 +1,14 @@
-<<<<<<< HEAD:routes/users_signup.js
-'use strict';
-
-const express = require('express');
-
-const router = express.Router();
-const knex = require('../knex');
-=======
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../knexfile.js')[env];
 const knex = require('knex')(config);
 const express = require('express');
 
 const router = express.Router();
->>>>>>> userRoutes:routes/user_functions/postUser.js
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
-<<<<<<< HEAD:routes/users_signup.js
-const getUsers = (req, res) => {
-  const { id } = req.body;
-  knex('users')
-  .where('id', id)
-}
-
 const postUsers = (req, res) => {
-  console.log('req.body', req.body);
-=======
-const postUsers = (req, res) => {
->>>>>>> userRoutes:routes/user_functions/postUser.js
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
@@ -80,26 +60,12 @@ const postUsers = (req, res) => {
       });
 
       delete user.hashed_password;
-<<<<<<< HEAD:routes/users_signup.js
-
-      res.send(user);
-=======
-      console.log(user);
       res.status(200).json(user);
->>>>>>> userRoutes:routes/user_functions/postUser.js
     })
     .catch((err) => {
       res.send({ status: 400, ErrorMessage: err });
     });
-}
+};
 
-<<<<<<< HEAD:routes/users_signup.js
-module.exports = {
-  getUsers,
-  postUsers,
-  patchusers,
-  deleteUsers
-}
-=======
+
 module.exports = postUsers;
->>>>>>> userRoutes:routes/user_functions/postUser.js

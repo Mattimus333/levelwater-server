@@ -1,13 +1,23 @@
+<<<<<<< HEAD:routes/users_signup.js
 'use strict';
 
 const express = require('express');
 
 const router = express.Router();
 const knex = require('../knex');
+=======
+const env = process.env.NODE_ENV || 'development';
+const config = require('../../knexfile.js')[env];
+const knex = require('knex')(config);
+const express = require('express');
+
+const router = express.Router();
+>>>>>>> userRoutes:routes/user_functions/postUser.js
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
+<<<<<<< HEAD:routes/users_signup.js
 const getUsers = (req, res) => {
   const { id } = req.body;
   knex('users')
@@ -16,6 +26,9 @@ const getUsers = (req, res) => {
 
 const postUsers = (req, res) => {
   console.log('req.body', req.body);
+=======
+const postUsers = (req, res) => {
+>>>>>>> userRoutes:routes/user_functions/postUser.js
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
@@ -48,7 +61,7 @@ const postUsers = (req, res) => {
         last_name,
         email,
         hashed_password,
-        superuser
+        superuser,
       };
 
       return knex('users').insert(newUser, '*');
@@ -57,27 +70,36 @@ const postUsers = (req, res) => {
       const user = users[0];
       const claim = { userId: user.id };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
-        expiresIn: '7 days'
+        expiresIn: '7 days',
       });
 
       res.cookie('token', token, {
         httpOnly: true,
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
-        secure: router.get('env') === 'production'
+        secure: router.get('env') === 'production',
       });
 
       delete user.hashed_password;
+<<<<<<< HEAD:routes/users_signup.js
 
       res.send(user);
+=======
+      console.log(user);
+      res.status(200).json(user);
+>>>>>>> userRoutes:routes/user_functions/postUser.js
     })
     .catch((err) => {
       res.send({ status: 400, ErrorMessage: err });
     });
 }
 
+<<<<<<< HEAD:routes/users_signup.js
 module.exports = {
   getUsers,
   postUsers,
   patchusers,
   deleteUsers
 }
+=======
+module.exports = postUsers;
+>>>>>>> userRoutes:routes/user_functions/postUser.js

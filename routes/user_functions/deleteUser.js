@@ -18,6 +18,6 @@ const deleteUser = (req, res) => {
       res.send({ status: 400, ErrorMessage: err });
     });
   }
-}
+};
 
 module.exports = deleteUser;

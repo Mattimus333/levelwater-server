@@ -12,7 +12,6 @@ const postUsers = (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
-    console.log('email', email);
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
 
@@ -27,9 +26,9 @@ const postUsers = (req, res) => {
     .then((user) => {
       const valid = Joi.validate(email, Joi.string().email());
       if (user) {
-        res.send({ status: 400, ErrorMessage: 'Email already exists' });
+        return res.send({ status: 400, ErrorMessage: 'Email already exists' });
       } else if (valid.error) {
-        res.send({ status: 400, ErrorMessage: 'Improper email format' });
+        return res.send({ status: 400, ErrorMessage: 'Improper email format' });
       }
       return bcrypt.hash(password, 12);
     })
@@ -60,10 +59,10 @@ const postUsers = (req, res) => {
       });
 
       delete user.hashed_password;
-      res.status(200).json(user);
+      return res.status(200).json(user);
     })
     .catch((err) => {
-      res.send({ status: 400, ErrorMessage: err });
+      return res.send({ status: 400, ErrorMessage: err });
     });
 };
 

@@ -57,7 +57,7 @@ const postUsers = (req, res) => {
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
         secure: router.get('env') === 'production',
       });
-
+      
       delete user.hashed_password;
       return res.status(200).json(user);
     })

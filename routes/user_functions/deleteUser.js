@@ -10,7 +10,6 @@ const deleteUser = (req, res) => {
     .where('id', req.params.userId)
     .del()
     .then((user) => {
-      console.log(user);
       delete user.hashed_password;
       res.status(200).json(user);
     })

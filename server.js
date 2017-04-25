@@ -4,6 +4,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const users = require('./routes/users');
+const water_systems = require('./routes/water_systems');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(users);
+app.use(water_systems);
 
 const PORT = process.env.PORT || 8000;
 

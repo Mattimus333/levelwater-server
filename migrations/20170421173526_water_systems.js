@@ -5,7 +5,6 @@ exports.up = function (knex, Promise) {
     table.integer('pws_id').notNullable().defaultTo(0);
     table.integer('population').notNullable().defaultTo(0);
     table.integer('connections').notNullable().defaultTo(0);
-    table.integer('max_day_demand').notNullable().defaultTo(0);
   });
 };
 

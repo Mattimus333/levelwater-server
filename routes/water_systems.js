@@ -1,7 +1,9 @@
-'use strict';
-
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const knex = require('../knex');
+const authorize = require('./authorize');
+const postWaterSystem = require('./waterSys_functions/postWaterSystem');
 
 const router = express.Router();
+
+router.post('/water_systems', postWaterSystem);
+
+module.exports = router;

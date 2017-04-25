@@ -4,6 +4,6 @@ const postWaterSystem = require('./waterSys_functions/postWaterSystem');
 
 const router = express.Router();
 
-router.post('/water_systems', postWaterSystem);
+router.post('/water_systems', authorize, postWaterSystem);
 
 module.exports = router;

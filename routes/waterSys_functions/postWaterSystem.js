@@ -1,4 +1,4 @@
-const knex = require('../../knex')
+const knex = require('../../knex');
 
 const postWaterSystems = (req, res) => {
   const { pws_name, pws_id, population, connections } = req.body;

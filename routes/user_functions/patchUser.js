@@ -8,12 +8,6 @@ const patchUser = (req, res) => {
   if (isNaN(req.params.userId) || req.params.userId === undefined) {
     res.status(400).send('User ID must be an integer');
   } else {
-    // if (req.body.password) {
-    //   return bcrypt.hash(req.body.password, 12);
-    // }
-    // .then((password) => {
-    //
-    // })
     const user = {
       water_systems_id: req.body.water_systems_id,
       first_name: req.body.first_name,

@@ -3,8 +3,7 @@
 // refactor to es6
 const express = require('express');
 const dotenv = require('dotenv');
-const usersSignup = require('./routes/index');
-const users = require('./routes/index');
+const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 
@@ -23,9 +22,8 @@ app.use(express.static(path.join('public')));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 app.use(users);
-app.use(usersSignup);
+
 
 const PORT = process.env.PORT || 8000;
 

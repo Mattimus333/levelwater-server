@@ -1,10 +1,14 @@
-const knex = require('knex');
+const env = process.env.NODE_ENV || 'development';
+const config = require('../../knexfile.js')[env];
+const knex = require('knex')(config);
+const express = require('express');
+
+const router = express.Router();
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
 
 const postUsers = (req, res) => {
-  console.log('req.body', req.body);
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
@@ -43,7 +47,7 @@ const postUsers = (req, res) => {
     })
     .then((users) => {
       const user = users[0];
-      const claim = { userId: user.id };
+      const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });
@@ -55,7 +59,8 @@ const postUsers = (req, res) => {
       });
 
       delete user.hashed_password;
-      res.send(user);
+      console.log(user);
+      res.status(200).json(user);
     })
     .catch((err) => {
       res.send({ status: 400, ErrorMessage: err });

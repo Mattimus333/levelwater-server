@@ -3,7 +3,6 @@ const config = require('../../knexfile.js')[env];
 const knex = require('knex')(config);
 const bcrypt = require('bcrypt-as-promised');
 
-//must return undefined if we do not want that field to update?
 const patchUser = (req, res) => {
   if (isNaN(req.params.userId) || req.params.userId === undefined) {
     res.status(400).send('User ID must be an integer');

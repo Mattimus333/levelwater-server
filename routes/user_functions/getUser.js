@@ -12,6 +12,10 @@ const getUser = (req, res) => {
     .then((user) => {
       delete user.hashed_password;
       res.status(200).json(user);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send('user ID is invalid!');
     });
   }
 };

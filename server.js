@@ -3,12 +3,7 @@
 // refactor to es6
 const express = require('express');
 const dotenv = require('dotenv');
-<<<<<<< HEAD
-// const usersSignup = require('./routes/index');
-const routes = require('./routes/index');
-=======
 const users = require('./routes/users');
->>>>>>> userRoutes
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 
@@ -27,14 +22,8 @@ app.use(express.static(path.join('public')));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-<<<<<<< HEAD
 
-app.use(routes);
-// app.use(postUsers);
-=======
 app.use(users);
-
->>>>>>> userRoutes
 
 const PORT = process.env.PORT || 8000;
 

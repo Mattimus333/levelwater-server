@@ -12,17 +12,20 @@ const deleteWaterSystem = (req, res) => {
   .select('water_systems_id')
   .then((result) => {
     console.log('result', result[0]);
-    if (req.params.id === result.water_systems_id) {
+    console.log(req.params.id);
+    console.log(result[0].water_systems_id);
+    if (Number(req.params.id) === Number(result[0].water_systems_id)) {
+      console.log('before delete');
       return knex('water_systems')
-      .where('id', req.params.id)
-      .del();
+      .del()
+      .where('id', (req.params.id));
     } else {
       throw new Error('Water System not found');
     }
   })
-  .then((result) => {
-    console.log('res', result);
-    res.status(200).json(result);
+  .then((data) => {
+    console.log('data', data);
+    res.status(200).json(data);
   })
   .catch((err) => {
     return res.send({ status: 400, ErrorMessage: err });

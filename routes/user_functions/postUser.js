@@ -12,13 +12,10 @@ const postUsers = (req, res) => {
   if (!email || !email.trim()) {
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
-
   if (!password || password.length < 8) {
     return res.send({ status: 400, errorMessage: 'Password must be at least 8 characters long' });
   }
-
   knex('users')
-    // .where('water_systems_id', null)
     .where('email', email)
     .first()
     .then((user) => {
@@ -45,7 +42,6 @@ const postUsers = (req, res) => {
     })
     .then((users) => {
       const user = users[0];
-      console.log(user);
       const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',

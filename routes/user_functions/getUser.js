@@ -1,8 +1,8 @@
 const knex = require('../../knex');
 
 const getUser = (req, res) => {
-  if (typeof req.params.userId !== 'number' || req.params.userId === undefined) {
-    return res.status(400).set('Content-Type', 'text/plain').send('User ID must be an integer');
+  if (Number(req.claim.userId) !== Number(req.params.userId)) {
+    return res.status(404).send('This user could not be found');
   }
   knex('users')
   .where('id', req.params.userId)

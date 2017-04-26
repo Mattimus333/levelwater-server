@@ -1,7 +1,7 @@
 const knex = require('../../knex');
 
 const patchUser = (req, res) => {
-  if (Number(req.claim.userId) !== Number(req.params.userId)) {
+  if (req.claim.userId !== req.params.userId) {
     return res.status(404).send('This user could not be found');
   }
   const user = {

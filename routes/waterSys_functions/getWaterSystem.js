@@ -1,7 +1,6 @@
 const knex = require('../../knex');
 
 const getWaterSystem = (req, res) => {
-  let waterSystemsId;
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

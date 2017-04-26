@@ -1,7 +1,6 @@
 const knex = require('../../knex');
 
 const deleteWaterSystem = (req, res) => {
-  let waterSystemsId;
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
@@ -14,6 +13,7 @@ const deleteWaterSystem = (req, res) => {
       // throw new Error('Water System not found');
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
+  })
   .then((result) => {
     res.status(200).json(result);
   })

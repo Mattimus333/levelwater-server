@@ -13,14 +13,9 @@ const cookieParser = require('cookie-parser');
 // import login from './routes/something/login';
 const app = express();
 
-
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
-
-const path = require('path');
-
-app.use(express.static(path.join('public')));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -28,6 +23,10 @@ app.use(cookieParser());
 app.use(users);
 app.use(sources);
 app.use(waterSystems);
+
+app.use((_req, res) => {
+  res.sendStatus(404);
+});
 
 const PORT = process.env.PORT || 8000;
 

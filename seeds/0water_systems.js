@@ -8,7 +8,6 @@ exports.seed = function (knex, Promise) {
         pws_id: 333,
         population: 100,
         connections: 444,
-        max_day_demand: 444,
       }]);
     });
 };

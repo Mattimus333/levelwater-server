@@ -1,9 +1,7 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../knexfile.js')[env];
-const knex = require('knex')(config);
+const knex = require('../../knex');
 
 const getUser = (req, res) => {
-  if (isNaN(req.params.userId) || req.params.userId === undefined) {
+  if (typeof req.params.userId !== 'number' || req.params.userId === undefined) {
     res.status(400).set('Content-Type', 'text/plain').send('User ID must be an integer');
   } else {
     knex('users')

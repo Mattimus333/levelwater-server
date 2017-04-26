@@ -1,6 +1,4 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../knexfile.js')[env];
-const knex = require('knex')(config);
+const knex = require('../../knex');
 const Joi = require('joi');
 const express = require('express');
 const bcrypt = require('bcrypt-as-promised');
@@ -47,7 +45,8 @@ const postUsers = (req, res) => {
     })
     .then((users) => {
       const user = users[0];
-      const claim = { userId: user.id };
+      console.log(user);
+      const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });

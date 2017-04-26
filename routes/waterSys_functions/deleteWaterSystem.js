@@ -1,18 +1,13 @@
 const knex = require('../../knex');
 
 const deleteWaterSystem = (req, res) => {
-  console.log('claim', req.claim);
-  console.log('params', req.params.id);
-  // if (req.claim.id !== req.params.id) {
-  //   return res.status(404).send('This user could not be found');
-  // }
   let waterSystemsId;
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    console.log('result', result[0]);
-    if (req.params.id === result.water_systems_id) {
+    if (Number(req.params.id) === Number(result[0].water_systems_id)) {
+      console.log('here');
       return knex('water_systems')
       .where('id', req.params.id)
       .del();

@@ -3,7 +3,6 @@ exports.up = function (knex, Promise) {
     table.increments();
     table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
     table.string('source_name', 'char(60)').notNullable().defaultTo('');
-    table.integer('system_source_id').notNullable().defaultTo(0);
     table.enum('source_type', ['gw', 'sw']);
     table.enum('critical_to_operations', ['true', 'false']).defaultTo('false');
     table.enum('treatment', ['true', 'false']).defaultTo('false');

@@ -18,16 +18,15 @@ const loginUsers = (req, res) => {
   .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id')
   .then((users) => {
     user = users[0];
-    console.log('here', user);
     if (user.length === 0) {
-      throw new Error('no user found with this email!');
+      // throw new Error('bad email or password');
+      return res.send({ status: 400, ErrorMessage: 'Bad email or password' });
     } else {
       return bcrypt.compare(req.body.password, user.hashed_password);
     }
   })
   .then(() => {
     const claim = { userId: user.id };
-    console.log('hereclaim', claim);
     const token = jwt.sign(claim, process.env.JWT_KEY, {
       expiresIn: '7 days',
     });

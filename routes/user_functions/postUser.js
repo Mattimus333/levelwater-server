@@ -12,13 +12,10 @@ const postUsers = (req, res) => {
   if (!email || !email.trim()) {
     return res.send({ status: 400, errorMessage: 'Email must not be blank' });
   }
-
   if (!password || password.length < 8) {
     return res.send({ status: 400, errorMessage: 'Password must be at least 8 characters long' });
   }
-
   knex('users')
-    // .where('water_systems_id', null)
     .where('email', email)
     .first()
     .then((user) => {

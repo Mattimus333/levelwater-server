@@ -1,15 +1,19 @@
 const knex = require('../../knex');
 
 const getWaterSystem = (req, res) => {
-  if (req.claim.userId !== req.params.userId) {
-    return res.status(404).send('This user could not be found');
-  }
-  knex('water_systems')
-  .where('id', req.params.id)
+  let waterSystemsId;
+  knex('users')
+  .where('id', req.claim.userId)
+  .select('water_systems_id')
   .then((result) => {
-    if (result.length === 0) {
-      return res.send({ status: 400, ErrorMessage: 'Must have a valid water system id!' });
+    if (Number(req.params.id) === Number(result[0].water_systems_id)) {
+      return knex('water_systems')
+      .where('id', req.params.id);
+    } else {
+      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
+  })
+  .then((result) => {
     return res.json(result[0]);
   })
   .catch((err) => {

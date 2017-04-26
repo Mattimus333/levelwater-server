@@ -1,6 +1,7 @@
 const knex = require('../../knex');
 
 const getWaterSystem = (req, res) => {
+  console.log(req.claim.userId);
   if (Number.isNaN(req.params.waterSystemId)) {
     return res.send({ status: 400, ErrorMessage: 'Must have a valid water system id!' });
   }

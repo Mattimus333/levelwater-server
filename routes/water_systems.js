@@ -7,5 +7,6 @@ const router = express.Router();
 
 router.get('/water_systems/:waterSystemId', authorize, getWaterSystem);
 router.post('/water_systems', authorize, postWaterSystem);
+// router.delete('/water_systems', authorize, deleteWaterSystem);
 
 module.exports = router;

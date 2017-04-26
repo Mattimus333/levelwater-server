@@ -45,7 +45,7 @@ const postUsers = (req, res) => {
     })
     .then((users) => {
       const user = users[0];
-      const claim = { userId: user.id };
+      const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });

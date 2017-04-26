@@ -8,13 +8,12 @@ const deleteWaterSystem = (req, res) => {
   .then((result) => {
     if (Number(req.params.id) === Number(result[0].water_systems_id)) {
       return knex('water_systems')
-      .where('id', req.params.id)
-      .del();
+      .del()
+      .where('id', (req.params.id));
     } else {
       // throw new Error('Water System not found');
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
-  })
   .then((result) => {
     res.status(200).json(result);
   })

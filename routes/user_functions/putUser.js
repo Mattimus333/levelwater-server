@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const patchUser = (req, res) => {
+const putUser = (req, res) => {
   if (Number(req.claim.userId) !== Number(req.params.userId)) {
     return res.status(404).send('This user could not be found');
   }
@@ -23,4 +23,4 @@ const patchUser = (req, res) => {
   });
 };
 
-module.exports = patchUser;
+module.exports = putUser;

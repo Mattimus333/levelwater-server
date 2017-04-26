@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const patchWaterSystem = (req, res) => {
+const putWaterSystem = (req, res) => {
   let waterSystem;
   knex('users')
   .where('id', req.claim.userId)
@@ -19,8 +19,7 @@ const patchWaterSystem = (req, res) => {
     .where('id', req.params.water_systems_id)
     .update(waterSystem);
   })
-  .then((result) => {
-    console.log(result);
+  .then(() => {
     res.status(200).json(waterSystem);
   })
   .catch((err) => {
@@ -29,4 +28,4 @@ const patchWaterSystem = (req, res) => {
 };
 
 
-module.exports = patchWaterSystem;
+module.exports = putWaterSystem;

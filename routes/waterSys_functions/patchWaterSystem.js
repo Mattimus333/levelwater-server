@@ -21,7 +21,6 @@ const patchWaterSystem = (req, res) => {
   })
   .then((result) => {
     console.log(result);
-    waterSystem.id = req.params.waterSystemId;
     res.status(200).json(waterSystem);
   })
   .catch((err) => {

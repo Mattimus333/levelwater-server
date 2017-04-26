@@ -10,6 +10,6 @@ const router = express.Router();
 router.get('/water_systems/:water_systems_id', authorize, getWaterSystem);
 router.post('/water_systems', authorize, postWaterSystem);
 router.delete('/water_systems/:water_systems_id', authorize, deleteWaterSystem);
-router.patch('/water_systems/:water_systems_id', authorize, patchWaterSystem);
+router.put('/water_systems/:water_systems_id', authorize, patchWaterSystem);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const deleteSources = (req, res) => {
+const patchSources = (req, res) => {
   let waterSystemId;
   knex('users')
   .where('id', req.claim.userId)
@@ -17,14 +17,14 @@ const deleteSources = (req, res) => {
     }
     return knex('sources')
     .where('id', req.params.source_id)
-    .del();
+    .update(req.body);
   })
-  .then((deletedRow) => {
-    return res.json(deletedRow);
+  .then(() => {
+    return res.json(req.body);
   })
   .catch((err) => {
     return res.send({ status: 400, ErrorMessage: err });
   });
 };
 
-module.exports = deleteSources;
+module.exports = patchSources;

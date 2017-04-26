@@ -6,17 +6,18 @@ const deleteSources = (req, res) => {
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    waterSystemId = result[0].water_systems_id; //references claimed user
+    waterSystemId = result[0].water_systems_id;
     return knex('sources')
     .where('id', req.params.source_id)
-    .select('water_systems_id')
+    .select('water_systems_id');
   })
   .then((sourceResult) => {
-    if (waterSystemId === sourceResult[0].water_systems_id) {
-      return knex('sources')
-      .where('id', req.params.source_id)
-      .del()
+    if (Number(waterSystemId) !== Number(sourceResult[0].water_systems_id)) {
+      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
+    return knex('sources')
+    .where('id', req.params.source_id)
+    .del();
   })
   .then((deletedRow) => {
     return res.json(deletedRow);

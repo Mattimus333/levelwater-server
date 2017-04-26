@@ -12,7 +12,7 @@ exports.up = function (knex, Promise) {
     table.integer('estimated_replacement_cost').notNullable().defaultTo(0);
     table.integer('estimated_time_to_replacement').notNullable().defaultTo(0);
     table.text('rate_increase_sentence').notNullable().defaultTo('');
-    table.enum('continuos_clorination', ['true', 'false']).defaultTo('false');
+    table.enum('continuous_clorination', ['true', 'false']).defaultTo('false');
   });
 };
 

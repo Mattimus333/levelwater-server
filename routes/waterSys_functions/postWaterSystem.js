@@ -20,7 +20,6 @@ const postWaterSystems = (req, res) => {
   knex('water_systems')
   .insert(waterSystem)
   .then((result) => {
-    console.log(result);
     res.status(200).json(result[0]);
   })
   .catch((err) => {

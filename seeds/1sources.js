@@ -14,7 +14,7 @@ exports.seed = function(knex, Promise) {
         condition: 'great',
         estimated_replacement_cost: 33,
         estimated_time_to_replacement: 45,
-        rate_increase_sentence: 'Yo you\'re rates suck bro',
+        rate_increase_sentence: 'Yo your rates suck bro',
         continuous_clorination: 'false',
       }]);
     });

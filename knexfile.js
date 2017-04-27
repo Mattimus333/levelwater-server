@@ -24,7 +24,7 @@ module.exports = ({
       host: process.env.DATABASE_URL,
       user: 'root',
       password: '',
-      database: 'levelwater',
+      database: 'heroku_9b45cc2e4d4a16e',
     },
   },
 });

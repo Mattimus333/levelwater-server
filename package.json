@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "knex": "knex",
     "start": "nodemon server.js",
-    "heroku-postbuild": "knex migrate:latest",
+    "heroku-postbuild": "knex migrate:latest"
   },
   "keywords": [],
   "author": "",

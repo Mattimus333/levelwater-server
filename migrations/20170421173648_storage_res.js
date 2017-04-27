@@ -1,5 +1,5 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('storage_res', (table) => {
+  return knex.schema.createTable('storage_reservoirs', (table) => {
     table.increments();
     table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
     table.string('reservoir_type', 'char(60)').notNullable().defaultTo('');
@@ -14,5 +14,5 @@ exports.up = function (knex, Promise) {
 };
 
 exports.down = function (knex, Promise) {
-  return knex.schema.dropTable('storage_res');
+  return knex.schema.dropTable('storage_reservoirs');
 };

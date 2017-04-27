@@ -12,7 +12,7 @@ const getSources = (req, res) => {
     .where('water_systems_id', req.params.water_systems_id);
   })
   .then((results) => {
-    return res.json(results);
+    res.json(results);
   })
   .catch((err) => {
     return res.send({ status: 400, ErrorMessage: err });

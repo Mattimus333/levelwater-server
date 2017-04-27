@@ -1,8 +1,8 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('storage_res').del()
+  return knex('storage_reservoirs').del()
     .then(() => {
-      return knex('storage_res').insert([{
+      return knex('storage_reservoirs').insert([{
         id: 1,
         water_systems_id: 1,
         reservoir_type: 'a big wooden thing',

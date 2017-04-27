@@ -17,7 +17,7 @@ describe('getUser', () => {
               // below is hitting server.js with supertest. might need to change app to path of our routes index.
               request(app)
               // below path might be incorrect
-                .post('/loginUser')
+                .post('/postUser')
                 .set('Accept', 'application/json')
                 .set('Content-Type', 'application/json')
                 // no below is wrong. need to login with seeded user info
@@ -59,7 +59,7 @@ describe('getUser', () => {
         request(app)
         // I believe id should be 2 because we're only seeding one user before it - no
         // we want to get seeded user info, as we signed in with user
-        .get('/users/1')
+        .get('/users/2')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, {
@@ -69,9 +69,19 @@ describe('getUser', () => {
       })
 
       // erroneous login for this test
-      it('', done => {
+      it('non existant user', done => {
         request(app)
-        .get('/users/2')
+        .get('/users/5')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200, {
+          // expect 404 page not found or 401, unauthorized
+        }, done)
+      })
+
+      it('existing user', done => {
+        request(app)
+        .get('/users/1')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200, {

@@ -2,12 +2,12 @@
 
 process.env.NODE_ENV = 'test';
 
-const request = require('supertest');
-const knex = require('../../../knex');
-const expect = require('chai').expect;
 const app = require('../../../server');
+const knex = require('../../../knex');
+const request = require('supertest');
+const expect = require('chai').expect;
 
-describe('controllers', () => {
+describe('getUser', () => {
 
     before((done) => {
       knex.migrate.latest()
@@ -22,7 +22,7 @@ describe('controllers', () => {
       });
     });
 
-    after(function(done) {
+    after((done) => {
       knex.migrate.rollback()
       .then(() => {
         done();
@@ -32,11 +32,11 @@ describe('controllers', () => {
       });
     });
 
-  describe('', () => {
+  describe('get requests for users table', () => {
 
-    describe('GET /', () => {
+    describe('GET /users/:id', () => {
 
-      it('should respond with a status code of 200', done => {
+      it('should respond with correct user info', done => {
         request(app)
         .get('/')
         .set('Accept', 'application/json')

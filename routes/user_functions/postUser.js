@@ -54,10 +54,11 @@ const postUsers = (req, res) => {
       });
 
       delete user.hashed_password;
-      return res.status(200).json(user);
+      res.status(200).json(user);
     })
     .catch((err) => {
-      return res.send({ status: 400, ErrorMessage: err });
+      console.log(err);
+      res.send({ status: 400, ErrorMessage: err });
     });
 };
 

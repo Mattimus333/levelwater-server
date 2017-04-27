@@ -20,6 +20,11 @@ module.exports = ({
   },
   production: {
     client: 'mysql',
-    connection: 'process.env.DATABASE_URL',
+    connection: {
+      database: process.env.DATABASE_NAME,
+      host: process.env.DATABASE_HOST,
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_USER,
+    },
   },
 });

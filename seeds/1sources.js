@@ -12,10 +12,7 @@ exports.seed = function(knex, Promise) {
         year_constructed: 1999,
         capacity: 1111,
         condition: 'great',
-        estimated_replacement_cost: 33,
-        estimated_time_to_replacement: 45,
-        rate_increase_sentence: 'Yo your rates suck bro',
-        continuous_clorination: 'false',
+        continuous_chlorination: 'false',
       }]);
     });
 };

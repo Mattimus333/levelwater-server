@@ -22,9 +22,9 @@ module.exports = ({
     client: 'mysql',
     connection: {
       host: process.env.DATABASE_URL,
-      user: 'b5067fc05aa3b5',
-      password: '54bcc969',
-      database: 'heroku_9b45cc2e4d4a16e',
+      user: 'bebec61bcb73f0',
+      password: '6d17d324',
+      database: 'heroku_98ceba80eed9ec3',
     },
   },
 });

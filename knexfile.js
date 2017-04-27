@@ -22,8 +22,8 @@ module.exports = ({
     client: 'mysql',
     connection: {
       host: process.env.DATABASE_URL,
-      user: 'root',
-      password: '',
+      user: 'b5067fc05aa3b5',
+      password: '54bcc969',
       database: 'heroku_9b45cc2e4d4a16e',
     },
   },

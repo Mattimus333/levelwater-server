@@ -20,11 +20,6 @@ module.exports = ({
   },
   production: {
     client: 'mysql',
-    connection: {
-      host: process.env.DATABASE_URL,
-      user: 'bebec61bcb73f0',
-      password: '6d17d324',
-      database: 'heroku_98ceba80eed9ec3',
-    },
+    connection: 'process.env.DATABASE_URL',
   },
 });

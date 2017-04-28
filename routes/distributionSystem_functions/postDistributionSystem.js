@@ -32,7 +32,7 @@ const postDistributionSystem = (req, res) => {
   .then((result) => {
     console.log(result, req.claim.userId);
     if (Number(distributionSystem.water_systems_id) !== result[0].water_systems_id) {
-      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Water System not found!' });
     }
     return knex('distribution_system')
     .insert(distributionSystem)

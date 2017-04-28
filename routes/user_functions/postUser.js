@@ -47,6 +47,7 @@ const postUsers = (req, res) => {
         expiresIn: '7 days',
       });
 
+      console.log('log this error!');
       res.cookie('token', token, {
         httpOnly: true,
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days

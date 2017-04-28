@@ -1,9 +1,10 @@
 const authorize = require('./authorize');
 const express = require('express');
-const getRatesFinances= require('./ratesFinances_functions/getRatesFinances');
+const getRatesFinances = require('./ratesFinances_functions/getRatesFinances');
 const deleteRatesFinances = require('./ratesFinances_functions/deleteRatesFinances');
 const postRatesFinances = require('./ratesFinances_functions/postRatesFinances');
 const patchRatesFinances = require('./ratesFinances_functions/patchRatesFinances');
+
 const router = express.Router();
 
 router.get('/ratesFinances/:water_systems_id', authorize, getRatesFinances);

@@ -76,3 +76,5 @@ const postRatesFinances = (req, res) => {
     return res.send({ status: 400, ErrorMessage: err });
   });
 }
+
+module.exports = postRatesFinances;

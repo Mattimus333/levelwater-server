@@ -57,7 +57,6 @@ const postUsers = (req, res) => {
       res.status(200).json(user);
     })
     .catch((err) => {
-      console.log(err);
       res.send({ status: 400, ErrorMessage: err });
     });
 };

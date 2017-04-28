@@ -9,6 +9,7 @@ const waterSystems = require('./routes/water_systems');
 const storageReservoirs = require('./routes/storageReservoirs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const morgan = require('morgan')''
 
 // finish below
 // import login from './routes/something/login';
@@ -17,7 +18,7 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
-
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

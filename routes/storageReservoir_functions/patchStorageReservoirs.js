@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const patchSources = (req, res) => {
+const patchStorageReservoirs = (req, res) => {
   let waterSystemId;
   knex('users')
   .where('id', req.claim.userId)
@@ -8,15 +8,15 @@ const patchSources = (req, res) => {
   .then((result) => {
     waterSystemId = result[0].water_systems_id;
     return knex('storage_resevoirs')
-    .where('id', req.params.source_id)
+    .where('id', req.params.storage_reservoir_id)
     .select('water_systems_id');
   })
-  .then((sourceResult) => {
-    if (Number(waterSystemId) !== Number(sourceResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'source not found!' });
+  .then((reservoirResult) => {
+    if (Number(waterSystemId) !== Number(reservoirResult[0].water_systems_id)) {
+      return res.send({ status: 400, ErrorMessage: 'Reservoir not found!' });
     }
-    return knex('sources')
-    .where('id', req.params.source_id)
+    return knex('storage_resevoirs')
+    .where('id', req.params.storage_reservoir_id)
     .update(req.body);
   })
   .then(() => {
@@ -27,4 +27,4 @@ const patchSources = (req, res) => {
   });
 };
 
-module.exports = patchSources;
+module.exports = patchStorageReservoirs;

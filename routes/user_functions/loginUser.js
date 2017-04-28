@@ -38,7 +38,7 @@ const loginUsers = (req, res) => {
     });
     delete user.hashed_password;
     user.token = token
-    res.status(200).json({ user, token });
+    res.status(200).json({ user });
   })
   .catch(bcrypt.MISMATCH_ERROR, () => {
     return res.send({ status: 400, ErrorMessage: 'Bad email or password' });

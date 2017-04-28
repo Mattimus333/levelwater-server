@@ -7,9 +7,9 @@ const patchDistributionSystem = require('./distributionSystem_functions/patchDis
 
 const router = express.Router();
 
-router.get('/distributionSystem/:water_systems_id', authorize, getDistributionSystem);
-router.patch('/distributionSystem/:distribution_system_id', authorize, patchDistributionSystem);
-router.post('/distributionSystem', authorize, postDistributionSystem);
-router.delete('/distributionSystem/:distribution_system_id', authorize, deleteDistributionSystem);
+router.get('/distribution-system/:water_systems_id', authorize, getDistributionSystem);
+router.patch('/distribution-system/:distribution_system_id', authorize, patchDistributionSystem);
+router.post('/distribution-system', authorize, postDistributionSystem);
+router.delete('/distribution-system/:distribution_system_id', authorize, deleteDistributionSystem);
 
 module.exports = router;

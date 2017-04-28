@@ -7,9 +7,9 @@ const putWaterSystem = require('./waterSys_functions/putWaterSystem');
 
 const router = express.Router();
 
-router.get('/water_systems/:water_systems_id', authorize, getWaterSystem);
-router.post('/water_systems', authorize, postWaterSystem);
-router.delete('/water_systems/:water_systems_id', authorize, deleteWaterSystem);
-router.put('/water_systems/:water_systems_id', authorize, putWaterSystem);
+router.get('/water-systems/:water_systems_id', authorize, getWaterSystem);
+router.post('/water-systems', authorize, postWaterSystem);
+router.delete('/water-systems/:water_systems_id', authorize, deleteWaterSystem);
+router.put('/water-systems/:water_systems_id', authorize, putWaterSystem);
 
 module.exports = router;

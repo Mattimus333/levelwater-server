@@ -37,12 +37,9 @@ const postUsers = (req, res) => {
         hashed_password,
         superuser,
       };
-
-      console.log('log this after cookie, before delete hashedpw');
       return knex('users').insert(newUser, '*');
     })
     .then((users) => {
-      console.log('log this before cookie!');
       const user = users[0];
       const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {

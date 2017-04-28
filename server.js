@@ -9,7 +9,7 @@ const waterSystems = require('./routes/water_systems');
 const storageReservoirs = require('./routes/storageReservoirs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan')''
+const morgan = require('morgan');
 
 // finish below
 // import login from './routes/something/login';

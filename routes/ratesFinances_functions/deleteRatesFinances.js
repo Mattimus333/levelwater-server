@@ -11,9 +11,9 @@ const deleteRatesFinances = (req, res) => {
     .where('id', req.params.ratesFinancesId)
     .select('water_systems_id');
   })
-  .then((reservoirResult) => {
-    if (Number(waterSystemId) !== Number(reservoirResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'reservoir not found!' });
+  .then((ratesResult) => {
+    if (Number(waterSystemId) !== Number(ratesResult[0].water_systems_id)) {
+      return res.send({ status: 400, ErrorMessage: 'RatesFinances not found!' });
     }
     return knex('rates_finances_fixedcosts')
     .where('id', req.params.ratesFinancesId)

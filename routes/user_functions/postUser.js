@@ -47,13 +47,13 @@ const postUsers = (req, res) => {
         expiresIn: '7 days',
       });
 
-      console.log('log this error!');
+      console.log('log this before cookie!');
       res.cookie('token', token, {
         httpOnly: true,
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
         secure: router.get('env') === 'production',
       });
-
+      console.log('log this after cookie, before delete hashedpw');
       delete user.hashed_password;
       res.status(200).json(user);
     })

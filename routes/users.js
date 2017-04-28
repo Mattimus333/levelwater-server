@@ -17,6 +17,5 @@ router.put('/users/:userId', authorize, putUser);
 router.delete('/users/:userId', authorize, deleteUser);
 router.post('/login', loginUser);
 router.delete('/logout', logoutUser);
-// router.get('/water_systems', )
 
 module.exports = router;

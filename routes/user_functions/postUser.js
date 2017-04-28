@@ -45,8 +45,6 @@ const postUsers = (req, res) => {
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });
-      user.token = token;
-      delete user.hashed_password;
       res.status(200).json({ user, token });
     })
     .catch((err) => {

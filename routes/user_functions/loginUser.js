@@ -37,7 +37,8 @@ const loginUsers = (req, res) => {
       secure: router.get('env') === 'production',
     });
     delete user.hashed_password;
-    return res.status(200).json(user);
+    user.token = token
+    res.status(200).json({ user, token });
   })
   .catch(bcrypt.MISMATCH_ERROR, () => {
     return res.send({ status: 400, ErrorMessage: 'Bad email or password' });

@@ -7,7 +7,7 @@ const knex = require('../../../knex');
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('getUser', () => {
+// suite('getUser', () => {
 
     // before((done) => {
     //   knex.migrate.latest()
@@ -46,6 +46,7 @@ describe('getUser', () => {
     //         });
     //       });
     // });
+  describe('get requests for users table', () => {
     before((done) => {
         knex.migrate.latest()
           .then(() => {
@@ -76,7 +77,6 @@ describe('getUser', () => {
       });
     });
 
-  describe('get requests for users table', () => {
 
     describe('GET /users/:id', () => {
 
@@ -90,8 +90,8 @@ describe('getUser', () => {
         .expect(200, {
           // expect all seeded user info below
 
-        },done)
-      })
+        }, done)
+      });
 
       // erroneous login for this test
       it('non existant user', done => {
@@ -102,7 +102,7 @@ describe('getUser', () => {
         .expect(200, {
           // expect 404 page not found or 401, unauthorized
         }, done)
-      })
+      });
 
       it('existing user', done => {
         request(app)
@@ -112,7 +112,7 @@ describe('getUser', () => {
         .expect(200, {
           // expect 404 page not found or 401, unauthorized
         }, done)
-      })
+      });
 
       it('should respond with 404 and Not Found if wrong id', done => {
         request(app)
@@ -120,7 +120,7 @@ describe('getUser', () => {
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect({'status':404,'ErrorMessage':'Not Found'}, done)
-      })
-    })
+      });
+    });
   });
-});
+// });

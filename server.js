@@ -6,6 +6,7 @@ const dotenv = require('dotenv');
 const users = require('./routes/users');
 const sources = require('./routes/sources');
 const waterSystems = require('./routes/water_systems');
+const storageReservoirs = require('./routes/storageReservoirs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(users);
 app.use(sources);
 app.use(waterSystems);
+app.use(storageReservoirs);
 
 app.use((_req, res) => {
   res.sendStatus(404);

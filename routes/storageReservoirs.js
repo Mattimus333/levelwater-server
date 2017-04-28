@@ -1,5 +1,8 @@
 const authorize = require('./authorize');
 const express = require('express');
+const getStorageReservoirs = require('./storageReservoir_functions/getStorageReservoirs');
+const deleteStorageReservoirs = require('./storageReservoir_functions/deleteStorageReservoirs');
+const postStorageReservoirs = require('./storageReservoir_functions/postStorageReservoirs');
 
 const router = express.Router();
 

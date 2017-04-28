@@ -43,7 +43,8 @@ const postSources = (req, res) => {
     .insert(source)
   })
   .then((result) => {
-    res.status(200).json(result[0]);
+    source.id = result[0];
+    res.status(200).json(source);
   })
   .catch((err) => {
     return res.send({ status: 400, ErrorMessage: err });

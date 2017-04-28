@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const getSources = (req, res) => {
+const getStorageReservoirs = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
@@ -8,7 +8,7 @@ const getSources = (req, res) => {
     if (Number(req.params.water_systems_id) !== Number(result[0].water_systems_id)) {
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
-    return knex('sources')
+    return knex('storage_reservoirs')
     .where('water_systems_id', req.params.water_systems_id);
   })
   .then((results) => {
@@ -19,4 +19,4 @@ const getSources = (req, res) => {
   });
 };
 
-module.exports = getSources;
+module.exports = getStorageReservoirs;

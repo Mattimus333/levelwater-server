@@ -7,8 +7,8 @@ const patchRatesFinances = require('./ratesFinances_functions/patchRatesFinances
 const router = express.Router();
 
 router.get('/ratesFinances/:water_systems_id', authorize, getRatesFinances);
-router.delete('/ratesFinances/:source_id', authorize, deleteRatesFinances);
+router.delete('/ratesFinances/:ratesFinancesId', authorize, deleteRatesFinances);
 router.post('/ratesFinances', authorize, postRatesFinances);
-router.patch('/ratesFinances/:source_id', authorize, patchRatesFinances);
+router.patch('/ratesFinances/:ratesFinancesId', authorize, patchRatesFinances);
 
 module.exports = router;

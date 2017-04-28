@@ -1,8 +1,8 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('storage_res').del()
+  return knex('storage_reservoirs').del()
     .then(() => {
-      return knex('storage_res').insert([{
+      return knex('storage_reservoirs').insert([{
         id: 1,
         water_systems_id: 1,
         reservoir_type: 'a big wooden thing',
@@ -10,9 +10,6 @@ exports.seed = function(knex, Promise) {
         year_constructed: 1998,
         capacity: 1000000,
         condition: 'poor',
-        estimated_replacement_cost: 10000,
-        estimated_time_to_replacement: 10,
-        rate_increase_sentence: 'You should increase your rates man',
       }]);
     });
 };

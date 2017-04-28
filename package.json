@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "heroku-postbuild": "knex migrate:latest",
+    "knex": "knex",
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,7 @@
     "joi": "^10.4.1",
     "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.9",
+    "morgan": "^1.8.1",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0"

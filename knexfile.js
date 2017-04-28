@@ -21,10 +21,10 @@ module.exports = ({
   production: {
     client: 'mysql',
     connection: {
-      host: process.env.DATABASE_URL,
-      user: 'root',
-      password: '',
-      database: 'levelwater',
+      database: process.env.DATABASE_NAME,
+      host: process.env.DATABASE_HOST,
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASS,
     },
   },
 });

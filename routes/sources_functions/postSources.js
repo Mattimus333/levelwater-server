@@ -1,7 +1,7 @@
 const knex = require('../../knex');
 
 const postSources = (req, res) => {
-  const { water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, continuous_chlorination } = req.body
+  const { water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, continuous_chlorination } = req.body;
   const source = { water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, continuous_chlorination };
 
   const currentdate = new Date();

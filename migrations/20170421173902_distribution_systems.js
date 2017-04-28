@@ -7,7 +7,7 @@ exports.up = function (knex, Promise) {
     table.integer('number_of_meters').notNullable().defaultTo(0);
     table.integer('number_of_pumping_plants').notNullable().defaultTo(0);
     table.integer('combined_pumping_capacity').notNullable().defaultTo(0);
-    table.enum('pump_condition', ['great', 'fair', 'poor']).defaultTo('great');
+    table.enum('pumps_condition', ['great', 'fair', 'poor']).defaultTo('great');
   });
 };
 

@@ -45,14 +45,9 @@ const postUsers = (req, res) => {
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });
-
-      res.cookie('token', token, {
-        httpOnly: true,
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
-        secure: router.get('env') === 'production',
-      });
+      user.token = token;
       delete user.hashed_password;
-      res.status(200).json(user);
+      res.status(200).json({ user, token });
     })
     .catch((err) => {
       res.send({ status: 400, ErrorMessage: err });

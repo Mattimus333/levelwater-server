@@ -38,22 +38,22 @@ const postUsers = (req, res) => {
         superuser,
       };
 
+      console.log('log this after cookie, before delete hashedpw');
       return knex('users').insert(newUser, '*');
     })
     .then((users) => {
+      console.log('log this before cookie!');
       const user = users[0];
       const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',
       });
 
-      console.log('log this before cookie!');
       res.cookie('token', token, {
         httpOnly: true,
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 7)),  // 7 days
         secure: router.get('env') === 'production',
       });
-      console.log('log this after cookie, before delete hashedpw');
       delete user.hashed_password;
       res.status(200).json(user);
     })

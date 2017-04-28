@@ -10,7 +10,7 @@ const authorize = require('./authorize');
 
 const router = express.Router();
 
-router.get('/test', authorize, test);
+router.get('/test', test);
 router.post('/users', postUser);
 router.get('/users/:userId', authorize, getUser);
 router.put('/users/:userId', authorize, putUser);

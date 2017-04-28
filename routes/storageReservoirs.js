@@ -6,9 +6,9 @@ const postStorageReservoirs = require('./storageReservoir_functions/postStorageR
 
 const router = express.Router();
 
-router.get('/storage-reservoirs/:water_systems_id', authorize, getStorageReservoirs);
-// router.patch('/storageReservoirs/:storageReservoir_id', authorize, patchStorageReservoirs);
-router.post('/storage-reservoirs', authorize, postStorageReservoirs);
-router.delete('/storage-reservoirs/:reservoir_id', authorize, deleteStorageReservoirs);
+router.get('/storageReservoirs/:water_systems_id', authorize, getStorageReservoirs);
+router.patch('/storageReservoirs/:source_id', authorize, patchStorageReservoirs);
+router.post('/storageReservoirs', authorize, postStorageReservoirs);
+router.delete('/storageReservoirs/:source_id', authorize, deleteStorageReservoirs);
 
 module.exports = router;

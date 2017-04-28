@@ -13,6 +13,7 @@
   "dependencies": {
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.1",
+    "chai": "^3.5.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "eslint": "^3.19.0",
@@ -22,7 +23,8 @@
     "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.9",
     "mysql": "^2.13.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

@@ -30,10 +30,8 @@ app.use((_req, res) => {
 
 const PORT = process.env.PORT || 8000;
 
-// const express = require('express');
 app.listen(PORT, () => {
   if (app.get('env') !== 'test') {
-    // eslint-disable-next-line no-console
     console.log('Listening on port', PORT);
   }
 });

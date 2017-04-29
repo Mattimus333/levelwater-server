@@ -55,13 +55,14 @@ const postRatesFinances = (req, res) => {
     return res.status(400).send('9');
   }
   if (typeof annual_debt_costs !== 'number') {
-    return res.status(400).send('11');
+    return res.status(400).send('10');
   }
 
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
+    console.log('here');
     if (Number(ratesFinances.water_systems_id) !== result[0].water_systems_id) {
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
@@ -69,6 +70,7 @@ const postRatesFinances = (req, res) => {
     .insert(ratesFinances)
   })
   .then((result) => {
+    console.log('made');
     ratesFinances.id = result[0];
     res.status(200).json(ratesFinances);
   })

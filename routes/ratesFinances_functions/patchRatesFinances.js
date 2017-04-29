@@ -8,7 +8,7 @@ const patchRatesFinances = (req, res) => {
   .then((result) => {
     waterSystemId = result[0].water_systems_id;
     return knex('rates_finances_fixedcosts')
-    .where('id', req.params.ratesFinancesId)
+    .where('id', req.params.rates_finances_id)
     .select('water_systems_id');
   })
   .then((ratesResult) => {
@@ -16,7 +16,7 @@ const patchRatesFinances = (req, res) => {
       return res.send({ status: 400, ErrorMessage: 'RatesFinances not found!' });
     }
     return knex('rates_finances_fixedcosts')
-    .where('id', req.params.ratesFinancesId)
+    .where('id', req.params.rates_finances_id)
     .update(req.body);
   })
   .then(() => {

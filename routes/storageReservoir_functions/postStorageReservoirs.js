@@ -15,13 +15,13 @@ const postStorageReservoirs = (req, res) => {
     return res.status(400).send('reservoir type must not be blank');
   }
   if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
-    return res.status(400).send('year constructed must not be blank must be a valid year');
+    return res.status(400).send('year constructed must not be blank and must be a valid year');
   }
   if (!capacity) {
     return res.status(400).send('capacity must not be blank');
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.status(400).send('condition must not be blank and must be great, fair or poor');
+    return res.status(400).send('condition must not be blank and must be great, fair, or poor');
   }
   knex('users')
   .where('id', req.claim.userId)

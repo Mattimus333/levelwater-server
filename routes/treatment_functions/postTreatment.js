@@ -29,17 +29,17 @@ const postTreatment = (req, res) => {
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    if (Number treatment.water_systems_id) !== result[0].water_systems_id) {
+    if (Number(treatment.water_systems_id) !== result[0].water_systems_id) {
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
-    } //else?
+    } // else?
     return knex('treatment')
     .insert(treatment);
   })
   .then((result) => {
-    treatment.id = result[0]
+    treatment.id = result[0];
     res.status(200).json(treatment);
   })
-  .catch(err => res.send({ status: 400, ErrorMessage: err}));
+  .catch(err => res.send({ status: 400, ErrorMessage: err }));
 };
 
 module.export = postTreatment;

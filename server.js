@@ -7,6 +7,7 @@ const users = require('./routes/users');
 const sources = require('./routes/sources');
 const waterSystems = require('./routes/water_systems');
 const storageReservoirs = require('./routes/storageReservoirs');
+const distributionSystem = require('./routes/distributionSystem');
 const ratesFinances = require('./routes/ratesFinances');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -27,6 +28,7 @@ app.use(users);
 app.use(sources);
 app.use(waterSystems);
 app.use(storageReservoirs);
+app.use(distributionSystem);
 app.use(ratesFinances);
 
 app.use((_req, res) => {

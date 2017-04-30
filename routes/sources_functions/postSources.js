@@ -6,10 +6,10 @@ const postSources = (req, res) => {
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
-    return res.status(400).send('water systems id must not be blank');
+    return res.status(400).send('water systems id must not be blank'); // potentially remove this.  does not compute.
   }
   if (!source_name || !source_name.trim()) {
-    return res.status(400).send('source name must not be blank');
+    return res.status(400).send('Source name must not be blank!');
   }
   if (source_type !== 'gw' && source_type !== 'sw') {
     return res.status(400).send('source type must not be blank and must be gw or sw');
@@ -40,15 +40,13 @@ const postSources = (req, res) => {
       return res.send({ status: 400, ErrorMessage: 'water system not found!' });
     }
     return knex('sources')
-    .insert(source)
+    .insert(source);
   })
   .then((result) => {
     source.id = result[0];
     res.status(200).json(source);
   })
-  .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
-  });
+  .catch(err => res.send({ status: 400, ErrorMessage: err }));
 };
 
 module.exports = postSources;

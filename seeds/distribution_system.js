@@ -10,8 +10,7 @@ exports.seed = function(knex, Promise) {
         number_of_meters: 4,
         number_of_pumping_plants: 7,
         combined_pumping_capacity: 444,
-        pumps_condition: 2,
-        rate_increase_sentence: 'Nice job, your rates are bomb diggity',
+        pumps_condition: 'great',
       }]);
     });
 };

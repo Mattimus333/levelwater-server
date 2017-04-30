@@ -1,7 +1,7 @@
 const knex = require('../../knex');
 
 const putUser = (req, res) => {
-  if (Number(req.claim.userId) !== Number(req.params.userId)) {
+  if (Number(req.claim.userId) !== Number(req.params.user_id)) {
     return res.status(404).send('This user could not be found');
   }
   const user = {
@@ -12,10 +12,10 @@ const putUser = (req, res) => {
     superuser: req.body.superuser,
   };
   return knex('users')
-  .where('id', req.params.userId)
+  .where('id', req.params.user_id)
   .update(user)
   .then(() => {
-    user.id = req.params.userId;
+    user.id = req.params.user_id;
     res.status(200).json(user);
   })
   .catch((err) => {

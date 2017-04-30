@@ -8,7 +8,7 @@ const deleteStorageReservoirs = (req, res) => {
   .then((result) => {
     waterSystemId = result[0].water_systems_id;
     return knex('storage_reservoirs')
-    .where('id', req.params.reservoir_id)
+    .where('id', req.params.storage_reservoir_id)
     .select('water_systems_id');
   })
   .then((reservoirResult) => {
@@ -16,7 +16,7 @@ const deleteStorageReservoirs = (req, res) => {
       return res.send({ status: 400, ErrorMessage: 'reservoir not found!' });
     }
     return knex('storage_reservoirs')
-    .where('id', req.params.reservoir_id)
+    .where('id', req.params.storage_reservoir_id)
     .del();
   })
   .then((deletedRow) => {

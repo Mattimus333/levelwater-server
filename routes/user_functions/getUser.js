@@ -1,11 +1,11 @@
 const knex = require('../../knex');
 
 const getUser = (req, res) => {
-  if (Number(req.claim.userId) !== Number(req.params.userId)) {
+  if (Number(req.claim.userId) !== Number(req.params.user_id)) {
     return res.status(404).send('This user could not be found');
   }
   knex('users')
-  .where('id', req.params.userId)
+  .where('id', req.params.user_id)
   .first()
   .then((user) => {
     delete user.hashed_password;

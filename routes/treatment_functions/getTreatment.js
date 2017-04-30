@@ -1,6 +1,6 @@
 const knex = require('../../knex');
 
-const getTreatement = (req, res) => {
+const getTreatment = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

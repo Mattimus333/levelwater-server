@@ -10,7 +10,7 @@ const postRatesFinances = (req, res) => {
     annual_revenue_subsidies,
     annual_savings_to_financial_reserves,
     annual_personnel_costs,
-    annual_operational_costs,
+    annual_operations_costs,
     annual_debt_costs
   } = req.body;
 
@@ -23,7 +23,7 @@ const postRatesFinances = (req, res) => {
     annual_revenue_subsidies,
     annual_savings_to_financial_reserves,
     annual_personnel_costs,
-    annual_operational_costs,
+    annual_operations_costs,
     annual_debt_costs
   };
 
@@ -51,7 +51,7 @@ const postRatesFinances = (req, res) => {
   if (typeof annual_personnel_costs !== 'number') {
     return res.status(400).send('8');
   }
-  if (typeof annual_operational_costs !== 'number') {
+  if (typeof annual_operations_costs !== 'number') {
     return res.status(400).send('9');
   }
   if (typeof annual_debt_costs !== 'number') {

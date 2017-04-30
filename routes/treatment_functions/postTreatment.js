@@ -42,4 +42,4 @@ const postTreatment = (req, res) => {
   .catch(err => res.send({ status: 400, ErrorMessage: err }));
 };
 
-module.export = postTreatment;
+module.exports = postTreatment;

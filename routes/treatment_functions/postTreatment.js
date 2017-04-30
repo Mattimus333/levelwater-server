@@ -10,21 +10,19 @@ const postTreatment = (req, res) => {
   if (!treatment_name || !treatment_name.trim()) {
     return res.status(400).send('Treatment plant name must not be blank!');
   }
-  if (treatment_type !== 'gw' && treatment_type !== 'sw') {
-    return res.status(400).send('source type must not be blank and must be gw or sw');
-  }
-  if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
-    return res.status(400).send('critical to operations must not be blank and must be true or false');
+  if (treatment_type !== 'surface water treatment' && treatment_type !== 'membrane filtration' && treatment_type !== 'slow sand filtration' && treatment_type !== 'surface water package plant' && treatment_type !== 'ion exchange' && treatment_type !== 'adsorptive' && treatment_type !== 'coagulation filtration') {
+    return res.status(400).send('Treatment type must not be blank and must be surface water treatment, membrane filtration, slow sand filtration, surface water package plant, ion exchange, adsorptive, or coagulation filtration');
   }
   if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
-    return res.status(400).send('year constructed must not be blank must be a valid year');
+    return res.status(400).send('Year constructed must not be blank must be a valid year');
   }
-  if (!capacity) {
-    return res.status(400).send('capacity must not be blank');
+  if (typeof capacity !== 'number') {
+    return res.status(400).send('Capacity must not be blank');
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.status(400).send('condition must not be blank and must be great, fair or poor');
+    return res.status(400).send('Condition must not be blank and must be great, fair or poor');
   }
+  // ['surface_water_treatment', 'membrane_filtration', 'slow_sand_filtration', 'surface_water_package_plant', 'ion_exchange', 'adsorptive', 'coagulation_filtration']
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

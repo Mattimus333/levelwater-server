@@ -6,9 +6,6 @@ exports.up = function (knex, Promise) {
     table.integer('year_constructed').notNullable().defaultTo(0);
     table.integer('capacity').notNullable().defaultTo(0);
     table.integer('condition').notNullable().defaultTo(0);
-    table.integer('estimated_replacement_cost').notNullable().defaultTo(0);
-    table.integer('estimated_time_to_replacement').notNullable().defaultTo(0);
-    table.text('rate_increase_sentence').notNullable().defaultTo('');
   });
 };
 

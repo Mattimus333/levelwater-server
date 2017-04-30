@@ -8,9 +8,6 @@ exports.seed = function (knex, Promise) {
       year_constructed: 1066,
       capacity: 2000,
       condition: 22,
-      estimated_replacement_cost: 222222,
-      estimated_time_to_replacement: 5,
-      rate_increase_sentence: 'Hello, my name is treaty the treatment plant',
     }]);
   });
 };

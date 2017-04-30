@@ -1,8 +1,8 @@
 const authorize = require('./authorize');
 const express = require('express');
 const getTreatment = require('./treatment_functions/getTreatment');
-const deleteTreatment = require('./treatment_functions/deletetreatment');
-const patchTreatment = require('./treatment_functions/patchtreatment');
+const deleteTreatment = require('./treatment_functions/deleteTreatment');
+const patchTreatment = require('./treatment_functions/patchTreatment');
 
 const postTreatment = require('./treatment_functions/postTreatment');
 

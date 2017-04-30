@@ -13,18 +13,14 @@ const patchSources = (req, res) => {
   })
   .then((sourceResult) => {
     if (Number(waterSystemId) !== Number(sourceResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'source not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Source not found!' });
     }
     return knex('sources')
     .where('id', req.params.source_id)
     .update(req.body);
   })
-  .then(() => {
-    return res.json(req.body);
-  })
-  .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
-  });
+  .then(() => res.json(req.body))
+  .catch(err => res.send({ status: 400, ErrorMessage: err }));
 };
 
 module.exports = patchSources;

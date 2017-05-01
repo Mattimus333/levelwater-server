@@ -20,10 +20,10 @@ const patchStorageReservoirs = (req, res) => {
     .update(req.body);
   })
   .then(() => {
-    return res.json(req.body);
+    res.json(req.body);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

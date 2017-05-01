@@ -19,8 +19,12 @@ const deleteTreatment = (req, res) => {
     .where('id', req.params.treatment_id)
     .del();
   })
-  .then(deletedRow => res.json(deletedRow))
-  .catch(err => res.send({ status: 400, ErrorMessage: err }));
+  .then((deletedRow) => {
+    res.json(deletedRow);
+  })
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
 };
 
 module.exports = deleteTreatment;

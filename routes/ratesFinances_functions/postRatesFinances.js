@@ -28,7 +28,7 @@ const postRatesFinances = (req, res) => {
   };
 
   if (typeof water_systems_id !== 'number') {
-    return res.status(400).send('water systems id must not be blank');
+    return res.status(400).send('Water systems id must not be blank');
   }
   if (typeof current_average_water_rate !== 'number') {
     return res.status(400).send('2');
@@ -62,20 +62,18 @@ const postRatesFinances = (req, res) => {
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    console.log('here');
     if (Number(ratesFinances.water_systems_id) !== result[0].water_systems_id) {
-      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
     }
     return knex('rates_finances_fixedcosts')
     .insert(ratesFinances)
   })
   .then((result) => {
-    console.log('made');
     ratesFinances.id = result[0];
     res.status(200).json(ratesFinances);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 }
 

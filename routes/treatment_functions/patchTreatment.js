@@ -19,8 +19,12 @@ const patchTreatment = (req, res) => {
     .where('id', req.params.treatment_id)
     .update(req.body);
   })
-  .then(() => res.json(req.body))
-  .catch(err => res.send({ status: 400, ErrorMessage: err }));
+  .then(() => {
+    res.json(req.body);
+  })
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
 };
 
 module.exports = patchTreatment;

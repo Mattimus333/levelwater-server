@@ -6,38 +6,38 @@ const postSources = (req, res) => {
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
-    return res.status(400).send('water systems id must not be blank'); // potentially remove this.  does not compute.
+    return res.status(400).send('Water systems id must not be blank and must be a number!');
   }
   if (!source_name || !source_name.trim()) {
     return res.status(400).send('Source name must not be blank!');
   }
   if (source_type !== 'gw' && source_type !== 'sw') {
-    return res.status(400).send('source type must not be blank and must be gw or sw');
+    return res.status(400).send('Source type must not be blank and must be gw or sw!');
   }
   if (treatment !== 'true' && treatment !== 'false') {
-    return res.status(400).send('treatment must not be blank and must be true or false');
+    return res.status(400).send('Treatment must not be blank and must be true or false!');
   }
   if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
-    return res.status(400).send('critical to operations must not be blank and must be true or false');
+    return res.status(400).send('Critical to operations must not be blank and must be true or false!');
   }
   if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
-    return res.status(400).send('year constructed must not be blank must be a valid year');
+    return res.status(400).send('Year constructed must not be blank must be a valid year');
   }
   if (!capacity) {
-    return res.status(400).send('capacity must not be blank');
+    return res.status(400).send('Capacity must not be blank!');
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.status(400).send('condition must not be blank and must be great, fair or poor');
+    return res.status(400).send('Condition must not be blank and must be great, fair or poor!');
   }
   if (continuous_chlorination !== 'true' && continuous_chlorination !== 'false') {
-    return res.status(400).send('continuous chlorination must not be blank and must be true or false');
+    return res.status(400).send('Continuous chlorination must not be blank and must be true or false!');
   }
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
     if (Number(source.water_systems_id) !== result[0].water_systems_id) {
-      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
     }
     return knex('sources')
     .insert(source);
@@ -46,7 +46,9 @@ const postSources = (req, res) => {
     source.id = result[0];
     res.status(200).json(source);
   })
-  .catch(err => res.send({ status: 400, ErrorMessage: err }));
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
 };
 
 module.exports = postSources;

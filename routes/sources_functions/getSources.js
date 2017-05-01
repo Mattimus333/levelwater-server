@@ -7,7 +7,7 @@ const getSources = (req, res) => {
   .then((result) => {
     if (Number(req.params.water_systems_id) !== Number(result[0].water_systems_id)) {
       return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
-    }  //else?
+    }
     return knex('sources')
     .where('water_systems_id', req.params.water_systems_id);
   })
@@ -15,7 +15,7 @@ const getSources = (req, res) => {
     res.json(results);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

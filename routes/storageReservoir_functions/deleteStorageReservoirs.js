@@ -13,17 +13,17 @@ const deleteStorageReservoirs = (req, res) => {
   })
   .then((reservoirResult) => {
     if (Number(waterSystemId) !== Number(reservoirResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'reservoir not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Reservoir not found!' });
     }
     return knex('storage_reservoirs')
     .where('id', req.params.storage_reservoir_id)
     .del();
   })
   .then((deletedRow) => {
-    return res.json(deletedRow);
+    res.json(deletedRow);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

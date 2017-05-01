@@ -13,17 +13,17 @@ const deleteRatesFinances = (req, res) => {
   })
   .then((ratesResult) => {
     if (Number(waterSystemId) !== Number(ratesResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'RatesFinances not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Rates/Finances not found!' });
     }
     return knex('rates_finances_fixedcosts')
     .where('id', req.params.ratesFinancesId)
     .del();
   })
   .then((deletedRow) => {
-    return res.json(deletedRow);
+    res.json(deletedRow);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

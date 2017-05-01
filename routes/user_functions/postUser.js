@@ -1,10 +1,7 @@
 const knex = require('../../knex');
 const Joi = require('joi');
-const express = require('express');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
-
-const router = express.Router();
 
 const postUsers = (req, res) => {
   const { email, password } = req.body;

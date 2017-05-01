@@ -10,8 +10,8 @@ const postTreatment = (req, res) => {
   if (!treatment_name || !treatment_name.trim()) {
     return res.status(400).send('Treatment plant name must not be blank!');
   }
-  if (treatment_type !== 'surface water treatment' && treatment_type !== 'membrane filtration' && treatment_type !== 'slow sand filtration' && treatment_type !== 'surface water package plant' && treatment_type !== 'ion exchange' && treatment_type !== 'adsorptive' && treatment_type !== 'coagulation filtration') {
-    return res.status(400).send('Treatment type must not be blank and must be surface water treatment, membrane filtration, slow sand filtration, surface water package plant, ion exchange, adsorptive, or coagulation filtration');
+  if (treatment_type !== 'conventional-sw' && treatment_type !== 'ion-exchange' && treatment_type !== 'corrosion-control') {
+    return res.status(400).send('Treatment type must not be blank and must be conventional-sw, ion-exchange, or corrosion-control');
   }
   if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
     return res.status(400).send('Year constructed must not be blank must be a valid year');
@@ -22,7 +22,7 @@ const postTreatment = (req, res) => {
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.status(400).send('Condition must not be blank and must be great, fair or poor');
   }
-  // ['surface_water_treatment', 'membrane_filtration', 'slow_sand_filtration', 'surface_water_package_plant', 'ion_exchange', 'adsorptive', 'coagulation_filtration']
+
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

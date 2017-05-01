@@ -4,6 +4,7 @@ exports.seed = function (knex, Promise) {
     return knex('treatment').insert([{
       id: 1,
       water_systems_id: 1,
+      treatment_name: 'main st plant',
       treatment_type: 'conventional-sw',
       year_constructed: 1986,
       capacity: 2000,

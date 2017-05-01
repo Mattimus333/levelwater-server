@@ -11,7 +11,7 @@ const postTreatment = (req, res) => {
   if (treatment_type !== 'conventional-sw' && treatment_type !== 'ion-exchange' && treatment_type !== 'corrosion-control') {
     return res.status(400).send('Treatment type must not be blank and must be conventional-sw, ion-exchange, or corrosion-control');
   }
-  if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
+  if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
     return res.status(400).send('Year constructed must not be blank must be a valid year');
   }
   if (typeof capacity !== 'number') {

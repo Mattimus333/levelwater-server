@@ -14,10 +14,10 @@ const postStorageReservoirs = (req, res) => {
   if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !==  'plastic') {
     return res.status(400).send('Reservoir type must not be blank');
   }
-  if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
+  if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
     return res.status(400).send('Year constructed must not be blank and must be a valid year');
   }
-  if (!capacity) {
+  if (typeof capacity !== 'number') {
     return res.status(400).send('Capacity must not be blank');
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {

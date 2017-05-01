@@ -5,10 +5,10 @@ exports.seed = function(knex, Promise) {
       return knex('storage_reservoirs').insert([{
         id: 1,
         water_systems_id: 1,
-        reservoir_type: 'a big wooden thing',
-        reservoir_name: 'Big ass thing',
-        year_constructed: 1998,
-        capacity: 1000000,
+        reservoir_type: 'steel',
+        reservoir_name: 'Main Street Tank',
+        year_constructed: 1975,
+        capacity: 250000,
         condition: 'poor',
         critical_to_operations: 'true',
       }]);

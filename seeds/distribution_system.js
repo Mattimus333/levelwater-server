@@ -5,12 +5,9 @@ exports.seed = function(knex, Promise) {
       return knex('distribution_system').insert([{
         id: 1,
         water_systems_id: 1,
-        total_length: 123,
-        number_of_valves: 3,
-        number_of_meters: 4,
-        number_of_pumping_plants: 7,
-        combined_pumping_capacity: 444,
-        pumps_condition: 'great',
+        total_length_miles: 15,
+        average_age_of_pipes: 50,
+        average_main_diameter_inches: '4',
       }]);
     });
 };

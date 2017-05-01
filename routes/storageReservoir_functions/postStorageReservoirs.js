@@ -11,7 +11,7 @@ const postStorageReservoirs = (req, res) => {
   if (!reservoir_name || !reservoir_name.trim()) {
     return res.status(400).send('Reservoir name name must not be blank');
   }
-  if (!reservoir_type ) {
+  if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !==  'plastic') {
     return res.status(400).send('Reservoir type must not be blank');
   }
   if (!year_constructed || (year_constructed > currentdate.getFullYear())) {

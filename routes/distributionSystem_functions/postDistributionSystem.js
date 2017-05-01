@@ -1,31 +1,23 @@
 const knex = require('../../knex');
 
 const postDistributionSystem = (req, res) => {
-  const { water_systems_id, total_length, number_of_valves, number_of_meters, number_of_pumping_plants, combined_pumping_capacity, pumps_condition } = req.body;
-  const distributionSystem = { water_systems_id, total_length, number_of_valves, number_of_meters, number_of_pumping_plants, combined_pumping_capacity, pumps_condition };
+  const { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches } = req.body;
+  const distributionSystem = { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches };
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
     return res.status(400).send('Water systems id must not be blank');
   }
-  if (typeof total_length !== 'number') {
+  if (typeof total_length_miles !== 'number') {
     return res.status(400).send('Total length must not be blank');
   }
-  if (typeof number_of_valves !== 'number') {
-    return res.status(400).send('Number of valves must not be blank');
+  if (typeof average_age_of_pipes !== 'number') {
+    return res.status(400).send('Average age of pipes must be a number');
   }
-  if (typeof number_of_meters !== 'number') {
-    return res.status(400).send('Number of meters must not be blank');
+  if (average_main_diameter_inches !== '4' && average_main_diameter_inches !== '6' && average_main_diameter_inches !== '8' && average_main_diameter_inches !== '12' && average_main_diameter_inches !== '24') {
+    return res.status(400).send('Average main diameter must be a valid length in inches');
   }
-  if (typeof number_of_pumping_plants !== 'number') {
-    return res.status(400).send('Number of pumping plants must not be blank');
-  }
-  if (typeof combined_pumping_capacity !== 'number') {
-    return res.status(400).send('Combined pumping capacity must not be blank');
-  }
-  if (pumps_condition !== 'great' && pumps_condition !== 'fair' && pumps_condition !== 'poor') {
-    return res.status(400).send('Pumps condition must not be blank and must be great, fair or poor');
-  }
+
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

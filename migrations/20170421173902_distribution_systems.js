@@ -2,12 +2,9 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable('distribution_system', (table) => {
     table.increments();
     table.integer('water_systems_id').notNullable().unsigned().references('id').inTable('water_systems').onDelete('CASCADE');
-    table.integer('total_length').notNullable().defaultTo(0);
-    table.integer('number_of_valves').notNullable().defaultTo(0);
-    table.integer('number_of_meters').notNullable().defaultTo(0);
-    table.integer('number_of_pumping_plants').notNullable().defaultTo(0);
-    table.integer('combined_pumping_capacity').notNullable().defaultTo(0);
-    table.enum('pumps_condition', ['great', 'fair', 'poor']).defaultTo('great');
+    table.integer('total_length_miles').notNullable().defaultTo(0);
+    table.integer('average_age_of_pipes').notNullable().defaultTo(0);
+    table.enum('average_main_diameter_inches', ['4', '6', '8', '12', '24']).defaultTo('6');
   });
 };
 

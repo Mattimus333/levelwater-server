@@ -27,7 +27,7 @@ const postRatesFinances = (req, res) => {
     annual_debt_costs
   };
 
-  if (typeof water_systems_id !== 'number') {
+  if (typeof Number(water_systems_id) !== 'number') {
     return res.status(400).send('Water systems id must not be blank');
   }
   if (typeof current_average_water_rate !== 'number') {

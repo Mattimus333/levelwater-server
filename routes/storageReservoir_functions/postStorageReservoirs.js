@@ -1,8 +1,8 @@
 const knex = require('../../knex');
 
 const postStorageReservoirs = (req, res) => {
-  const { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition } = req.body
-  const reservoir = { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition };
+  const { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations } = req.body
+  const reservoir = { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations };
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
@@ -23,6 +23,10 @@ const postStorageReservoirs = (req, res) => {
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.status(400).send('Condition must not be blank and must be great, fair, or poor');
   }
+  if (critical_to_operations !== 'true' || critical_to_operations !== 'false') {
+    return res.status(400).send('Critical to Operations status must be either true or false');
+  }
+
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

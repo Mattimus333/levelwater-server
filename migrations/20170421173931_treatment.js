@@ -5,7 +5,8 @@ exports.up = function (knex, Promise) {
     table.enum('treatment_type', ['conventional-sw', 'ion-exchange', 'corrosion-control'])
     table.integer('year_constructed').notNullable().defaultTo(0);
     table.integer('capacity').notNullable().defaultTo(0);
-    table.enum('pumps_condition', ['great', 'fair', 'poor']).defaultTo('great');
+    table.enum('condition', ['great', 'fair', 'poor']).defaultTo('great');
+    table.enum('critical_to_operations', ['true', 'false']).defaultTo('false');
   });
 };
 

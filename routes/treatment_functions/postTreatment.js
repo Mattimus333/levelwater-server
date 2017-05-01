@@ -1,8 +1,8 @@
 const knex = require('../../knex');
 
 const postTreatment = (req, res) => {
-  const { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition } = req.body;
-  const treatment = { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition };
+  const { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations } = req.body;
+  const treatment = { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations };
   const currentdate = new Date();
 
   if (!treatment_name || !treatment_name.trim()) {
@@ -19,6 +19,9 @@ const postTreatment = (req, res) => {
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.status(400).send('Condition must not be blank and must be great, fair or poor');
+  }
+  if (critical_to_operations !== 'true' || critical_to_operations !== 'false') {
+    return res.status(400).send('Critical to Operations status must be either true or false');
   }
 
   knex('users')

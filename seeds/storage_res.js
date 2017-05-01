@@ -10,6 +10,7 @@ exports.seed = function(knex, Promise) {
         year_constructed: 1998,
         capacity: 1000000,
         condition: 'poor',
+        critical_to_operations: 'true',
       }]);
     });
 };

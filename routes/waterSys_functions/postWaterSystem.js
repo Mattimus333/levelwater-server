@@ -16,11 +16,18 @@ const postWaterSystems = (req, res) => {
   }
 
   const waterSystem = { pws_name, pws_id, population, connections };
+  let waterSystemId;
 
   knex('water_systems')
   .insert(waterSystem)
   .then((result) => {
-    res.status(200).json(result[0]);
+    waterSystemId = result[0];
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update('water_systems_id', result[0]);
+  })
+  .then(() => {
+    res.status(200).json(waterSystemId);
   })
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });

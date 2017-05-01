@@ -20,10 +20,10 @@ const postSources = (req, res) => {
   if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
     return res.status(400).send('Critical to operations must not be blank and must be true or false!');
   }
-  if (!year_constructed || (year_constructed > currentdate.getFullYear())) {
+  if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
     return res.status(400).send('Year constructed must not be blank must be a valid year');
   }
-  if (!capacity) {
+  if (typeof capacity !== 'number') {
     return res.status(400).send('Capacity must not be blank!');
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {

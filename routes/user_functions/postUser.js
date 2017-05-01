@@ -12,6 +12,7 @@ const postUsers = (req, res) => {
   if (!password || password.length < 8) {
     return res.send({ status: 400, errorMessage: 'Password must be at least 8 characters long' });
   }
+
   knex('users')
     .where('email', email)
     .first()
@@ -38,7 +39,6 @@ const postUsers = (req, res) => {
     })
     .then((users) => {
       const user = users[0];
-      console.log(user);
       const claim = { userId: user };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
         expiresIn: '7 days',

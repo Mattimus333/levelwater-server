@@ -21,6 +21,14 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
 }
+
+// CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -32,6 +40,7 @@ app.use(storageReservoirs);
 app.use(treatment);
 app.use(distributionSystem);
 app.use(ratesFinances);
+
 app.use((_req, res) => {
   res.sendStatus(404);
 });

@@ -7,6 +7,7 @@ exports.up = function (knex, Promise) {
     table.integer('year_constructed').notNullable().defaultTo(0);
     table.integer('capacity').notNullable().defaultTo(0);
     table.enum('condition', ['great', 'fair', 'poor']).defaultTo('great');
+    table.enum('critical_to_operations', ['true', 'false']).defaultTo('false');
   });
 };
 

@@ -13,17 +13,17 @@ const deleteDistributionSystem = (req, res) => {
   })
   .then((distributionSystemResult) => {
     if (Number(waterSystemId) !== Number(distributionSystemResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'Distribution System not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Distribution system not found!' });
     }
     return knex('distribution_system')
     .where('id', req.params.distribution_system_id)
     .del();
   })
   .then((deletedRow) => {
-    return res.json(deletedRow);
+    res.json(deletedRow);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

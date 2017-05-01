@@ -4,7 +4,7 @@ const getUser = (req, res) => {
   if (Number(req.claim.userId) !== Number(req.params.user_id)) {
     return res.status(404).send('This user could not be found');
   }
-  knex('users')
+  return knex('users')
   .where('id', req.params.user_id)
   .first()
   .then((user) => {
@@ -12,7 +12,7 @@ const getUser = (req, res) => {
     res.status(200).json(user);
   })
   .catch((err) => {
-    res.status(400).send('user ID is invalid!');
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

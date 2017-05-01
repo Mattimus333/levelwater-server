@@ -25,7 +25,7 @@ const postTreatment = (req, res) => {
   .select('water_systems_id')
   .then((user) => {
     if (Number(treatment.water_systems_id) !== user[0].water_systems_id) {
-      return res.send({ status: 400, ErrorMessage: 'water system not found!' });
+      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
     }
     return knex('treatment')
     .insert(treatment);

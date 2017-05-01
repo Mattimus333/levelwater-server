@@ -23,7 +23,7 @@ const postWaterSystems = (req, res) => {
     res.status(200).json(result[0]);
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

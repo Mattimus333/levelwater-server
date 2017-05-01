@@ -13,17 +13,15 @@ const loginUsers = (req, res) => {
   if (req.body.password === undefined) {
     return res.send({ status: 400, errorMessage: 'Password must not be blank' });
   }
-  knex('users')
+  return knex('users')
   .where('email', req.body.email)
   .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id')
   .then((users) => {
     user = users[0];
     if (user.length === 0) {
-      // throw new Error('bad email or password');
       return res.send({ status: 400, ErrorMessage: 'Bad email or password' });
-    } else {
-      return bcrypt.compare(req.body.password, user.hashed_password);
     }
+    return bcrypt.compare(req.body.password, user.hashed_password);
   })
   .then(() => {
     const claim = { userId: user.id };
@@ -37,14 +35,14 @@ const loginUsers = (req, res) => {
       secure: router.get('env') === 'production',
     });
     delete user.hashed_password;
-    user.token = token
+    user.token = token;
     res.status(200).json({ user });
   })
   .catch(bcrypt.MISMATCH_ERROR, () => {
-    return res.send({ status: 400, ErrorMessage: 'Bad email or password' });
+    res.send({ status: 400, ErrorMessage: 'Bad email or password' });
   })
   .catch((err) => {
-    return res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: err });
   });
 };
 

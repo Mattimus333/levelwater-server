@@ -6,7 +6,7 @@ const authorize = (req, res, next) => {
       return res.send({ status: 401, errorMessage: 'Unauthorized' });
     }
     req.claim = payload;
-    next();
+    return next();
   });
 };
 

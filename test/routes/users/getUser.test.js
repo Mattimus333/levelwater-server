@@ -46,37 +46,57 @@ const expect = require('chai').expect;
     //         });
     //       });
     // });
-  describe('get requests for users table', () => {
-    before((done) => {
-        knex.migrate.latest()
-          .then(() => {
-            done();
-          })
-          .catch((err) => {
-            done(err);
-          });
-      });
-
-    beforeEach((done) => {
-      knex.seed.run()
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          done(err);
-        });
-    });
-
-    after((done) => {
-      knex.migrate.rollback()
-      .then(() => {
+  beforeEach((done) => {
+    knex.migrate.latest().then(() => {
+      knex.seed.run().then(() =>{
         done();
       })
-      .catch((err) => {
-        done(err);
-      });
-    });
+    })
+  })
 
+  afterEach((done) => {
+    knex.migrate.rollback()
+    .then(() => {
+      done();
+    });
+  });
+
+describe('GET /users/:id', () => {
+  let token = '';
+
+  it('requires a token', done => {
+    request
+    .post('/login')
+    .send({
+      email: 'alex83@gmail.com',
+      password: 'something'
+    })
+    .end((err, res) => {
+      expect(res.body.token);
+      token = res.body.token;
+    })
+    done();
+  })
+
+  it('responds with JSON', done => {
+    request
+    .get('/users/:id')
+    .set('token', token)
+    .expect('Content-Type', /json/)
+    .expect(200, done);
+  })
+})
+
+
+
+
+
+
+
+
+
+
+  describe('get requests for users table', () => {
 
     describe('GET /users/:id', () => {
 

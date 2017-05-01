@@ -3,11 +3,11 @@ exports.seed = function (knex, Promise) {
   return knex('treatment').del().then(() => {
     return knex('treatment').insert([{
       id: 1,
-      treatment_id: 1,
-      treatment_type: 'adsorptive',
-      year_constructed: 1066,
+      water_systems_id: 1,
+      treatment_type: 'conventional-sw',
+      year_constructed: 1986,
       capacity: 2000,
-      condition: 22,
+      condition: 'fair',
     }]);
   });
 };

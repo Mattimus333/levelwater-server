@@ -20,7 +20,7 @@ const postTreatment = (req, res) => {
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.status(400).send('Condition must not be blank and must be great, fair or poor');
   }
-  if (critical_to_operations !== 'true' || critical_to_operations !== 'false') {
+  if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
     return res.status(400).send('Critical to Operations status must be either true or false');
   }
 

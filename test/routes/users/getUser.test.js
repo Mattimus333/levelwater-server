@@ -7,59 +7,20 @@ const knex = require('../../../knex');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
 
-// suite('getUser', () => {
-
-    // before((done) => {
-    //   knex.migrate.latest()
-    //     .then(() => {
-    //       return knex.seed.run()
-    //         .then(() => {
-    //           done();
-    //         }).then(() => {
-    //           // below is hitting server.js with supertest. might need to change app to path of our routes index.
-    //           request(app)
-    //           // below path might be incorrect
-    //             .post('/postUser')
-    //             .set('Accept', 'application/json')
-    //             .set('Content-Type', 'application/json')
-    //             // no below is wrong. need to login with seeded user info
-    //             // maybe not, compare supseasonal and other API's vs bookshelf
-    //             .send({
-    //                "email": "getUserTest@gmail.com",
-    //                "password": "getUserTest",
-    //                "first_name": "Fitzwilliam",
-    //                "last_name": "Darcy",
-    //                "water_systems_id": 1,
-    //                "superuser": "true"
-    //              })
-    //             .end((err, res) => {
-    //               if (err) {
-    //                 return done(err);
-    //               }
-    //
-    //               agent.saveCookies(res);
-    //               done();
-    //             });
-    //         })
-    //         .catch((err) => {
-    //             done(err);
-    //         });
-    //       });
-    // });
-  beforeEach((done) => {
-    knex.migrate.latest().then(() => {
-      knex.seed.run().then(() =>{
-        done();
-      });
-    });
-  });
-
-  afterEach((done) => {
-    knex.migrate.rollback()
-    .then(() => {
+beforeEach((done) => {
+  knex.migrate.latest().then(() => {
+    knex.seed.run().then(() =>{
       done();
     });
   });
+});
+
+afterEach((done) => {
+  knex.migrate.rollback()
+  .then(() => {
+    done();
+  });
+});
 
 describe('GET /users/:id', () => {
   let token = '';
@@ -71,7 +32,13 @@ describe('GET /users/:id', () => {
       email: 'alex83@gmail.com',
       password: 'something',
     })
+    .expect((res) => {
+      console.log('RES', res.body);
+    })
+    .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
     .end((err, res) => {
+      console.log('HEADER', res.header);
+      console.log('BODY', res.body);
       expect(res.body.token);
       token = res.body.token;
     });

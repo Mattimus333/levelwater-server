@@ -26,6 +26,18 @@ const config = {
   appRoot: __dirname // required config
 };
 
+switch (app.get('env')) {
+  case 'development':
+    app.use(morgan('dev'));
+    break;
+
+  case 'production':
+    app.use(morgan('short'));
+    break;
+
+  default:
+}
+
 // CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -33,7 +45,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 

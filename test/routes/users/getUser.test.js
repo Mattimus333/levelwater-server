@@ -40,18 +40,15 @@ describe('GET /users/:id', () => {
     // })
     // .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
     .end((err, res) => {
-      console.log('HEADER', res.header);
-      console.log('BODY', res.body);
-
-      expect(res.body.token);
-      token = res.body.token;
+      expect(res.body.user.token);
+      token = res.body.user.token;
     });
     done();
   });
 
   it('responds with JSON', done => {
     request
-    .get('/users/:id')
+    .get('/users/1')
     .set('token', token)
     .expect('Content-Type', /json/)
     .expect(200, done);

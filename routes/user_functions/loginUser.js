@@ -17,25 +17,25 @@ const loginUsers = (req, res) => {
   .where('email', req.body.email)
   .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id')
   .then((users) => {
-    console.log('REQ', req.body);
+    // console.log('REQ', req.body);
 
     user = users[0];
     if (user.length === 0) {
       return res.send({ status: 400, ErrorMessage: 'Bad email or password' });
     }
-    console.log('BCRYPT', bcrypt.compare(req.body.password, user.hashed_password));
+    // console.log('BCRYPT', bcrypt.compare(req.body.password, user.hashed_password));
 
     return bcrypt.compare(req.body.password, user.hashed_password);
   })
   .then(() => {
     const claim = { userId: user.id };
     require('dotenv').config();
-    console.log('JWT', process.env.JWT_KEY);
+    // console.log('JWT', process.env.JWT_KEY);
 
     const token = jwt.sign(claim, process.env.JWT_KEY, {
       expiresIn: '7 days',
     });
-    console.log('TOKEN', token);
+    // console.log('TOKEN', token);
 
     // res.cookie('token', token, {
     //   httpOnly: true,
@@ -44,7 +44,7 @@ const loginUsers = (req, res) => {
     // });
     delete user.hashed_password;
     user.token = token;
-    console.log('USER', user);
+    // console.log('USER', user);
 
     res.status(200).json({ user });
   })

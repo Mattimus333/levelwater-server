@@ -19,8 +19,12 @@ const morgan = require('morgan');
 const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
+  require('dotenv').config();
 }
+
+const config = {
+  appRoot: __dirname // required config
+};
 
 // CORS
 app.use((req, res, next) => {

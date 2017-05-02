@@ -10,7 +10,7 @@ const storageReservoirs = require('./routes/storageReservoirs');
 const treatment = require('./routes/treatment');
 const distributionSystem = require('./routes/distributionSystem');
 const ratesFinances = require('./routes/ratesFinances');
-const dashboard = require('./routes/dashboard');
+const algorithm = require('./routes/algorithm');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -41,7 +41,7 @@ app.use(storageReservoirs);
 app.use(treatment);
 app.use(distributionSystem);
 app.use(ratesFinances);
-app.use(dashboard);
+app.use(algorithm);
 
 app.use((_req, res) => {
   res.sendStatus(404);

@@ -35,11 +35,6 @@ describe('GET /users/:id', () => {
       email: 'alex83@gmail.com',
       password: 'something',
     })
-    // .expect((res) => {
-    //   console.log('RES', res.body);
-    // })
-    // .expect('set-cookie', /token=[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+\.[a-zA-Z0-9\-_]+; Path=\/;.+HttpOnly/)
-    .end((err, res) => {
       expect(res.body.user.token);
       token = res.body.user.token;
     });

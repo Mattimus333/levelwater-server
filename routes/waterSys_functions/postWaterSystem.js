@@ -21,8 +21,6 @@ const postWaterSystems = (req, res) => {
   knex('water_systems')
   .insert(waterSystem)
   .then((result) => {
-    console.log(result);
-    console.log(req.claim.userId);
     waterSystemId = result[0];
     return knex('users')
     .where('id', req.claim.userId)

@@ -74,7 +74,6 @@ const postRatesFinances = (req, res) => {
     res.status(200).json(ratesFinances);
   })
   .catch((err) => {
-    console.log(err);
     res.send({ status: 400, ErrorMessage: err });
   });
 }

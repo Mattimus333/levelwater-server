@@ -1,10 +1,11 @@
 const knex = require('../../knex');
 
 /**
+*@module getDistributionSystem
 * GET function to make request to Distribution Systems table
-* @name something
-* @route {GET}
-* @headerparam {Number} water_systems_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, and average_main_diameter_inches.
+* @name getDistributionSystem
+* @route {GET} /distribution-system
+* @routeparam {Number} water_systems_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, and average_main_diameter_inches.
 */
 const getDistributionSystem = (req, res) => {
   knex('users')

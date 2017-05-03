@@ -63,6 +63,7 @@ const postRatesFinances = (req, res) => {
   .select('water_systems_id')
   .then((result) => {
     if (Number(ratesFinances.water_systems_id) !== result[0].water_systems_id) {
+      //TODO: make this a thrown error instead!
       return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
     }
     return knex('rates_finances_fixedcosts')

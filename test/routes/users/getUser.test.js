@@ -6,9 +6,6 @@ const app = require('../../../server');
 const knex = require('../../../knex');
 const request = require('supertest')(app);
 const expect = require('chai').expect;
-const bodyParser = require('body-parser');
-
-app.use(bodyParser.json());
 
 beforeEach((done) => {
   knex.migrate.latest().then(() => {
@@ -26,7 +23,7 @@ afterEach((done) => {
 });
 
 describe('GET /users/:id', () => {
-  let token = '';
+  let token;
 
   it('requires a token', (done) => {
     request

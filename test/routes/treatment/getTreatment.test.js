@@ -22,10 +22,10 @@ afterEach((done) => {
   });
 });
 
-describe('GET /users/:id', () => {
+describe('GET /treatment/:id', () => {
   let token;
 
-  it('requires a token', (done) => {
+  it('creates a token', (done) => {
     request
     .post('/login')
     .send({
@@ -41,32 +41,41 @@ describe('GET /users/:id', () => {
 
   it('responds with JSON', done => {
     request
-    .get('/users/1')
+    .get('/treatment/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, done);
+    .expect(200, [{
+      id: 1,
+      water_systems_id: 1,
+      treatment_name: 'First Street Treatment Plant',
+      treatment_type: 'conventional-sw',
+      year_constructed: 1986,
+      capacity: 200,
+      condition: 'fair',
+      critical_to_operations: 'true',
+    }], done);
   });
 
   it('should respond with 401 and Unauthorized if no token', done => {
     request
-    .get('/distribution-system/1')
+    .get('/treatment/1')
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
-  it('should respond with 401 and Unauthorized if id does not exist', done => {
+  it('should respond with 400 and Water system not found if id does not exist', done => {
     request
-    .get('/users/3000')
-    // .set('token', token)
-    // .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  });
-
-  it('should respond with 401 and Unauthorized if wrong id', done => {
-    request
-    .get('/users/2')
+    .get('/treatment/3000')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
+  });
+
+  it('should respond with 400 and Water system not found if wrong id', done => {
+    request
+    .get('/treatment/2')
+    .set('token', token)
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
   });
 });

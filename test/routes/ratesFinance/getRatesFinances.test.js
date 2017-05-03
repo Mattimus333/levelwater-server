@@ -22,10 +22,10 @@ afterEach((done) => {
   });
 });
 
-describe('GET /users/:id', () => {
+describe('GET /rates-finances-fixedcosts/:id', () => {
   let token;
 
-  it('requires a token', (done) => {
+  it('creates a token', (done) => {
     request
     .post('/login')
     .send({
@@ -41,32 +41,44 @@ describe('GET /users/:id', () => {
 
   it('responds with JSON', done => {
     request
-    .get('/users/1')
+    .get('/rates-finances-fixedcosts/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, done);
+    .expect(200, [{
+      id: 1,
+      water_systems_id: 1,
+      current_average_water_rate: 40,
+      total_financial_reserves: 10000,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    }], done);
   });
 
   it('should respond with 401 and Unauthorized if no token', done => {
     request
-    .get('/distribution-system/1')
+    .get('/rates-finances-fixedcosts/1')
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
-  it('should respond with 401 and Unauthorized if id does not exist', done => {
+  it('should respond with 400 and Water system not found if id does not exist', done => {
     request
-    .get('/users/3000')
-    // .set('token', token)
-    // .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  });
-
-  it('should respond with 401 and Unauthorized if wrong id', done => {
-    request
-    .get('/users/2')
+    .get('/rates-finances-fixedcosts/3000')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
+  });
+
+  it('should respond with 400 and Water system not found if wrong id', done => {
+    request
+    .get('/rates-finances-fixedcosts/2')
+    .set('token', token)
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
   });
 });

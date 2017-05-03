@@ -22,10 +22,10 @@ afterEach((done) => {
   });
 });
 
-describe('GET /users/:id', () => {
+describe('GET /water-systems/:id', () => {
   let token;
 
-  it('requires a token', (done) => {
+  it('creates a token', (done) => {
     request
     .post('/login')
     .send({
@@ -41,32 +41,38 @@ describe('GET /users/:id', () => {
 
   it('responds with JSON', done => {
     request
-    .get('/users/1')
+    .get('/water-systems/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, done);
+    .expect(200, {
+      id: 1,
+      pws_name: 'Drunk with power',
+      pws_id: 1234567,
+      population: 1000,
+      connections: 444,
+    }, done);
   });
 
   it('should respond with 401 and Unauthorized if no token', done => {
     request
-    .get('/distribution-system/1')
+    .get('/water-systems/1')
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
-  it('should respond with 401 and Unauthorized if id does not exist', done => {
+  it('should respond with 400 and Water system not found if id does not exist', done => {
     request
-    .get('/users/3000')
-    // .set('token', token)
-    // .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  });
-
-  it('should respond with 401 and Unauthorized if wrong id', done => {
-    request
-    .get('/users/2')
+    .get('/water-systems/3000')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
+  });
+
+  it('should respond with 400 and Water system not found if wrong id', done => {
+    request
+    .get('/water-systems/2')
+    .set('token', token)
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
   });
 });

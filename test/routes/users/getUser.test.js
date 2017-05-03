@@ -50,7 +50,7 @@ describe('GET /users/:id', () => {
     .expect(200, done);
   });
 
-  it('should respond with 404 and Not Found if wrong id', done => {
+  it('should respond with 401 and Unauthorized if id does not exist', done => {
     request
     .get('/users/3000')
     .set('Accept', 'application/json')
@@ -58,62 +58,11 @@ describe('GET /users/:id', () => {
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
+  it('should respond with 401 and Unauthorized if wrong id', done => {
+    request
+    .get('/users/2')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  });
 });
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//   describe('get requests for users table', () => {
-//
-//     describe('GET /users/:id', () => {
-//
-//       it('should respond with correct user info', done => {
-//         request(app)
-//         // I believe id should be 2 because we're only seeding one user before it - no
-//         // we want to get seeded user info, as we signed in with user
-//         .get('/users/2')
-//         .set('Accept', 'application/json')
-//         .expect('Content-Type', /json/)
-//         .expect(200, {
-//           // expect all seeded user info below
-//
-//         }, done)
-//       });
-//
-//       // erroneous login for this test
-//       it('non existant user', done => {
-//         request(app)
-//         .get('/users/5')
-//         .set('Accept', 'application/json')
-//         .expect('Content-Type', /json/)
-//         .expect(200, {
-//           // expect 404 page not found or 401, unauthorized
-//         }, done)
-//       });
-//
-//       it('existing user', done => {
-//         request(app)
-//         .get('/users/1')
-//         .set('Accept', 'application/json')
-//         .expect('Content-Type', /json/)
-//         .expect(200, {
-//           // expect 404 page not found or 401, unauthorized
-//         }, done)
-//       });
-//
-//       it('should respond with 404 and Not Found if wrong id', done => {
-//         request(app)
-//         .get('/users/3000')
-//         .set('Accept', 'application/json')
-//         .expect('Content-Type', /json/)
-//         .expect({'status':404,'ErrorMessage':'Not Found'}, done)
-//       });
-//     });
-//   });
-// // });

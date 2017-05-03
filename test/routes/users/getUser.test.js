@@ -33,8 +33,8 @@ describe('GET /users/:id', () => {
       password: 'something',
     })
     .end((err, res) => {
-      expect(res.body.user.token);
-      token = res.body.user.token;
+      expect(res.body.token);
+      token = res.body.token;
     });
     done();
   });
@@ -68,5 +68,22 @@ describe('GET /users/:id', () => {
     .set('token', token)
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  });
+
+  it('should respond with 200 and return user info', done => {
+    request
+    .get('/users/1')
+    .set('token', token)
+    .expect((res) => {
+      delete res.body.token;
+    })
+    .expect({
+      "first_name": "Axel",
+      "last_name": "K",
+      "id": 1,
+      "email": "alex83@gmail.com",
+      "superuser": "true",
+      "water_systems_id": 1
+    }, done);
   });
 });

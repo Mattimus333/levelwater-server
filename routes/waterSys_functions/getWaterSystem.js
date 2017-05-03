@@ -9,7 +9,7 @@ const getWaterSystem = (req, res) => {
       return knex('water_systems')
       .where('id', req.params.water_systems_id);
     }
-    return res.send({ status: 400, ErrorMessage: 'water system not found!' });
+    return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
   })
   .then((result) => {
     res.json(result[0]);

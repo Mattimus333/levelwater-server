@@ -57,7 +57,7 @@ describe('POST /users', () => {
     .expect(200, done);
   });
 
-  it('rejects a post if the user already exists', (done) => {
+  it('rejects a post if the user email already exists', (done) => {
     request
     .post('/users')
     .send({

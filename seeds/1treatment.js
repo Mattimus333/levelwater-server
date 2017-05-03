@@ -8,7 +8,7 @@ exports.seed = function (knex, Promise) {
     year_constructed: 1986,
     capacity: 200,
     condition: 'fair',
-    critical_to_operations: 'true',
+    critical_to_operations: 'false',
   },
   {
     id: 2,

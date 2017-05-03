@@ -18,7 +18,7 @@ exports.seed = function (knex, Promise) {
       water_systems_id: 1,
       source_name: 'Main Street Well',
       source_type: 'sw',
-      critical_to_operations: 'true',
+      critical_to_operations: 'false',
       treatment: 'false',
       year_constructed: 1985,
       capacity: 35,

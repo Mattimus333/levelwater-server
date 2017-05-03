@@ -7,6 +7,7 @@ exports.seed = function (knex, Promise) {
       total_length_miles: 15,
       average_age_of_pipes: 50,
       average_main_diameter_inches: '4',
+      condition: 'great',
     },
     {
       id: 2,
@@ -14,6 +15,7 @@ exports.seed = function (knex, Promise) {
       total_length_miles: 400,
       average_age_of_pipes: 65,
       average_main_diameter_inches: '12',
+      condition: 'fair',
     },
     {
       id: 3,
@@ -21,5 +23,6 @@ exports.seed = function (knex, Promise) {
       total_length_miles: 750,
       average_age_of_pipes: 50,
       average_main_diameter_inches: '12',
+      condition: 'poor',
     }]));
 };

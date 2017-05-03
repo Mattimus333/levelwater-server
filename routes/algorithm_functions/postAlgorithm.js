@@ -1,67 +1,66 @@
 const knex = require('../../knex');
+const startAlgorithm = require('../../water-math/app.js');
 
-const sources = [];
-const treatment = [];
-const storage = [];
-const distribution = [];
-const finances = [];
 
-const postAlgorithm = (req, res) => {
+const sourceObjectArray = [];
+const treatmentObjectArray = [];
+const storageObjectArray = [];
+const distributionObjectArray = [];
+const ratesFinancesObjectArray = [];
+let algorithmResultsObject;
+
+const getInfoFromTables = (req, res) => Promise.all([
   knex('sources')
-  .where('water_systems_id', req.params.water_systems_id)
-  .then((sourceResults) => {
-    // console.log('this is sourceResults:', sourceResults);
-    for (let i = 0; i < sourceResults.length; i++) {
-      sources.push(sourceResults[i]);
-    }
-    console.log('this is sources:', sources);
+      .where('water_systems_id', req.params.water_systems_id)
+      .then((sourceResults) => {
+        // console.log('this is sourceResults:', sourceResults);
+        for (let i = 0; i < sourceResults.length; i++) {
+          sourceObjectArray.push(sourceResults[i]);
+        }
+      }),
+  knex('treatment')
+      .where('water_systems_id', req.params.water_systems_id)
+      .then((treatmentResult) => {
+        // console.log('this is treatmentResult:', treatmentResult);
+        for (let i = 0; i < treatmentResult.length; i++) {
+          treatmentObjectArray.push(treatmentResult[i]);
+        }
+        // console.log('this is treatment:', treatmentObjectArray);
+      }),
+  knex('storage_reservoirs')
+      .where('water_systems_id', req.params.water_systems_id)
+      .then((storageResult) => {
+        for (let i = 0; i < storageResult.length; i++) {
+          storageObjectArray.push(storageResult[i]);
+        }
+        // console.log('this is storage:', storageObjectArray);
+      }),
+  knex('distribution_system')
+      .where('water_systems_id', req.params.water_systems_id)
+      .then((distributionResult) => {
+        for (let i = 0; i < distributionResult.length; i++) {
+          distributionObjectArray.push(distributionResult[i]);
+        }
+      }),
+  knex('rates_finances_fixedcosts')
+      .where('water_systems_id', req.params.water_systems_id)
+      .then((ratesFinancesResult) => {
+        for (let i = 0; i < ratesFinancesResult.length; i++) {
+          ratesFinancesObjectArray.push(ratesFinancesResult[i]);
+        }
+        // console.log('this is ratesFinances: ', ratesFinancesObjectArray);
+      }),
+])
+  .then(() => {
+    // console.log(startAlgorithm);
+    // console.log('1', sourceObjectArray, '2', treatmentObjectArray, '3', storageObjectArray, '4', distributionObjectArray, '5', ratesFinancesObjectArray);
+    return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray) || 1);
   })
   .then((result) => {
-    knex('treatment')
-    .where('water_systems_id', req.params.water_systems_id)
-    .then((treatmentResult) => {
-      // console.log('this is treatmentResult:', treatmentResult);
-      for (let i = 0; i < treatmentResult.length; i++) {
-        treatment.push(treatmentResult[i]);
-      }
-      console.log('this is treatment:', treatment);
-    });
-  })
-  .then((result) => {
-    knex('storage_reservoirs')
-    .where('water_systems_id', req.params.water_systems_id)
-    .then((storageResult) => {
-      for (let i = 0; i < storageResult.length; i++) {
-        storage.push(storageResult[i]);
-      }
-      console.log('this is storage:', storage);
-    });
-  })
-  .then((result) => {
-    knex('distribution_system')
-    .where('water_systems_id', req.params.water_systems_id)
-    .then((distributionResult) => {
-      for (let i = 0; i < distributionResult.length; i++) {
-        distribution.push(distributionResult[i]);
-      }
-      console.log('this is distribution: ', distribution);
-    });
+    console.log(result, 'aw hell yeah');
   })
   .catch((err) => {
-    res.send({ status: 400, ErrorMessage: err });
+    res.send({ status: 400, ErrorMessage: 'Something went wrong accessing the database to create arrays' });
   });
-};
 
-module.exports = postAlgorithm;
-
-
-// const myPromise = new Promise((resolve, error) => { resolve('param!'); });
-// myPromise
-//   .then((x) => {
-//     console.log(x);
-//     return knex.select('column')
-//                .from('table')
-//                .then(handleData);
-//   })
-//   .then(data_from_handleData => knex.select('another_column')
-//                .from('another_table'));
+module.exports = getInfoFromTables;

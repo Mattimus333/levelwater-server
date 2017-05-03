@@ -49,7 +49,7 @@ describe('GET /users/:id', () => {
 
   it('should respond with 401 and Unauthorized if no token', done => {
     request
-    .get('/distribution-system/1')
+    .get('/users/1')
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
@@ -57,8 +57,8 @@ describe('GET /users/:id', () => {
   it('should respond with 401 and Unauthorized if id does not exist', done => {
     request
     .get('/users/3000')
-    // .set('token', token)
-    // .expect('Content-Type', /json/)
+    .set('token', token)
+    .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 

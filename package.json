@@ -28,6 +28,8 @@
     "morgan": "^1.8.1",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
     "supertest": "^3.0.0"
   },
   "devDependencies": {

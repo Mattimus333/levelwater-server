@@ -63,16 +63,12 @@ const getInfoFromTables = (req, res) => {
     return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray));
   })
   .then((result) => {
-    // console.log(result, 'aw hell yeah');
     algorithmResultsObject.water_systems_id = req.params.water_systems_id;
     algorithmResultsObject.algorithm_results = JSON.stringify(result);
-    console.log(algorithmResultsObject, 'if you smellllllllllaa what the rock is cooking');
-    // console.log('sup ryan', algorithmResultsObject.algorithm_results);
     return knex('algorithm_results')
     .insert((algorithmResultsObject));
   })
   .then(() => {
-    console.log('made it here.  sup alex');
     res.status(200).json(algorithmResultsObject);
   })
   .catch((err) => {

@@ -1,5 +1,9 @@
 const knex = require('../../knex');
 
+/**
+* Functionality for GET request to Distribution Systems table
+* @param {Number} water_systems_id - The id for the water system.
+*/
 const getDistributionSystem = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

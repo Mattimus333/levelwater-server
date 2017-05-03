@@ -7,6 +7,7 @@ const patchDistributionSystem = require('./distributionSystem_functions/patchDis
 
 const router = express.Router();
 
+/** CRUD Routes for Distribution Systems table*/
 router.get('/distribution-system/:water_systems_id', authorize, getDistributionSystem);
 router.patch('/distribution-system/:distribution_system_id', authorize, patchDistributionSystem);
 router.post('/distribution-system', authorize, postDistributionSystem);

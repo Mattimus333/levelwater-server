@@ -47,11 +47,11 @@ describe('GET /treatment/:id', () => {
     .expect(200, [{
       id: 1,
       water_systems_id: 1,
-      reservoir_type: 'steel',
-      reservoir_name: 'Main Street Tank',
-      year_constructed: 1975,
-      capacity: 250000,
-      condition: 'poor',
+      treatment_name: 'First Street Treatment Plant',
+      treatment_type: 'conventional-sw',
+      year_constructed: 1986,
+      capacity: 200,
+      condition: 'fair',
       critical_to_operations: 'true',
     }], done);
   });

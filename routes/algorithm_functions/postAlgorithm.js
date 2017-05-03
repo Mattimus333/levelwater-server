@@ -9,7 +9,10 @@ const distributionObjectArray = [];
 const ratesFinancesObjectArray = [];
 let algorithmResultsObject;
 
-const getInfoFromTables = (req, res) => Promise.all([
+const getInfoFromTables = (req, res) => {
+  knex('users')
+
+  Promise.all([
   knex('sources')
       .where('water_systems_id', req.params.water_systems_id)
       .then((sourceResults) => {
@@ -54,7 +57,7 @@ const getInfoFromTables = (req, res) => Promise.all([
   .then(() => {
     // console.log(startAlgorithm);
     // console.log('1', sourceObjectArray, '2', treatmentObjectArray, '3', storageObjectArray, '4', distributionObjectArray, '5', ratesFinancesObjectArray);
-    return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray) || 1);
+    return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray));
   })
   .then((result) => {
     console.log(result, 'aw hell yeah');
@@ -62,5 +65,6 @@ const getInfoFromTables = (req, res) => Promise.all([
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: 'Something went wrong accessing the database to create arrays' });
   });
+}
 
 module.exports = getInfoFromTables;

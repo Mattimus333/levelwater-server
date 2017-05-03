@@ -2,7 +2,6 @@
 
 // refactor to es6
 const express = require('express');
-const dotenv = require('dotenv').load();
 const users = require('./routes/users');
 const sources = require('./routes/sources');
 const waterSystems = require('./routes/water_systems');
@@ -22,6 +21,8 @@ const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
+} else {
+  require('dotenv').load();
 }
 
 const config = {

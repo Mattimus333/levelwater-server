@@ -13,6 +13,7 @@ const ratesFinances = require('./routes/ratesFinances');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const passport = require('passport');
 
 // finish below
 // import login from './routes/something/login';
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use(users);
 app.use(sources);

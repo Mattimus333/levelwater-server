@@ -47,14 +47,12 @@ describe('GET /storage-reservoirs/:id', () => {
     .expect(200, [{
       id: 1,
       water_systems_id: 1,
-      source_name: 'First Street Well',
-      source_type: 'gw',
+      reservoir_type: 'steel',
+      reservoir_name: 'Main Street Tank',
+      year_constructed: 1975,
+      capacity: 250000,
+      condition: 'poor',
       critical_to_operations: 'true',
-      treatment: 'true',
-      year_constructed: 1999,
-      capacity: 100,
-      condition: 'great',
-      continuous_chlorination: 'false'
     }], done);
   });
 

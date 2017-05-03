@@ -53,19 +53,26 @@ describe('GET /distribution-system/:id', () => {
     }, done);
   });
 
-  it('should respond with 401 and Unauthorized if id does not exist', done => {
+  it('should respond with 401 and Unauthorized if no token', done => {
     request
-    .get('/distribution-system/3000')
-    .set('Accept', 'application/json')
+    .get('/distribution-system/1')
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
-  it('should respond with 401 and Unauthorized if wrong id', done => {
+  it('should respond with 400 and Water system not found if id does not exist', done => {
+    request
+    .get('/distribution-system/3000')
+    .set('token', token)
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
+  });
+
+  it('should respond with 400 and Water system not found if wrong id', done => {
     request
     .get('/distribution-system/2')
-    .set('Accept', 'application/json')
+    .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
   });
 });

@@ -47,11 +47,18 @@ describe('GET /users/:id', () => {
     .expect(200, done);
   });
 
+  it('should respond with 401 and Unauthorized if no token', done => {
+    request
+    .get('/distribution-system/1')
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  });
+
   it('should respond with 401 and Unauthorized if id does not exist', done => {
     request
     .get('/users/3000')
-    .set('token', token)
-    .expect('Content-Type', /json/)
+    // .set('token', token)
+    // .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 

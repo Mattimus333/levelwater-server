@@ -47,15 +47,14 @@ describe('GET /sources/:id', () => {
     .expect(200, [{
       id: 1,
       water_systems_id: 1,
-      current_average_water_rate: 40,
-      total_financial_reserves: 10000,
-      annual_revenue_water_sales: 50000,
-      annual_revenue_fees_charged: 50000,
-      annual_revenue_subsidies: 1000,
-      annual_savings_to_financial_reserves: 1000,
-      annual_personnel_costs: 40000,
-      annual_operations_costs: 30000,
-      annual_debt_costs: 4000,
+      source_name: 'First Street Well',
+      source_type: 'gw',
+      critical_to_operations: 'true',
+      treatment: 'true',
+      year_constructed: 1999,
+      capacity: 100,
+      condition: 'great',
+      continuous_chlorination: 'false'
     }], done);
   });
 

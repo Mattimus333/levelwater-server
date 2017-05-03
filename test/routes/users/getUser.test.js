@@ -35,6 +35,7 @@ describe('GET /users/:id', () => {
       email: 'alex83@gmail.com',
       password: 'something',
     })
+    .end((err, res) => {
       expect(res.body.user.token);
       token = res.body.user.token;
     });
@@ -48,6 +49,15 @@ describe('GET /users/:id', () => {
     .expect('Content-Type', /json/)
     .expect(200, done);
   });
+
+  it('should respond with 404 and Not Found if wrong id', done => {
+    request
+    .get('/users/3000')
+    .set('Accept', 'application/json')
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  });
+
 });
 
 

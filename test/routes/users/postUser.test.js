@@ -47,11 +47,11 @@ describe('POST /users', () => {
     request
     .post('/users')
     .send({
-      email: 'alex822@gmail.com',
-      password: 'something',
-      first_name: 'Alex',
-      last_name: 'K-Daddy',
-      superuser: 'true',
+      first_name: "Dino",
+      last_name: "Mite",
+      email: "mmuhr88@gmail.com",
+      superuser: "true",
+      password: "dinomite123"
     })
     .expect('Content-Type', /json/)
     .expect(200, done);

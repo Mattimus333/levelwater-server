@@ -12,6 +12,7 @@ const logoutUser = require('./user_functions/logoutUser');
 const oAuthUser = require('./user_functions/oauthFunction');
 const authorize = require('./authorize');
 
+const router = express.Router();
 require('../config/passport')(passport);
 
 passport.serializeUser((user, done) => {
@@ -21,7 +22,6 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-const router = express.Router();
 
 router.get('/test', test);
 router.post('/users', postUser);

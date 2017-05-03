@@ -6,8 +6,8 @@ const getInfoFromTables = require('./algorithm_functions/postAlgorithm');
 
 const router = express.Router();
 
-router.get('/dashboard/:water_systems_id', authorize, getAlgorithm);
-router.post('/dashboard/:water_systems_id', authorize, getInfoFromTables);
+router.get('/algorithm-results/:water_systems_id', authorize, getAlgorithm);
+router.post('/algorithm-results/:water_systems_id', authorize, getInfoFromTables);
 // router.patch('/dashboard/:water_systems_id', authorize, patchAlgorithm);
 
 module.exports = router;

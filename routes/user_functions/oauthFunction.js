@@ -15,8 +15,9 @@ const oAuthUser = (req, res) => {
       });
       delete result.hashed_password;
       result.token = token;
-      res.redirect('https://level-water.herokuapp.com/dashboard')
+      res.redirect('http://level-water.herokuapp.com/dashboard');
       res.status(200).json(result);
+      res.end();
     } else {
       const password = req.session.passport.user.first_name + 99999999
       const user = req.session.passport.user;

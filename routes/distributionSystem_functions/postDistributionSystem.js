@@ -1,7 +1,12 @@
 const knex = require('../../knex');
 
-const postDistributionSystem = (req, res) => {
-  const { water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, average_main_diameter_inches } = req.body;
+/**
+*@module postDistributionSystem
+* POST function to make request to Distribution Systems table
+* @name postDistributionSystem
+* @route {POST} /distribution-system
+*/const postDistributionSystem = (req, res) => {
+  const { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches } = req.body;
   const distributionSystem = { water_systems_id, total_length_miles, distribution_name, average_age_of_pipes, condition, average_main_diameter_inches };
 
   const currentdate = new Date();

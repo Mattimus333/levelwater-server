@@ -26,9 +26,8 @@ const postUsers = (req, res) => {
       return bcrypt.hash(password, 12);
     })
     .then((hashed_password) => {
-      const { water_systems_id, first_name, last_name, superuser } = req.body;
+      const { first_name, last_name, superuser } = req.body;
       const newUser = {
-        water_systems_id,
         first_name,
         last_name,
         email,

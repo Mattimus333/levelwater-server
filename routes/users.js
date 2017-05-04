@@ -10,12 +10,11 @@ const authorize = require('./authorize');
 
 const router = express.Router();
 
-router.get('/test', test);
-router.post('/users', postUser);
-router.get('/users/:user_id', authorize, getUser);
-router.put('/users/:user_id', authorize, putUser);
-router.delete('/users/:user_id', authorize, deleteUser);
 router.post('/login', loginUser);
 router.delete('/logout', logoutUser);
+router.delete('/users/:user_id', authorize, deleteUser);
+router.get('/users/:user_id', authorize, getUser);
+router.post('/users', postUser);
+router.put('/users/:user_id', authorize, putUser);
 
 module.exports = router;

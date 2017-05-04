@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: ratesFinances_functions/getRatesFinances.js</title>
+    <title>JSDoc: Source: user_functions/postUser.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: ratesFinances_functions/getRatesFinances.js</h1>
+    <h1 class="page-title">Source: user_functions/postUser.js</h1>
 
     
 
@@ -27,34 +27,65 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
+const Joi = require('joi');
+const bcrypt = require('bcrypt-as-promised');
+const jwt = require('jsonwebtoken');
 
 /**
-* GET function to make request to Rates Finances table. Returns JSON object with water_systems_id, current_average_water_rate, total_financial_reserves, annual_revenue_water_sales, annual_revenue_fees_charged, annual_revenue_subsidies, annual_savings_to_financial_reserves, annual_personnel_costs, annual_operations_costs, and annual_debt_costs.
-*@module getRatesFinances
-* @name getRatesFinances
-* @route {GET} /rates-finances-fixedcosts
-* @routeparam {Number} water_systems_id - ID for Water Systems table.
+* POST function to make request to Users table. Posts JSON object with water_systems_id, first_name, last_name, email, hashed_password, and superuser.
+* @module postsUser
+* @name postsUser
+* @route {POST} /users
 */
-const getRatesFinances = (req, res) => {
+const postUsers = (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !email.trim()) {
+    return res.send({ status: 400, errorMessage: 'Email must not be blank' });
+  }
+  if (!password || password.length &lt; 8) {
+    return res.send({ status: 400, errorMessage: 'Password must be at least 8 characters long' });
+  }
+
   knex('users')
-  .where('id', req.claim.userId)
-  .select('water_systems_id')
-  .then((result) => {
-    if (Number(req.params.water_systems_id) !== Number(result[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
-    }
-    return knex('rates_finances_fixedcosts')
-    .where('water_systems_id', req.params.water_systems_id);
-  })
-  .then((results) => {
-    res.json(results);
-  })
-  .catch((err) => {
-    res.send({ status: 400, ErrorMessage: err });
-  });
+    .where('email', email)
+    .first()
+    .then((user) => {
+      const valid = Joi.validate(email, Joi.string().email());
+      if (user) {
+        return res.send({ status: 400, ErrorMessage: 'Email already exists' });
+      } else if (valid.error) {
+        return res.send({ status: 400, ErrorMessage: 'Improper email format' });
+      }
+      return bcrypt.hash(password, 12);
+    })
+    .then((hashed_password) => {
+      const { water_systems_id, first_name, last_name, superuser } = req.body;
+      const newUser = {
+        water_systems_id,
+        first_name,
+        last_name,
+        email,
+        hashed_password,
+        superuser,
+      };
+      return knex('users').insert(newUser, '*');
+    })
+    .then((users) => {
+      const user = users[0];
+      const claim = { userId: user };
+      const token = jwt.sign(claim, process.env.JWT_KEY, {
+        expiresIn: '7 days',
+      });
+      res.status(200).json({ user, token });
+    })
+    .catch((err) => {
+      res.send({ status: 400, ErrorMessage: err });
+    });
 };
 
-module.exports = getRatesFinances;
+
+module.exports = postUsers;
 </code></pre>
         </article>
     </section>

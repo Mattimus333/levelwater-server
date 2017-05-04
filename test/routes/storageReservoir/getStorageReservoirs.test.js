@@ -33,8 +33,8 @@ describe('GET /storage-reservoirs/:id', () => {
       password: 'something',
     })
     .end((err, res) => {
-      expect(res.body.user.token);
-      token = res.body.user.token;
+      expect(res.body.token);
+      token = res.body.token;
     });
     done();
   });
@@ -44,16 +44,28 @@ describe('GET /storage-reservoirs/:id', () => {
     .get('/storage-reservoirs/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, [{
-      id: 1,
-      water_systems_id: 1,
-      reservoir_type: 'steel',
-      reservoir_name: 'Main Street Tank',
-      year_constructed: 1975,
-      capacity: 250000,
-      condition: 'poor',
-      critical_to_operations: 'true',
-    }], done);
+    .expect(200, [
+      {
+        id: 1,
+        water_systems_id: 1,
+        reservoir_type: 'steel',
+        reservoir_name: 'Main Street Tank',
+        year_constructed: 1975,
+        capacity: 250000,
+        condition: 'poor',
+        critical_to_operations: 'true',
+      },
+      {
+        id: 2,
+        water_systems_id: 1,
+        reservoir_type: 'concrete',
+        reservoir_name: 'First Street Tank',
+        year_constructed: 2000,
+        capacity: 500000,
+        condition: 'fair',
+        critical_to_operations: 'true',
+      }
+    ], done);
   });
 
   it('should respond with 401 and Unauthorized if no token', done => {

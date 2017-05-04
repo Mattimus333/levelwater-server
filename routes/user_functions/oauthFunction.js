@@ -16,7 +16,7 @@ const oAuthUser = (req, res) => {
       delete result.hashed_password;
       result.token = token;
       let water_systems_id = result.water_systems_id || null;
-      res.redirect(`http://level-water.herokuapp.com/?token=${token}&water_systems_id=${water_systems_id}`);
+      res.redirect(`http://level-water.herokuapp.com/?t=${token}&wsi=${water_systems_id}`);
       // res.status(200).json(result);
       res.end();
     } else {
@@ -33,7 +33,7 @@ const oAuthUser = (req, res) => {
           const token = jwt.sign(claim, process.env.JWT_KEY, {
             expiresIn: '7 days',
           });
-          res.redirect(`http://level-water.herokuapp.com/?token=${token}&water_systems_id=null`);
+          res.redirect(`http://level-water.herokuapp.com/?t=${token}&wsi=null`);
           // res.status(200).json({ userId, token });
           res.end();
         });

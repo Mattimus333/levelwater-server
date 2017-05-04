@@ -1,7 +1,13 @@
 const knex = require('../../knex');
 const startAlgorithm = require('../../water-math/app.js');
 
-
+/**
+* POST function to make request to post to the Algorithm Results table
+* @module postAlgorithm
+* @name postAlgorithm
+* @route {POST} /algorithm-results
+* @routeparam {Number} water_systems_id - The id for the water system. 
+*/
 const sourceObjectArray = [];
 const treatmentObjectArray = [];
 const storageObjectArray = [];

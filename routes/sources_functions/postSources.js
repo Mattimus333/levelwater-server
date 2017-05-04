@@ -1,10 +1,10 @@
 const knex = require('../../knex');
 
 /**
-  * POST function to make request to Sources table. Posts JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.
+* POST function to make request to Sources table. Posts JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.
 * @module postSources
 * @name postSources
-  * @route {POST} /sources
+* @route {POST} /sources
 */
 const postSources = (req, res) => {
   const { water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, continuous_chlorination } = req.body;

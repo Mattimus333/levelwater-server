@@ -1,10 +1,10 @@
 const knex = require('../../knex');
 
 /**
-  * PATCH function to make request to Storage Reservoir table. Patches and returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
+* PATCH function to make request to Storage Reservoir table. Patches and returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
 * @module patchStorageReservoirs
 * @name patchStorageReservoirs
-  * @route {PATCH} /storage-reservoirs
+* @route {PATCH} /storage-reservoirs
 * @routeparam {Number} storage_reservoir_id - serial ID for Storage Reservoir table.
 */
 const patchStorageReservoirs = (req, res) => {

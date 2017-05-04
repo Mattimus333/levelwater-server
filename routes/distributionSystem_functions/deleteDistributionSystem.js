@@ -1,11 +1,11 @@
 const knex = require('../../knex');
 
 /**
-* DELETE function to make request to Distribution Systems table
+* DELETE function to make request to Distribution Systems table. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, and average_main_diameter_inches.
 * @module deleteDistributionSystem
 * @name deleteDistributionSystem
 * @route {DELETE} /distribution-system
-* @routeparam {Number} water_systems_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, and average_main_diameter_inches.
+* @routeparam {Number} water_systems_id - The id for the water system.
 */
 const deleteDistributionSystem = (req, res) => {
   let waterSystemId;

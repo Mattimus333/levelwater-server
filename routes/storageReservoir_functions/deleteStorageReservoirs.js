@@ -1,10 +1,10 @@
 const knex = require('../../knex');
 
 /**
-  * DELETE function to make request to Storage Reservoir table. Deletes and returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
+* DELETE function to make request to Storage Reservoir table. Deletes and returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
 * @module deleteStorageReservoirs
 * @name deleteStorageReservoirs
-  * @route {DELETE} /storage-reservoirs
+* @route {DELETE} /storage-reservoirs
 * @routeparam {Number} storage_reservoir_id - serial ID for Storage Reservoir table.
 */
 const deleteStorageReservoirs = (req, res) => {

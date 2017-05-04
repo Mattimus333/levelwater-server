@@ -1,5 +1,11 @@
 const knex = require('../../knex');
 
+/**
+* POST function to make request to Water Systems table. Posts and returns JSON object with pws_name, pws_id, population, and connections.
+* @module postWaterSystem
+* @name postWaterSystem
+* @route {POST} /water-systems
+*/
 const postWaterSystems = (req, res) => {
   const { pws_name, pws_id, population, connections } = req.body;
   if (!pws_name || !pws_name.trim()) {

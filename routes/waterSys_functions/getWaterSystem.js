@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* GET function to make request to Water Systems table. Returns JSON object with pws_name, pws_id, population, and connections.
+* @module getWaterSystem
+* @name getWaterSystem
+* @route {GET} /water-systems
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
 const getWaterSystem = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

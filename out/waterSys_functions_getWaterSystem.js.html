@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: patchStorageReservoirs</title>
+    <title>JSDoc: Source: waterSys_functions/getWaterSystem.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,153 +17,47 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: patchStorageReservoirs</h1>
+    <h1 class="page-title">Source: waterSys_functions/getWaterSystem.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><h5>Route:</h5>
-                            <table class="params">
-                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
-                            <tr>
-                            <td class="type">PATCH</td>
-                            <td class="name last">/storage-reservoirs</td>
-                            </tr>
-                            </table>
-                            PATCH function to make request to Storage Reservoir table. Patches and returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
-                            <h5>Route Parameters:</h5>
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                
-                
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-            <tr>
-            <td class="name">storage_reservoir_id</td>
-            <td class="type">Number</td>
-            
-            
-            <td class="description last">serial ID for Storage Reservoir table.</td>
-          </tr>
-          </table></div>
-        
+/**
+* GET function to make request to Water Systems table. Returns JSON object with pws_name, pws_id, population, and connections.
+* @module getWaterSystem
+* @name getWaterSystem
+* @route {GET} /water-systems
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
+const getWaterSystem = (req, res) => {
+  knex('users')
+  .where('id', req.claim.userId)
+  .select('water_systems_id')
+  .then((result) => {
+    if (Number(req.params.water_systems_id) === Number(result[0].water_systems_id)) {
+      return knex('water_systems')
+      .where('id', req.params.water_systems_id);
+    }
+    return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
+  })
+  .then((result) => {
+    res.json(result[0]);
+  })
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
+};
 
-        
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="storageReservoir_functions_patchStorageReservoirs.js.html">storageReservoir_functions/patchStorageReservoirs.js</a>, <a href="storageReservoir_functions_patchStorageReservoirs.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = getWaterSystem;
+</code></pre>
+        </article>
+    </section>
 
 
 

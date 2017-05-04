@@ -29,6 +29,7 @@ const oAuthUser = (req, res) => {
         .insert(user, '*')
         .then((userResult) => {
           const userId = userResult[0];
+          console.log('userId', userId);
           const claim = { userId: userId };
           const token = jwt.sign(claim, process.env.JWT_KEY, {
             expiresIn: '7 days',

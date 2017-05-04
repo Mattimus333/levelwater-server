@@ -1,5 +1,6 @@
-const test = (req, res) => {
-  res.send('drunk with POWER');
+const test = (req, res, next) => {
+  res.redirect('http://google.com');
+  res.end();
 };
 
 module.exports = test;

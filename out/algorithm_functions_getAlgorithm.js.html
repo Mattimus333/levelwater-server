@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: getWaterSystem</title>
+    <title>JSDoc: Source: algorithm_functions/getAlgorithm.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,153 +17,49 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: getWaterSystem</h1>
+    <h1 class="page-title">Source: algorithm_functions/getAlgorithm.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
 
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description"><h5>Route:</h5>
-                            <table class="params">
-                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
-                            <tr>
-                            <td class="type">GET</td>
-                            <td class="name last">/water-systems</td>
-                            </tr>
-                            </table>
-                            GET function to make request to Water Systems table. Returns JSON object with pws_name, pws_id, population, and connections.
-                            <h5>Route Parameters:</h5>
-          <table class="params">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                
-                
-                <th class="last">Description</th>
-              </tr>
-            </thead>
-            <tr>
-            <td class="name">water_systems_id</td>
-            <td class="type">Number</td>
-            
-            
-            <td class="description last">serial ID for Water Systems table.</td>
-          </tr>
-          </table></div>
-        
+// this code works for the actual get.  below line 22 is a test
 
-        
-            
+/**
+* GET function to make request to return JSON object from Algorithm Results table
+* @module getAlgorithm
+* @name getAlgorithm
+* @route {GET} /algorithm-results
+* @routeparam {Number} water_systems_id - The id for the water system.
+*/
+const getAlgorithm = (req, res) => {
+  knex('users')
+  .where('id', req.claim.userId)
+  .select('water_systems_id')
+  .then((result) => {
+    if (Number(req.params.water_systems_id) !== Number(result[0].water_systems_id)) {
+      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
+    }
+    return knex('algorithm_results')
+    .where('water_systems_id', req.params.water_systems_id);
+  })
+  .then((results) => {
+    res.json(results[0]);
+  })
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="waterSys_functions_getWaterSystem.js.html">waterSys_functions/getWaterSystem.js</a>, <a href="waterSys_functions_getWaterSystem.js.html#line3">line 3</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+module.exports = getAlgorithm;
+</code></pre>
+        </article>
+    </section>
 
 
 

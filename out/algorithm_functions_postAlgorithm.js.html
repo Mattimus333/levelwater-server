@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: treatment_functions/patchTreatment.js</title>
+    <title>JSDoc: Source: algorithm_functions/postAlgorithm.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: treatment_functions/patchTreatment.js</h1>
+    <h1 class="page-title">Source: algorithm_functions/postAlgorithm.js</h1>
 
     
 
@@ -27,42 +27,90 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
+const startAlgorithm = require('../../water-math/app.js');
 
 /**
-* PATCH function to make request to Treatment table. Patches and returns JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
-* @module patchTreatment
-* @name patchTreatment
-* @route {PATCH} /treatment
-* @routeparam {Number} treatement_id - serial ID for Treatment table.
+* POST function to make request to post to the Algorithm Results table
+* @module postAlgorithm
+* @name postAlgorithm
+* @route {POST} /algorithm-results
+* @routeparam {Number} water_systems_id - The id for the water system. 
 */
-const patchTreatment = (req, res) => {
-  let waterSystemId;
+const sourceObjectArray = [];
+const treatmentObjectArray = [];
+const storageObjectArray = [];
+const distributionObjectArray = [];
+const ratesFinancesObjectArray = [];
+const algorithmResultsObject = {};
+
+const getInfoFromTables = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    waterSystemId = result[0].water_systems_id;
-    return knex('treatment')
-    .where('id', req.params.treatment_id)
-    .select('water_systems_id');
-  })
-  .then((treatmentResult) => {
-    if (Number(waterSystemId) !== Number(treatmentResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'Treatment plant not found!' });
+    if (Number(req.params.water_systems_id) !== result[0].water_systems_id) {
+      return res.send({ status: 400, ErrorMessage: 'Water system not found'})
     }
-    return knex('treatment')
-    .where('id', req.params.treatment_id)
-    .update(req.body);
+    return Promise.all([
+      knex('sources')
+          .where('water_systems_id', req.params.water_systems_id)
+          .then((sourceResults) => {
+            // console.log('this is sourceResults:', sourceResults);
+            for (let i = 0; i &lt; sourceResults.length; i++) {
+              sourceObjectArray.push(sourceResults[i]);
+            }
+          }),
+      knex('treatment')
+          .where('water_systems_id', req.params.water_systems_id)
+          .then((treatmentResult) => {
+            // console.log('this is treatmentResult:', treatmentResult);
+            for (let i = 0; i &lt; treatmentResult.length; i++) {
+              treatmentObjectArray.push(treatmentResult[i]);
+            }
+            // console.log('this is treatment:', treatmentObjectArray);
+          }),
+      knex('storage_reservoirs')
+          .where('water_systems_id', req.params.water_systems_id)
+          .then((storageResult) => {
+            for (let i = 0; i &lt; storageResult.length; i++) {
+              storageObjectArray.push(storageResult[i]);
+            }
+            // console.log('this is storage:', storageObjectArray);
+          }),
+      knex('distribution_system')
+          .where('water_systems_id', req.params.water_systems_id)
+          .then((distributionResult) => {
+            for (let i = 0; i &lt; distributionResult.length; i++) {
+              distributionObjectArray.push(distributionResult[i]);
+            }
+          }),
+      knex('rates_finances_fixedcosts')
+          .where('water_systems_id', req.params.water_systems_id)
+          .then((ratesFinancesResult) => {
+            for (let i = 0; i &lt; ratesFinancesResult.length; i++) {
+              ratesFinancesObjectArray.push(ratesFinancesResult[i]);
+            }
+          }),
+      ]);
+    })
+  .then(() => {
+    return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray));
+  })
+  .then((result) => {
+    algorithmResultsObject.water_systems_id = req.params.water_systems_id;
+    algorithmResultsObject.algorithm_results = JSON.stringify(result);
+    return knex('algorithm_results')
+    .insert((algorithmResultsObject));
   })
   .then(() => {
-    res.json(req.body);
+    res.status(200).json(algorithmResultsObject);
   })
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });
   });
-};
+}
 
-module.exports = patchTreatment;
+module.exports = getInfoFromTables;
 </code></pre>
         </article>
     </section>

@@ -231,4 +231,21 @@ describe('POST /treatment', () => {
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
+
+  it('Denies requests to reference water systems the user isnt connected to', done => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 2,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+  });
 });

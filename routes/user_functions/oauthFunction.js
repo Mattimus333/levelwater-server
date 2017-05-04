@@ -15,6 +15,7 @@ const oAuthUser = (req, res) => {
       });
       delete result.hashed_password;
       result.token = token;
+      res.redirect('level-water.herokuapp.com/dashboard')
       res.status(200).json(result);
     } else {
       const password = req.session.passport.user.first_name + 99999999
@@ -30,6 +31,7 @@ const oAuthUser = (req, res) => {
           const token = jwt.sign(claim, process.env.JWT_KEY, {
             expiresIn: '7 days',
           });
+          res.redirect('')
           res.status(200).json({ userId, token });
         });
       });

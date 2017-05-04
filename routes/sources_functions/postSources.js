@@ -27,7 +27,7 @@ const postSources = (req, res) => {
     return res.send({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` });
   }
   if (continuous_chlorination !== 'true' && continuous_chlorination !== 'false') {
-    return res.send({ status: 400, ErrorMessage: `continuous chlorination name must not be blank and must be 'true' or 'false'` });
+    return res.send({ status: 400, ErrorMessage: `Continuous chlorination name must not be blank and must be 'true' or 'false'` });
   }
   knex('users')
   .where('id', req.claim.userId)

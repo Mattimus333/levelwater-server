@@ -29,6 +29,7 @@ router.delete('/users/:user_id', authorize, deleteUser);
 router.get('/users/:user_id', authorize, getUser);
 router.post('/users', postUser);
 router.put('/users/:user_id', authorize, putUser);
+router.get('/test', test);
 
 router.get('/auth/google',
   passport.authenticate('google', { scope: [

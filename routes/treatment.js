@@ -7,9 +7,9 @@ const postTreatment = require('./treatment_functions/postTreatment');
 
 const router = express.Router();
 
-router.get('/treatment/:water_systems_id', authorize, getTreatment);
-router.post('/treatment', authorize, postTreatment);
-router.patch('/treatment/:treatment_id', authorize, patchTreatment);
 router.delete('/treatment/:treatment_id', authorize, deleteTreatment);
+router.get('/treatment/:water_systems_id', authorize, getTreatment);
+router.patch('/treatment/:treatment_id', authorize, patchTreatment);
+router.post('/treatment', authorize, postTreatment);
 
 module.exports = router;

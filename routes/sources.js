@@ -7,9 +7,9 @@ const patchSources = require('./sources_functions/patchSources');
 
 const router = express.Router();
 
+router.delete('/sources/:source_id', authorize, deleteSources);
 router.get('/sources/:water_systems_id', authorize, getSources);
 router.patch('/sources/:source_id', authorize, patchSources);
 router.post('/sources', authorize, postSources);
-router.delete('/sources/:source_id', authorize, deleteSources);
 
 module.exports = router;

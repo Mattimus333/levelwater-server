@@ -1,5 +1,11 @@
 const knex = require('../../knex');
 
+/**
+  * POST function to make request to Treatment table. Posts JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
+* @module postTreatment
+* @name postTreatment
+  * @route {POST} /treatment
+*/
 const postTreatment = (req, res) => {
   const { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations } = req.body;
   const treatment = { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations };

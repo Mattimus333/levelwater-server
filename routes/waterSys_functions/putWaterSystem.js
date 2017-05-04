@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* PUT function to make request to Water Systems table. Puts and returns JSON object with pws_name, pws_id, population, and connections.
+* @module putWaterSystem
+* @name putWaterSystem
+* @route {PUT} /water-systems
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
 const putWaterSystem = (req, res) => {
   let waterSystem;
   knex('users')

@@ -1,8 +1,8 @@
 const knex = require('../../knex');
 
 /**
-*@module postDistributionSystem
 * POST function to make request to Distribution Systems table
+* @module postDistributionSystem
 * @name postDistributionSystem
 * @route {POST} /distribution-system
 */const postDistributionSystem = (req, res) => {

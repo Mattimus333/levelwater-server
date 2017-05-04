@@ -1,12 +1,13 @@
 const knex = require('../../knex');
 
 /**
-*@module deleteRatesFinances
-* DELETE function to make request to Rates Finances table
+  * DELETE function to make request to Rates Finances table. Deletes and returns JSON object with water_systems_id, current_average_water_rate, total_financial_reserves, annual_revenue_water_sales, annual_revenue_fees_charged, annual_revenue_subsidies, annual_savings_to_financial_reserves, annual_personnel_costs, annual_operations_costs, and annual_debt_costs.
+* @module deleteRatesFinances
 * @name deleteRatesFinances
-* @route {DELETE} /rates-finances-fixedcosts
-* @routeparam {Number} rates_finances_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, and average_main_diameter_inches.
-*/const deleteRatesFinances = (req, res) => {
+  * @route {DELETE} /rates-finances-fixedcosts
+* @routeparam {Number} rates_finances_id - serial ID for Rates Finances Fixed-costs table.
+*/
+const deleteRatesFinances = (req, res) => {
   let waterSystemId;
   knex('users')
   .where('id', req.claim.userId)

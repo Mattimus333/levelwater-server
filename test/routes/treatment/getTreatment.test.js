@@ -33,8 +33,8 @@ describe('GET /treatment/:id', () => {
       password: 'something',
     })
     .end((err, res) => {
-      expect(res.body.user.token);
-      token = res.body.user.token;
+      expect(res.body.token);
+      token = res.body.token;
     });
     done();
   });
@@ -52,7 +52,7 @@ describe('GET /treatment/:id', () => {
       year_constructed: 1986,
       capacity: 200,
       condition: 'fair',
-      critical_to_operations: 'true',
+      critical_to_operations: 'false',
     }], done);
   });
 

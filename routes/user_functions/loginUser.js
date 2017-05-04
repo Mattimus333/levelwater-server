@@ -18,7 +18,7 @@ const loginUsers = (req, res) => {
   .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id')
   .then((users) => {
     user = users[0];
-    if (user.length === 0) {
+    if (users.length === 0) {
       return res.send({ status: 400, ErrorMessage: 'Bad email or password' });
     }
     return bcrypt.compare(req.body.password, user.hashed_password);
@@ -32,7 +32,7 @@ const loginUsers = (req, res) => {
     user.token = token;
     // console.log('USER', user);
 
-    res.status(200).json({ user });
+    res.status(200).json(user);
   })
   .catch(bcrypt.MISMATCH_ERROR, () => {
     res.send({ status: 400, ErrorMessage: 'Bad email or password' });

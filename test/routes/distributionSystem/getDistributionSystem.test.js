@@ -33,8 +33,8 @@ describe('GET /distribution-system/:id', () => {
       password: 'something',
     })
     .end((err, res) => {
-      expect(res.body.user.token);
-      token = res.body.user.token;
+      expect(res.body.token);
+      token = res.body.token;
     });
     done();
   });
@@ -49,6 +49,8 @@ describe('GET /distribution-system/:id', () => {
       water_systems_id: 1,
       total_length_miles: 15,
       average_age_of_pipes: 50,
+      condition: 'great',
+      distribution_name: 'Distribution System',
       average_main_diameter_inches: '4',
     }, done);
   });

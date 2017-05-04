@@ -28,7 +28,7 @@ const postWaterSystems = (req, res) => {
   .then((result) => {
     waterSystem.id = result[0];
     console.log(waterSystem.id);
-    console.log(req.claim.userId);
+    console.log('this is the claim', req.claim.userId);
     return knex('users')
     .where('id', req.claim.userId)
     .update('water_systems_id', result[0]);

@@ -20,7 +20,7 @@ afterEach((done) => {
   });
 });
 
-describe('POST /treatment', () => {
+describe('POST /treatment TESTS', () => {
   let token;
 
   it('requires a token', (done) => {

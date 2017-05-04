@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* GET function to make request to Storage Reservoir table. Returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
+* @module getStorageReservoirs
+* @name getStorageReservoirs
+* @route {GET} /storage-reservoirs
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
 const getStorageReservoirs = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

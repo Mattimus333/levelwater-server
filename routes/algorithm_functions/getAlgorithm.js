@@ -1,7 +1,14 @@
 const knex = require('../../knex');
 
-
 // this code works for the actual get.  below line 22 is a test
+
+/**
+* GET function to make request to return JSON object from Algorithm Results table
+* @module getAlgorithm
+* @name getAlgorithm
+* @route {GET} /algorithm-results
+* @routeparam {Number} water_systems_id - The id for the water system.
+*/
 const getAlgorithm = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* PATCH function to make request to Sources table. Patches and returns JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.
+* @module patchSources
+* @name patchSources
+* @route {PATCH} /sources
+* @routeparam {Number} sources_id - serial ID for Sources table.
+*/
 const patchSources = (req, res) => {
   let waterSystemId;
   knex('users')

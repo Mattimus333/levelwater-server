@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* DELETE function to make request to Sources table. Deletes and returns JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.
+* @module deleteSources
+* @name deleteSources
+* @route {DELETE} /sources
+* @routeparam {Number} sources_id - serial ID for Sources table.
+*/
 const deleteSources = (req, res) => {
   let waterSystemId;
   knex('users')

@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* DELETE function to make request to Water Systems table. Deletes and returns JSON object with pws_name, pws_id, population, and connections.
+* @module deleteWaterSystem
+* @name deleteWaterSystem
+* @route {DELETE} /water-systems
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
 const deleteWaterSystem = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

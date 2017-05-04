@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* PATCH function to make request to Treatment table. Patches and returns JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
+* @module patchTreatment
+* @name patchTreatment
+* @route {PATCH} /treatment
+* @routeparam {Number} treatement_id - serial ID for Treatment table.
+*/
 const patchTreatment = (req, res) => {
   let waterSystemId;
   knex('users')

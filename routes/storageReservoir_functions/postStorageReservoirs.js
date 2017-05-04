@@ -1,5 +1,11 @@
 const knex = require('../../knex');
 
+/**
+* POST function to make request to Storage Reservoir table. Posts JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
+* @module postStorageReservoirs
+* @name postStorageReservoirs
+* @route {POST} /storage-reservoirs
+*/
 const postStorageReservoirs = (req, res) => {
   const { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations } = req.body
   const reservoir = { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations };

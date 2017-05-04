@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* GET function to make request to Treatment table. Returns JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
+* @module getTreatment
+* @name getTreatment
+* @route {GET} /treatment
+* @routeparam {Number} water_systems_id - serial ID for Water Systems table.
+*/
 const getTreatment = (req, res) => {
   knex('users')
   .where('id', req.claim.userId)

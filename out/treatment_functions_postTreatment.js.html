@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: treatment_functions/postTreatment.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: treatment_functions/postTreatment.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
+
+/**
+* POST function to make request to Treatment table. Posts JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
+* @module postTreatment
+* @name postTreatment
+* @route {POST} /treatment
+*/
+const postTreatment = (req, res) => {
+  const { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations } = req.body;
+  const treatment = { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations };
+  const currentdate = new Date();
+
+  if (!treatment_name || !treatment_name.trim()) {
+    return res.send({ status: 400, ErrorMessage: 'Treatment name must not be blank' });
+  }
+  if (treatment_type !== 'conventional-sw' &amp;&amp; treatment_type !== 'ion-exchange' &amp;&amp; treatment_type !== 'corrosion-control') {
+    return res.send({ status: 400, ErrorMessage: 'Treatment type must not be blank and must be conventional-sw, ion-exchange, or corrosion-control' });
+  }
+  if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
+    return res.send({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' });
+  }
+  if (typeof capacity !== 'number') {
+    return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
+  }
+  if (condition !== 'great' &amp;&amp; condition !== 'fair' &amp;&amp; condition !== 'poor') {
+    return res.send({ status: 400, ErrorMessage: 'Condition must not be blank and must be great, fair, or poor' });
+  }
+  if (critical_to_operations !== 'true' &amp;&amp; critical_to_operations !== 'false') {
+    return res.send({ status: 400, ErrorMessage: 'Critical to operations must not be blank and must be true or false' });
+  }
+
+  knex('users')
+  .where('id', req.claim.userId)
+  .select('water_systems_id')
+  .then((user) => {
+    if (Number(treatment.water_systems_id) !== user[0].water_systems_id) {
+      return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
+    }
+    return knex('treatment')
+    .insert(treatment);
+  })
+  .then((result) => {
+    treatment.id = result[0];
+    res.status(200).json(treatment);
+  })
+  .catch((err) => {
+    res.send({ status: 400, ErrorMessage: err });
+  });
+};
+
+module.exports = postTreatment;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-deleteDistributionSystem.html">deleteDistributionSystem</a></li><li><a href="module-deleteRatesFinances.html">deleteRatesFinances</a></li><li><a href="module-deleteSources.html">deleteSources</a></li><li><a href="module-deleteStorageReservoirs.html">deleteStorageReservoirs</a></li><li><a href="module-deleteTreatment.html">deleteTreatment</a></li><li><a href="module-deleteUser.html">deleteUser</a></li><li><a href="module-deleteWaterSystem.html">deleteWaterSystem</a></li><li><a href="module-getAlgorithm.html">getAlgorithm</a></li><li><a href="module-getDistributionSystem.html">getDistributionSystem</a></li><li><a href="module-getRatesFinances.html">getRatesFinances</a></li><li><a href="module-getSources.html">getSources</a></li><li><a href="module-getStorageReservoirs.html">getStorageReservoirs</a></li><li><a href="module-getTreatment.html">getTreatment</a></li><li><a href="module-getUser.html">getUser</a></li><li><a href="module-getWaterSystem.html">getWaterSystem</a></li><li><a href="module-patchDistributionSystem.html">patchDistributionSystem</a></li><li><a href="module-patchRatesFinances.html">patchRatesFinances</a></li><li><a href="module-patchSources.html">patchSources</a></li><li><a href="module-patchStorageReservoirs.html">patchStorageReservoirs</a></li><li><a href="module-patchTreatment.html">patchTreatment</a></li><li><a href="module-postAlgorithm.html">postAlgorithm</a></li><li><a href="module-postDistributionSystem.html">postDistributionSystem</a></li><li><a href="module-postRatesFinances.html">postRatesFinances</a></li><li><a href="module-postSources.html">postSources</a></li><li><a href="module-postStorageReservoirs.html">postStorageReservoirs</a></li><li><a href="module-postsUser.html">postsUser</a></li><li><a href="module-postTreatment.html">postTreatment</a></li><li><a href="module-postWaterSystem.html">postWaterSystem</a></li><li><a href="module-putUser.html">putUser</a></li><li><a href="module-putWaterSystem.html">putWaterSystem</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu May 04 2017 10:19:21 GMT-0700 (PDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

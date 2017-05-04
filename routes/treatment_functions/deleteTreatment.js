@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+* DELETE function to make request to Treatment table. Deletes and returns JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations
+* @module deleteTreatment
+* @name deleteTreatment
+* @route {DELETE} /treatment
+* @routeparam {Number} treatement_id - serial ID for Treatment table.
+*/
 const deleteTreatment = (req, res) => {
   let waterSystemId;
   knex('users')

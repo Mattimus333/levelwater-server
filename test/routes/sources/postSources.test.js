@@ -87,6 +87,24 @@ describe('POST /sources TESTS', () => {
     })
     .expect({ status: 400, ErrorMessage: 'Source type must not be blank' }, done);
   });
+
+  it('requires source type to be gw or sw', (done) => {
+    request
+    .post('/sources')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      source_type: 'sss',
+      source_name: '5th Street Well',
+      critical_to_operations: 'true',
+      treatment: 'false',
+      year_constructed: 1995,
+      capacity: 30,
+      condition: 'fair',
+      continuous_chlorination: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Source type must not be blank' }, done);
+  });
   //
   // it('requires year constructed', (done) => {
   //   request

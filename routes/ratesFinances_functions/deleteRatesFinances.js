@@ -1,6 +1,12 @@
 const knex = require('../../knex');
 
-const deleteRatesFinances = (req, res) => {
+/**
+*@module deleteRatesFinances
+* DELETE function to make request to Rates Finances table
+* @name deleteRatesFinances
+* @route {DELETE} /rates-finances-fixedcosts
+* @routeparam {Number} rates_finances_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, and average_main_diameter_inches.
+*/const deleteRatesFinances = (req, res) => {
   let waterSystemId;
   knex('users')
   .where('id', req.claim.userId)

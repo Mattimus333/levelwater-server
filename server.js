@@ -2,7 +2,7 @@
 
 // refactor to es6
 const express = require('express');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv').load();
 const users = require('./routes/users');
 const sources = require('./routes/sources');
 const waterSystems = require('./routes/water_systems');
@@ -10,9 +10,11 @@ const storageReservoirs = require('./routes/storageReservoirs');
 const treatment = require('./routes/treatment');
 const distributionSystem = require('./routes/distributionSystem');
 const ratesFinances = require('./routes/ratesFinances');
+const algorithm = require('./routes/algorithm');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const passport = require('passport');
 
 // finish below
 // import login from './routes/something/login';
@@ -47,6 +49,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(passport.initialize());
 
 app.use(users);
 app.use(sources);
@@ -55,6 +58,7 @@ app.use(storageReservoirs);
 app.use(treatment);
 app.use(distributionSystem);
 app.use(ratesFinances);
+app.use(algorithm);
 
 app.use((_req, res) => {
   res.sendStatus(404);

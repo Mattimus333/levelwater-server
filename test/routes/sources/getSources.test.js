@@ -33,29 +33,43 @@ describe('GET /sources/:id', () => {
       password: 'something',
     })
     .end((err, res) => {
-      expect(res.body.user.token);
-      token = res.body.user.token;
+      expect(res.body.token);
+      token = res.body.token;
     });
     done();
   });
 
-  it('responds with JSON', done => {
+  it('responds with JSON', (done) => {
     request
     .get('/sources/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, [{
-      id: 1,
-      water_systems_id: 1,
-      source_name: 'First Street Well',
-      source_type: 'gw',
-      critical_to_operations: 'true',
-      treatment: 'true',
-      year_constructed: 1999,
-      capacity: 100,
-      condition: 'great',
-      continuous_chlorination: 'false'
-    }], done);
+    .expect(200, [
+      {
+        id: 1,
+        water_systems_id: 1,
+        source_name: 'First Street Well',
+        source_type: 'gw',
+        critical_to_operations: 'true',
+        treatment: 'true',
+        year_constructed: 1999,
+        capacity: 100,
+        condition: 'great',
+        continuous_chlorination: 'false',
+      },
+      {
+        id: 2,
+        water_systems_id: 1,
+        source_name: 'Main Street Well',
+        source_type: 'sw',
+        critical_to_operations: 'false',
+        treatment: 'false',
+        year_constructed: 1985,
+        capacity: 35,
+        condition: 'poor',
+        continuous_chlorination: 'true',
+      },
+    ], done);
   });
 
   it('should respond with 401 and Unauthorized if no token', done => {

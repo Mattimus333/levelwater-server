@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: ratesFinances_functions/deleteRatesFinances.js</title>
+    <title>JSDoc: Source: sources_functions/patchSources.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: ratesFinances_functions/deleteRatesFinances.js</h1>
+    <h1 class="page-title">Source: sources_functions/patchSources.js</h1>
 
     
 
@@ -29,40 +29,40 @@
             <pre class="prettyprint source linenums"><code>const knex = require('../../knex');
 
 /**
-  * DELETE function to make request to Rates Finances table. Deletes and returns JSON object with water_systems_id, current_average_water_rate, total_financial_reserves, annual_revenue_water_sales, annual_revenue_fees_charged, annual_revenue_subsidies, annual_savings_to_financial_reserves, annual_personnel_costs, annual_operations_costs, and annual_debt_costs.
-* @module deleteRatesFinances
-* @name deleteRatesFinances
-  * @route {DELETE} /rates-finances-fixedcosts
-* @routeparam {Number} rates_finances_id - serial ID for Rates Finances Fixed-costs table.
+  * PATCH function to make request to Sources table. Patches and returns JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.
+* @module patchSources
+* @name patchSources
+  * @route {PATCH} /sources
+* @routeparam {Number} sources_id - serial ID for Sources table.
 */
-const deleteRatesFinances = (req, res) => {
+const patchSources = (req, res) => {
   let waterSystemId;
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
     waterSystemId = result[0].water_systems_id;
-    return knex('rates_finances_fixedcosts')
-    .where('id', req.params.ratesFinancesId)
+    return knex('sources')
+    .where('id', req.params.source_id)
     .select('water_systems_id');
   })
-  .then((ratesResult) => {
-    if (Number(waterSystemId) !== Number(ratesResult[0].water_systems_id)) {
-      return res.send({ status: 400, ErrorMessage: 'Rates/Finances not found!' });
+  .then((sourceResult) => {
+    if (Number(waterSystemId) !== Number(sourceResult[0].water_systems_id)) {
+      return res.send({ status: 400, ErrorMessage: 'Source not found!' });
     }
-    return knex('rates_finances_fixedcosts')
-    .where('id', req.params.ratesFinancesId)
-    .del();
+    return knex('sources')
+    .where('id', req.params.source_id)
+    .update(req.body);
   })
-  .then((deletedRow) => {
-    res.json(deletedRow);
+  .then(() => {
+    res.json(req.body);
   })
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });
   });
 };
 
-module.exports = deleteRatesFinances;
+module.exports = patchSources;
 </code></pre>
         </article>
     </section>

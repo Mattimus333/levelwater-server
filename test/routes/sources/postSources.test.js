@@ -157,37 +157,41 @@ describe('POST /sources TESTS', () => {
     })
     .expect({ status: 400, ErrorMessage: 'Capacity must not be blank' }, done);
   });
-  //
-  // it('requires condition', (done) => {
-  //   request
-  //   .post('/treatment')
-  //   .set('token', token)
-  //   .send({
-  //     water_systems_id: 1,
-  //     treatment_name: 'Cool treatment type',
-  //     capacity: 300000,
-  //     treatment_type: 'ion-exchange',
-  //     year_constructed: 2016,
-  //     critical_to_operations: 'true',
-  //   })
-  //   .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
-  // });
-  //
-  // it('requires condition be great, fair or poor', (done) => {
-  //   request
-  //   .post('/treatment')
-  //   .set('token', token)
-  //   .send({
-  //     water_systems_id: 1,
-  //     treatment_name: 'Cool treatment type',
-  //     capacity: 300000,
-  //     treatment_type: 'ion-exchange',
-  //     year_constructed: 2016,
-  //     condition: 'fantastic',
-  //     critical_to_operations: 'true',
-  //   })
-  //   .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
-  // });
+
+  it('requires condition', (done) => {
+    request
+    .post('/sources')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      source_type: 'gw',
+      source_name: '5th Street Well',
+      critical_to_operations: 'true',
+      year_constructed: 2001,
+      treatment: 'false',
+      capacity: 30,
+      continuous_chlorination: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` }, done);
+  });
+
+  it('requires condition be great, fair or poor', (done) => {
+    request
+    .post('/sources')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      source_type: 'gw',
+      source_name: '5th Street Well',
+      critical_to_operations: 'true',
+      year_constructed: 1998,
+      treatment: 'false',
+      capacity: 30,
+      condition: 'WHATEVER',
+      continuous_chlorination: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` }, done);
+  });
   //
   // it('requires critical to operations', (done) => {
   //   request

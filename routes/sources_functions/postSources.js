@@ -24,7 +24,7 @@ const postSources = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.send({ status: 400, ErrorMessage: `Condition name must not be blank and must be 'great', 'fair', or 'poor'` });
+    return res.send({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` });
   }
   if (continuous_chlorination !== 'true' && continuous_chlorination !== 'false') {
     return res.send({ status: 400, ErrorMessage: `continuous chlorination name must not be blank and must be 'true' or 'false'` });

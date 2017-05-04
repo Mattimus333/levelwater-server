@@ -6,7 +6,7 @@ const postTreatment = (req, res) => {
   const currentdate = new Date();
 
   if (!treatment_name || !treatment_name.trim()) {
-    return res.status(400).send('Treatment plant name must not be blank!');
+    return res.send({ status: 400, ErrorMessage: 'Treatment name must not be blank' });
   }
   if (treatment_type !== 'conventional-sw' && treatment_type !== 'ion-exchange' && treatment_type !== 'corrosion-control') {
     return res.status(400).send('Treatment type must not be blank and must be conventional-sw, ion-exchange, or corrosion-control');

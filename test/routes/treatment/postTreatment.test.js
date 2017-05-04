@@ -20,7 +20,7 @@ afterEach((done) => {
   });
 });
 
-describe('POST /water-systems', () => {
+describe('POST /treatment', () => {
   let token;
 
   it('requires a token', (done) => {
@@ -37,28 +37,34 @@ describe('POST /water-systems', () => {
     done();
   });
 
-  it('requires pws name', (done) => {
+  it('requires water system id', (done) => {
     request
     .post('/water-systems')
     .set('token', token)
     .send({
-      pws_id: 345345,
-      population: 11000,
-      connections: 3,
+      treatment_name: 'Cool Treatment Plant',
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'PWS name must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
   });
 
-  it('requires pws id', (done) => {
+  it('requires treatment name', (done) => {
     request
     .post('/water-systems')
     .set('token', token)
     .send({
-      pws_name: 'Stoney System',
-      population: 11000,
-      connections: 3,
+      water_systems_id: 1,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'PWS id must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
   });
 
   it('requires population', (done) => {

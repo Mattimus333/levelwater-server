@@ -82,36 +82,153 @@ describe('POST /treatment', () => {
     .expect({ status: 400, ErrorMessage: 'Treatment name must not be blank' }, done);
   });
 
-  // it('responds with JSON with a correct token', done => {
-  //   request
-  //   .post('/treatment')
-  //   .set('token', token)
-  //   .send({
-  //     pws_id: 345345,
-  //     pws_name: 'Stoney System',
-  //     population: 3000,
-  //     connections: 400,
-  //   })
-  //   .expect('Content-Type', /json/)
-  //   .expect(200, {
-  //     pws_id: 345345,
-  //     pws_name: 'Stoney System',
-  //     population: 3000,
-  //     connections: 400,
-  //     id: 4,
-  //   }, done);
-  // });
+  it('requires year constructed', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      treatment_type: 'ion-exchange',
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' }, done);
+  });
+
+  it('requires year constructed be a valid year', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      treatment_type: 'ion-exchange',
+      year_constructed: 2018,
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' }, done);
+  });
+
+  it('requires capacity', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Capacity name must not be blank' }, done);
+  });
+
+  it('requires condition', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
+  });
+
+  it('requires condition be great, fair or poor', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'fantastic',
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
+  });
+
+  it('requires critical to operations', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+    })
+    .expect({ status: 400, ErrorMessage: 'Critical to operations must not be blank and must be true or false' }, done);
+  });
+
+  it('requires critical to operations be true or false', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+      critical_to_operations: 'what?!',
+    })
+    .expect({ status: 400, ErrorMessage: 'Critical to operations must not be blank and must be true or false' }, done);
+  });
+
+  it('responds with JSON with a correct token', done => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect('Content-Type', /json/)
+    .expect(200, {
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
+      id: 4,
+    }, done);
+  });
   //
-  // it('Denies requests that dont have a token', done => {
-  //   request
-  //   .post('/treatment')
-  //   .send({
-  //     pws_id: 345345,
-  //     pws_name: 'Stoney System',
-  //     population: 3000,
-  //     connections: 400,
-  //   })
-  //   .expect('Content-Type', /json/)
-  //   .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  // });
+  it('Denies requests that dont have a token', done => {
+    request
+    .post('/treatment')
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool treatment type',
+      capacity: 300000,
+      treatment_type: 'ion-exchange',
+      year_constructed: 2016,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect('Content-Type', /json/)
+    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  });
 });

@@ -1,5 +1,12 @@
 const knex = require('../../knex');
 
+/**
+*@module patchDistributionSystem
+* PATCH function to make request to Distribution Systems table
+* @name patchDistributionSystem
+* @route {PATCH} /distribution-system
+* @routeparam {Number} water_systems_id - The id for the water system. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, and average_main_diameter_inches.
+*/
 const patchDistributionSystem = (req, res) => {
   let waterSystemId;
   knex('users')

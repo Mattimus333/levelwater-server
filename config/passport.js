@@ -11,7 +11,6 @@ module.exports = (passport) => {
     },
     (token, accessToken, refreshToken, profile, done) => {
       process.nextTick(() => {
-        console.log(profile);
         const user = {
           first_name: profile.name.givenName,
           last_name: profile.name.familyName,

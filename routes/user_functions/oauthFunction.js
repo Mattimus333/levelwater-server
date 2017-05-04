@@ -33,8 +33,9 @@ const oAuthUser = (req, res) => {
           const token = jwt.sign(claim, process.env.JWT_KEY, {
             expiresIn: '7 days',
           });
-          res.redirect('')
-          res.status(200).json({ userId, token });
+          res.redirect(`http://level-water.herokuapp.com/?token=${token}&water_systems_id=null`);
+          // res.status(200).json({ userId, token });
+          res.end();
         });
       });
     }

@@ -15,7 +15,7 @@ const oAuthUser = (req, res) => {
       });
       delete result.hashed_password;
       result.token = token;
-      res.redirect('http://level-water.herokuapp.com/dashboard');
+      res.redirect(`http://level-water.herokuapp.com/token=${token}`);
       res.status(200).json(result);
       res.end();
     } else {

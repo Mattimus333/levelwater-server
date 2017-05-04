@@ -39,7 +39,7 @@ describe('POST /treatment', () => {
 
   it('requires water system id', (done) => {
     request
-    .post('/water-systems')
+    .post('/treatment')
     .set('token', token)
     .send({
       treatment_name: 'Cool Treatment Plant',
@@ -52,9 +52,24 @@ describe('POST /treatment', () => {
     .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
   });
 
+  it('requires treatment type', (done) => {
+    request
+    .post('/treatment')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      treatment_name: 'Cool Treatment Plant',
+      year_constructed: 2016,
+      capacity: 300000,
+      condition: 'great',
+      critical_to_operations: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+  });
+
   it('requires treatment name', (done) => {
     request
-    .post('/water-systems')
+    .post('/treatment')
     .set('token', token)
     .send({
       water_systems_id: 1,
@@ -67,60 +82,36 @@ describe('POST /treatment', () => {
     .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
   });
 
-  it('requires population', (done) => {
-    request
-    .post('/water-systems')
-    .set('token', token)
-    .send({
-      pws_id: 345345,
-      pws_name: 'Stoney System',
-      connections: 3,
-    })
-    .expect({ status: 400, ErrorMessage: 'Population must not be blank' }, done);
-  });
-
-  it('requires connections', (done) => {
-    request
-    .post('/water-systems')
-    .set('token', token)
-    .send({
-      pws_id: 345345,
-      pws_name: 'Stoney System',
-      population: 3000,
-    })
-    .expect({ status: 400, ErrorMessage: 'Connections must not be blank' }, done);
-  });
-
-  it('responds with JSON with a correct token', done => {
-    request
-    .post('/water-systems')
-    .set('token', token)
-    .send({
-      pws_id: 345345,
-      pws_name: 'Stoney System',
-      population: 3000,
-      connections: 400,
-    })
-    .expect('Content-Type', /json/)
-    .expect(200, {
-      pws_id: 345345,
-      pws_name: 'Stoney System',
-      population: 3000,
-      connections: 400,
-      id: 4,
-    }, done);
-  });
-
-  it('Denies requests that dont have a token', done => {
-    request
-    .post('/water-systems')
-    .send({
-      pws_id: 345345,
-      pws_name: 'Stoney System',
-      population: 3000,
-      connections: 400,
-    })
-    .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  });
+  // it('responds with JSON with a correct token', done => {
+  //   request
+  //   .post('/treatment')
+  //   .set('token', token)
+  //   .send({
+  //     pws_id: 345345,
+  //     pws_name: 'Stoney System',
+  //     population: 3000,
+  //     connections: 400,
+  //   })
+  //   .expect('Content-Type', /json/)
+  //   .expect(200, {
+  //     pws_id: 345345,
+  //     pws_name: 'Stoney System',
+  //     population: 3000,
+  //     connections: 400,
+  //     id: 4,
+  //   }, done);
+  // });
+  // 
+  // it('Denies requests that dont have a token', done => {
+  //   request
+  //   .post('/treatment')
+  //   .send({
+  //     pws_id: 345345,
+  //     pws_name: 'Stoney System',
+  //     population: 3000,
+  //     connections: 400,
+  //   })
+  //   .expect('Content-Type', /json/)
+  //   .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
+  // });
 });

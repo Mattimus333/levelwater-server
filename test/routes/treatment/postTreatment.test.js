@@ -64,7 +64,7 @@ describe('POST /treatment', () => {
       condition: 'great',
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+    .expect({ status: 400, ErrorMessage: 'Treatment type must not be blank and must be conventional-sw, ion-exchange, or corrosion-control' }, done);
   });
 
   it('requires treatment name', (done) => {
@@ -79,7 +79,7 @@ describe('POST /treatment', () => {
       condition: 'great',
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+    .expect({ status: 400, ErrorMessage: 'Treatment name must not be blank' }, done);
   });
 
   // it('responds with JSON with a correct token', done => {
@@ -101,7 +101,7 @@ describe('POST /treatment', () => {
   //     id: 4,
   //   }, done);
   // });
-  // 
+  //
   // it('Denies requests that dont have a token', done => {
   //   request
   //   .post('/treatment')

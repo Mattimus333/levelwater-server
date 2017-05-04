@@ -15,10 +15,10 @@ const postTreatment = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' });
   }
   if (typeof capacity !== 'number') {
-    return res.send({ status: 400, ErrorMessage: 'Capacity name must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.send({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' });
+    return res.send({ status: 400, ErrorMessage: 'Condition must not be blank and must be great, fair, or poor' });
   }
   if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
     return res.send({ status: 400, ErrorMessage: 'Critical to operations must not be blank and must be true or false' });

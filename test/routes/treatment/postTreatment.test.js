@@ -125,7 +125,7 @@ describe('POST /treatment TESTS', () => {
       condition: 'great',
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Capacity name must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Capacity must not be blank' }, done);
   });
 
   it('requires condition', (done) => {
@@ -140,7 +140,7 @@ describe('POST /treatment TESTS', () => {
       year_constructed: 2016,
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
+    .expect({ status: 400, ErrorMessage: 'Condition must not be blank and must be great, fair, or poor' }, done);
   });
 
   it('requires condition be great, fair or poor', (done) => {
@@ -156,7 +156,7 @@ describe('POST /treatment TESTS', () => {
       condition: 'fantastic',
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Condition name must not be blank and must be great, fair, or poor' }, done);
+    .expect({ status: 400, ErrorMessage: 'Condition must not be blank and must be great, fair, or poor' }, done);
   });
 
   it('requires critical to operations', (done) => {

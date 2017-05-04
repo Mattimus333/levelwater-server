@@ -21,7 +21,7 @@ const postSources = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' });
   }
   if (typeof capacity !== 'number') {
-    return res.send({ status: 400, ErrorMessage: 'Capacity number must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.send({ status: 400, ErrorMessage: `Condition name must not be blank and must be 'great', 'fair', or 'poor'` });

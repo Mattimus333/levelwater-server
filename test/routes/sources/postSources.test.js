@@ -140,21 +140,23 @@ describe('POST /sources TESTS', () => {
     })
     .expect({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' }, done);
   });
-  //
-  // it('requires capacity', (done) => {
-  //   request
-  //   .post('/treatment')
-  //   .set('token', token)
-  //   .send({
-  //     water_systems_id: 1,
-  //     treatment_name: 'Cool treatment type',
-  //     treatment_type: 'ion-exchange',
-  //     year_constructed: 2016,
-  //     condition: 'great',
-  //     critical_to_operations: 'true',
-  //   })
-  //   .expect({ status: 400, ErrorMessage: 'Capacity name must not be blank' }, done);
-  // });
+
+  it('requires capacity', (done) => {
+    request
+    .post('/sources')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      source_type: 'gw',
+      source_name: '5th Street Well',
+      critical_to_operations: 'true',
+      year_constructed: 2000,
+      treatment: 'false',
+      condition: 'fair',
+      continuous_chlorination: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Capacity must not be blank' }, done);
+  });
   //
   // it('requires condition', (done) => {
   //   request

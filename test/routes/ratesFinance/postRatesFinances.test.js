@@ -87,65 +87,84 @@ describe('POST /distribution-system', () => {
     .expect('Content-Type', /json/)
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
-  //
-  // it('should require a water systems id', done => {
-  //   request
-  //   .post('/distribution-system')
-  //   .set('token', token)
-  //   .send({
-  //     total_length_miles: 400,
-  //     average_age_of_pipes: 65,
-  //     average_main_diameter_inches: '12',
-  //     condition: 'fair',
-  //   })
-  //   .expect('Content-Type', /json/)
-  //   .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank' }, done);
-  // });
-  //
-  //
-  //   it('should require water systems id to be a number', done => {
-  //     request
-  //     .post('/distribution-system')
-  //     .set('token', token)
-  //     .send({
-  //       total_length_miles: 33,
-  //       water_systems_id: 'Im a string',
-  //       average_age_of_pipes: 65,
-  //       average_main_diameter_inches: '12',
-  //       condition: 'fair',
-  //     })
-  //     .expect('Content-Type', /json/)
-  //     .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank' }, done);
-  //   });
-  //
-  // it('should require a total length miles', done => {
-  //   request
-  //   .post('/distribution-system')
-  //   .set('token', token)
-  //   .send({
-  //     water_systems_id: 1,
-  //     average_age_of_pipes: 65,
-  //     average_main_diameter_inches: '12',
-  //     condition: 'fair',
-  //   })
-  //   .expect('Content-Type', /json/)
-  //   .expect({ status: 400, ErrorMessage: 'Total length must not be blank and must be a number' }, done);
-  // });
-  //
-  // it('should require a total length miles to be a number', done => {
-  //   request
-  //   .post('/distribution-system')
-  //   .set('token', token)
-  //   .send({
-  //     total_length_miles: 'Wooo Im a string',
-  //     water_systems_id: 1,
-  //     average_age_of_pipes: 65,
-  //     average_main_diameter_inches: '12',
-  //     condition: 'fair',
-  //   })
-  //   .expect('Content-Type', /json/)
-  //   .expect({ status: 400, ErrorMessage: 'Total length must not be blank and must be a number' }, done);
-  // });
+
+  it('should require a water systems id', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      current_average_water_rate: 40.00,
+      total_financial_reserves: 10000,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank and must be a number' }, done);
+  });
+
+  it('should require a water systems id to be a number', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      water_systems_id: 'Not a number',
+      current_average_water_rate: 40.00,
+      total_financial_reserves: 10000,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank and must be a number' }, done);
+  });
+
+  it('should require current average water rate', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      total_financial_reserves: 10000,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Current average water rate must not be blank and must be a number' }, done);
+  });
+
+  it('should require current average water rate be a number', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      current_average_water_rate: 'Not a number',
+      total_financial_reserves: 10000,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Current average water rate must not be blank and must be a number' }, done);
+  });
   //
   // it('should require an average age of pipes', done => {
   //   request

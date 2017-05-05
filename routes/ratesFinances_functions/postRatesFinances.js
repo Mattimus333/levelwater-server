@@ -34,10 +34,10 @@ const postRatesFinances = (req, res) => {
   };
 
   if (typeof water_systems_id !== 'number') {
-    return res.status(400).send('Water systems id must not be blank');
+    return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank and must be a number' });
   }
   if (typeof current_average_water_rate !== 'number') {
-    return res.status(400).send('Current average water rate must be a number');
+    return res.send({ status: 400, ErrorMessage: 'Current average water rate must not be blank and must be a number' })
   }
   if (typeof total_financial_reserves !== 'number') {
     return res.status(400).send('must be a number');

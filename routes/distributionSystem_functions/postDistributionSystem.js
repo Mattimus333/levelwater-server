@@ -7,15 +7,13 @@ const knex = require('../../knex');
 * @route {POST} /distribution-system
 */
 const postDistributionSystem = (req, res) => {
-  const { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches } = req.body;
-  const distributionSystem = { water_systems_id, total_length_miles, distribution_name, average_age_of_pipes, condition, average_main_diameter_inches };
+  const { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches, condition } = req.body;
+  const distributionSystem = { water_systems_id, total_length_miles, average_age_of_pipes, condition, average_main_diameter_inches };
+  console.log('this');
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
     return res.status(400).send('Water systems id must not be blank');
-  }
-  if (!distribution_name || !distribution_name.trim()) {
-    return res.status(400).send('distribution name must not be blank!');
   }
   if (typeof total_length_miles !== 'number') {
     return res.status(400).send('Total length must not be blank');

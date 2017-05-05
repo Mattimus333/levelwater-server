@@ -37,12 +37,58 @@ describe('DELETE /users/:id', () => {
     done();
   });
 
+  it('throws an error for incorrect user id', done => {
+    request
+      .delete('/users/10001')
+      .end((err, res) => {
+        knex('users')
+        .where('id', 10001)
+        .then(user => {
+          console.log('first', user);
+          expect(user).to.have.lengthOf(0);
+        })
+        done();
+        // below should only apply to water_systems delete tests because it is the central table
+        // .then(() => {
+        //   knex('water_systems')
+        //     .where('director_id', res.body[0].id)
+        //     .then(movies => {
+        //       expect(movies).to.have.lengthOf(0);
+        //       done();
+        //     });
+        // })
+      });
+  })
+
+  it('test', done => {
+    request
+      .delete('/users/10001')
+      .set('token', token)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        expect(res.body).to.deep.equal({})
+        done();
+      });
+        // below should only apply to water_systems delete tests because it is the central table
+        // .then(() => {
+        //   knex('water_systems')
+        //     .where('director_id', res.body[0].id)
+        //     .then(movies => {
+        //       expect(movies).to.have.lengthOf(0);
+        //       done();
+        //     });
+        // })
+  })
+
   it('deletes a user and its information', done => {
     request
       .delete('/users/1')
       .end((err, res) => {
-        knex('users').then(users => {
-          expect(users).to.have.lengthOf(0);
+        knex('users')
+        .where('id', 1)
+        .then(user => {
+          console.log(user);
+          expect({});
         })
         done();
         // below should only apply to water_systems delete tests because it is the central table

@@ -165,6 +165,45 @@ describe('POST /distribution-system', () => {
     .expect('Content-Type', /json/)
     .expect({ status: 400, ErrorMessage: 'Current average water rate must not be blank and must be a number' }, done);
   });
+
+  it('should require total financial reserves', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      current_average_water_rate: 1,
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Total financial reserves must not be blank and must be a number' }, done);
+  });
+
+  it('should require total financial reserves to be a number', done => {
+    request
+    .post('/rates-finances-fixedcosts')
+    .set('token', token)
+    .send({
+      water_systems_id: 1,
+      current_average_water_rate: 1,
+      total_financial_reserves: 'String',
+      annual_revenue_water_sales: 50000,
+      annual_revenue_fees_charged: 50000,
+      annual_revenue_subsidies: 1000,
+      annual_savings_to_financial_reserves: 1000,
+      annual_personnel_costs: 40000,
+      annual_operations_costs: 30000,
+      annual_debt_costs: 4000,
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Total financial reserves must not be blank and must be a number' }, done);
+  });
   //
   // it('should require an average age of pipes', done => {
   //   request

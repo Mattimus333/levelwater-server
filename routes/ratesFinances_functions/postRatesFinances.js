@@ -40,7 +40,7 @@ const postRatesFinances = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Current average water rate must not be blank and must be a number' })
   }
   if (typeof total_financial_reserves !== 'number') {
-    return res.status(400).send('must be a number');
+    return res.send({ status: 400, ErrorMessage: 'Total financial reserves must not be blank and must be a number' })
   }
   if (typeof annual_revenue_water_sales !== 'number') {
     return res.status(400).send('Annual revenue water sales must be a number');

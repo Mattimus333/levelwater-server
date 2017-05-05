@@ -5,7 +5,10 @@ An express server for [level-water.herokuapp.com](https://level-water.herokuapp.
 See our JS Doc HTML page here for route documentation.  
 
 ## Setup
-To run this on your own machine locally first fork and clone this repo.  In order to run it yourself you will need to create your own google app and create your own .env file.  The .env file needs three properties, JWT_KEY, CLIENTID, and CLIENTSECRET.  JWT KEY will have to be generated and the other two you can get when you create a google app.  See our env sample file(just fill in the values and add a . at the beginning!)
+- To run this on your own machine locally first fork and clone this repo.  
+- In order to run it yourself you will need to create your own google app and create your own .env file.  
+- The .env file needs three properties, JWT_KEY, CLIENTID, and CLIENTSECRET.  
+- JWT KEY will have to be generated and the other two you can get when you create a google app.  See our env sample file(just fill in the values and add a . at the beginning!)
 
 `npm install`
 Installs dependencies

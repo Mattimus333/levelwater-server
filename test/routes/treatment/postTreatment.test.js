@@ -49,7 +49,7 @@ describe('POST /treatment TESTS', () => {
       condition: 'great',
       critical_to_operations: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+    .expect({ status: 400, ErrorMessage: 'Water systems name must not be blank' }, done);
   });
 
   it('requires treatment type', (done) => {

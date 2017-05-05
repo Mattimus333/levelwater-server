@@ -22,7 +22,7 @@ afterEach((done) => {
   });
 });
 
-describe('GET /water-systems/:id', () => {
+describe('DELETE /water-systems/:id', () => {
   let token;
 
   it('requires a token', (done) => {
@@ -39,40 +39,36 @@ describe('GET /water-systems/:id', () => {
     done();
   });
 
-  it('responds with JSON', done => {
+  it('Throws an an error if the user is not linked to the water system they want to delete', (done) => {
     request
-    .get('/water-systems/1')
+    .delete('/water-systems/2')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect(200, {
-      id: 1,
-      pws_name: 'Drunk with power',
-      pws_id: 1234567,
-      population: 1000,
-      connections: 444,
-    }, done);
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
   });
 
-  it('should respond with 401 and Unauthorized if no token', done => {
+  it('Throws an an error if the water system doesnt exist', (done) => {
     request
-    .get('/water-systems/1')
-    .expect('Content-Type', /json/)
-    .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
-  });
-
-  it('should respond with 400 and Water system not found if id does not exist', done => {
-    request
-    .get('/water-systems/3000')
+    .delete('/water-systems/200')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
-  });
+    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+  })
 
-  it('should respond with 400 and Water system not found if wrong id', done => {
+  it('Deletes the water system', (done) => {
     request
-    .get('/water-systems/2')
+    .delete('/water-systems/1')
     .set('token', token)
     .expect('Content-Type', /json/)
-    .expect({ 'status': 400, 'ErrorMessage': 'Water system not found!' }, done);
+    .expect(200, '1')
+    .then(() => {
+      knex('water_systems')
+      .where('id', 1)
+      .then((waterSystem) => {
+        expect(waterSystem).to.have.lengthOf(0);
+        // expect(directors).to.deep.include(newDirector);
+      });
+    });
+    done();
   });
 });

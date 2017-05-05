@@ -63,7 +63,7 @@ describe('POST /login', () => {
       })
       .expect({ status: 400, ErrorMessage: 'Bad email or password' }, done);
     });
-    
+
     it('should respond with 200 and return user info with correct credentials', done => {
       request
       .post('/login')

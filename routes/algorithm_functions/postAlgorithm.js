@@ -8,14 +8,14 @@ const startAlgorithm = require('../../water-math/app.js');
 * @route {POST} /algorithm-results
 * @routeparam {Number} water_systems_id - The id for the water system.
 */
-let sourceObjectArray = [];
-let treatmentObjectArray = [];
-let storageObjectArray = [];
-let distributionObjectArray = [];
-let ratesFinancesObjectArray = [];
-let algorithmResultsObject = {};
 
 const getInfoFromTables = (req, res) => {
+  const sourceObjectArray = [];
+  const treatmentObjectArray = [];
+  const storageObjectArray = [];
+  const distributionObjectArray = [];
+  const ratesFinancesObjectArray = [];
+  const algorithmResultsObject = {};
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')

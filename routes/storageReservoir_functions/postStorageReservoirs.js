@@ -15,16 +15,16 @@ const postStorageReservoirs = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank' });
   }
   if (!reservoir_name || !reservoir_name.trim()) {
-    return res.send({ status: 400, ErrorMessage: 'Reservoir name name must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Reservoir name must not be blank' });
   }
   if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !==  'plastic') {
-    return res.send({ status: 400, ErrorMessage: 'Reservoir type must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Reservoir type must be valid' });
   }
   if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
     return res.send({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' });
   }
-  if (typeof capacity !== 'number') {
-    return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
+  if (typeof capacity !== 'number' || capacity < 0) {
+    return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank and must not be negative' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
     return res.send({ status: 400, ErrorMessage: 'Condition must not be blank and must be great, fair, or poor' });

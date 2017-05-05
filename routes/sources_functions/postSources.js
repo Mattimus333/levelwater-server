@@ -11,6 +11,9 @@ const postSources = (req, res) => {
   const source = { water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, continuous_chlorination };
 
   const currentdate = new Date();
+  if (typeof water_systems_id !== 'number') {
+    return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank' });
+  }
   if (!source_name || !source_name.trim()) {
     return res.send({ status: 400, ErrorMessage: 'Source name must not be blank' });
   }

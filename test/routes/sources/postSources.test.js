@@ -51,7 +51,7 @@ describe('POST /sources TESTS', () => {
       condition: 'fair',
       continuous_chlorination: 'true',
     })
-    .expect({ status: 400, ErrorMessage: 'Water system not found!' }, done);
+    .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank' }, done);
   });
   //
   it('requires source name', (done) => {

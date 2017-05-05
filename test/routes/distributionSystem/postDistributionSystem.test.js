@@ -76,6 +76,20 @@ describe('POST /distribution-system', () => {
     .expect({ 'status': 401, 'ErrorMessage': 'Unauthorized' }, done);
   });
 
+  it('should should require a water systems id', done => {
+    request
+    .post('/distribution-system')
+    .set('token', token)
+    .send({
+      total_length_miles: 400,
+      average_age_of_pipes: 65,
+      average_main_diameter_inches: '12',
+      condition: 'fair',
+    })
+    .expect('Content-Type', /json/)
+    .expect({ status: 400, ErrorMessage: 'Water systems id must not be blank' }, done);
+  });
+
   // it('should respond with 400 and Water system not found if id does not exist', done => {
   //   request
   //   .get('/distribution-system/3000')

@@ -13,7 +13,7 @@ const postDistributionSystem = (req, res) => {
 
   const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
-    return res.status(400).send('Water systems id must not be blank');
+    return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank' });
   }
   if (typeof total_length_miles !== 'number') {
     return res.status(400).send('Total length must not be blank');

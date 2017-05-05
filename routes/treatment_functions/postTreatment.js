@@ -11,6 +11,10 @@ const postTreatment = (req, res) => {
   const treatment = { water_systems_id, treatment_name, treatment_type, year_constructed, capacity, condition, critical_to_operations };
   const currentdate = new Date();
 
+
+  if (typeof water_systems_id !== 'number') {
+    return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank' });
+  }
   if (!treatment_name || !treatment_name.trim()) {
     return res.send({ status: 400, ErrorMessage: 'Treatment name must not be blank' });
   }

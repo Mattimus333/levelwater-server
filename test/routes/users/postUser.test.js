@@ -69,4 +69,30 @@ describe('POST /users', () => {
     })
     .expect({ status: 400, ErrorMessage: 'Email already exists' }, done);
   });
+
+  it('rejects a post if the password is too short', (done) => {
+    request
+    .post('/users')
+    .send({
+      email: 'alex834@gmail.com',
+      password: 'some',
+      first_name: 'Alex',
+      last_name: 'K-Daddy',
+      superuser: 'true',
+    })
+    .expect({ status: 400, errorMessage: 'Password must be at least 8 characters long' }, done);
+  });
+
+  it('rejects a post if the email is not valid email format', (done) => {
+    request
+    .post('/users')
+    .send({
+      email: 'alex8gmail.com',
+      password: 'something',
+      first_name: 'Alex',
+      last_name: 'K-Daddy',
+      superuser: 'true',
+    })
+    .expect({ status: 400, ErrorMessage: 'Improper email format' }, done);
+  });
 });

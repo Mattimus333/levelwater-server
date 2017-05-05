@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --recursive",
     "heroku-postbuild": "knex migrate:latest",
     "knex": "knex",
     "start": "nodemon server.js"

@@ -45,6 +45,7 @@ describe('DELETE /users/:id', () => {
         .where('id', 10001)
         .then(user => {
           console.log('first', user);
+          'This user could not be found'
           expect(user).to.have.lengthOf(0);
         })
         done();
@@ -65,10 +66,7 @@ describe('DELETE /users/:id', () => {
       .delete('/users/10001')
       .set('token', token)
       .expect('Content-Type', /json/)
-      .end((err, res) => {
-        expect(res.body).to.deep.equal({})
-        done();
-      });
+      .expect({ 'status': 404, 'ErrorMessage': 'This user could not be found' }, done);
         // below should only apply to water_systems delete tests because it is the central table
         // .then(() => {
         //   knex('water_systems')
@@ -78,7 +76,7 @@ describe('DELETE /users/:id', () => {
         //       done();
         //     });
         // })
-  })
+  });
 
   it('deletes a user and its information', done => {
     request
@@ -87,7 +85,7 @@ describe('DELETE /users/:id', () => {
         knex('users')
         .where('id', 1)
         .then(user => {
-          console.log(user);
+          console.log('second', user);
           expect({});
         })
         done();

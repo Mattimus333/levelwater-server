@@ -9,7 +9,7 @@ const knex = require('../../knex');
 */
 const deleteUser = (req, res) => {
   if (Number(req.claim.userId) !== Number(req.params.user_id)) {
-    return res.status(404).send('This user could not be found');
+    return res.send({ status: 404, ErrorMessage: 'This user could not be found' });
   }
   return knex('users')
   .where('id', req.params.user_id)

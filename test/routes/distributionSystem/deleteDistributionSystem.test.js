@@ -20,7 +20,7 @@ afterEach((done) => {
   });
 });
 
-describe('DELETE /users/:user_id', () => {
+describe('DELETE /distribution-system/:water_systems_id', () => {
   let token;
 
   it('requires a token', (done) => {
@@ -37,28 +37,28 @@ describe('DELETE /users/:user_id', () => {
     done();
   });
 
-  it('throws an error for incorrect user id', done => {
+  it('throws an error for incorrect water system id', done => {
     request
-      .delete('/users/10001')
+      .delete('/distribution-system/10001')
       .set('token', token)
       .expect('Content-Type', /json/)
-      .expect({ 'status': 404, 'ErrorMessage': 'This user could not be found' }, done);
+      .expect({ 'status': 400, 'ErrorMessage': 'Distribution system not found!' }, done);
   });
 
-  it('deletes a user and its information, returns id of deleted user', done => {
+  it('deletes a user and its information, returns id of deleted distribution system', done => {
     request
-      .delete('/users/1')
+      .delete('/distribution-system/1')
       .set('token', token)
       .expect('Content-Type', /json/)
       .expect(200, '1', done);
   });
 
-  it('throws an error when deleting an incorrect user id', done => {
+  it('throws an error when deleting an incorrect water system id', done => {
     request
-      .delete('/users/3')
+      .delete('/distribution-system/3')
       .set('token', token)
       .expect('Content-Type', /json/)
-      .expect({ 'status': 404, 'ErrorMessage': 'This user could not be found' }, done);
+      .expect({ 'status': 400, 'ErrorMessage': 'Distribution system not found!' }, done);
   });
 
 });

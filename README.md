@@ -22,7 +22,8 @@ Use this to lint all pages: `./node_modules/.bin/eslint *`
 Use this to test all routes: `npm test`
 
 ## Functionality
-levelwater-server is a node server that uses the express module to send get, post, patch, and delete requests to a database.  Users can authenticate through traditional signup/login or Google oauth.  To access most routes, the user must be authorized to make requests to the desired water system.  
+levelwater-server is a node server that uses the express module to send get, post, patch, and delete requests to a database.  Users can authenticate through traditional signup/login or Google oauth.  To access most routes, the user must be authorized to make requests to the desired water system.
+- To view route documentation run `out/index.html` locally.   
 
 ## About Level water
 

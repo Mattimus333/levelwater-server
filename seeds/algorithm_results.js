@@ -3,7 +3,7 @@ exports.seed = function (knex, Promise) {
   return knex('algorithm_results').del()
     .then(() => knex('algorithm_results').insert([{
       id: 1,
-      water_systems_id: 2,
+      water_systems_id: 1,
       algorithm_results: JSON.stringify({ ratesFinancesObject:
    { id: 1,
      water_systems_id: 1,

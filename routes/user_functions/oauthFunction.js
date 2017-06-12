@@ -16,7 +16,7 @@ const oAuthUser = (req, res) => {
       delete result.hashed_password;
       result.token = token;
       let water_systems_id = result.water_systems_id || null;
-      res.redirect(`https://level-water.herokuapp.com/?t=${token}&wsi=${water_systems_id}`);
+      res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&wsi=${water_systems_id}`);
       // res.status(200).json(result);
       res.end();
     } else {

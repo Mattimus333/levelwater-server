@@ -75,6 +75,13 @@ const getInfoFromTables = (req, res) => {
     .insert((algorithmResultsObject));
   })
   .then(() => {
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileCompleted: 'true',
+    })
+  })
+  .then(() => {
     res.status(200).json(algorithmResultsObject);
   })
   .catch((err) => {

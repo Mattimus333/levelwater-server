@@ -8,6 +8,7 @@ exports.seed = function (knex, Promise) {
       email: 'alex83@gmail.com',
       hashed_password: '$2a$12$gu7YpvRMhFigRfd926FSL.88tRajaCtd7m00M.lO5fGR1IhbApXm.',
       superuser: 'true',
+      profileCompleted: 'true',
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ exports.seed = function (knex, Promise) {
       email: 'bob@gmail.com',
       hashed_password: '$2a$12$3AvRLQk7D.7GNXjuX/8rqefxt9TLo42NeW77ln3.mnnXYACTfc12e',
       superuser: 'true',
+      profileCompleted: 'true',
     },
     {
       id: 3,
@@ -26,5 +28,6 @@ exports.seed = function (knex, Promise) {
       email: 'fred@gmail.com',
       hashed_password: '$2a$12$RRlmART1CQol71mHKTBXz.QIbKL0/SRFJB7Xh5xiZqJKLftncXyxe',
       superuser: 'true',
+      profileCompleted: 'true',
     }]));
 };

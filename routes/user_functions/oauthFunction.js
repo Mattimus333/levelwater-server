@@ -17,7 +17,7 @@ const oAuthUser = (req, res) => {
       result.token = token;
       let water_systems_id = result.water_systems_id || null;
       let profileStepCompleted = result.profileStepCompleted;
-      res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=${profileStepCompleted}`);
+      res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=${profileStepCompleted}&wsi=${water_systems_id}`);
       // res.status(200).json(result);
       res.end();
     } else {
@@ -38,7 +38,7 @@ const oAuthUser = (req, res) => {
             'Content-Type': 'text/plain',
             'Token': `${token}`
           });
-          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none`);
+          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none&wsi=${water_systems_id}`);
           // res.status(200).json({ userId, token });
           res.end();
         });

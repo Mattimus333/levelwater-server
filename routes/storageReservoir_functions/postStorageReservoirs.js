@@ -43,6 +43,13 @@ const postStorageReservoirs = (req, res) => {
     return knex('storage_reservoirs')
     .insert(reservoir);
   })
+  .then(() => {
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileStepCompleted: 'storage',
+    })
+  })
   .then((result) => {
     reservoir.id = result[0];
     res.status(200).json(reservoir);

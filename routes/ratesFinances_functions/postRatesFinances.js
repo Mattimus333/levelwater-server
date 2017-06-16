@@ -79,6 +79,13 @@ const postRatesFinances = (req, res) => {
     ratesFinances.id = result[0];
     res.status(200).json(ratesFinances);
   })
+  .then(() => {
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileStepCompleted: 'revenue',
+    })
+  })
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });
   });

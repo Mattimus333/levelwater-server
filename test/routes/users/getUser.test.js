@@ -83,7 +83,8 @@ describe('GET /users/:id', () => {
       "id": 1,
       "email": "alex83@gmail.com",
       "superuser": "true",
-      "water_systems_id": 1
+      "water_systems_id": 1,
+      "profileStepCompleted": "algorithm"
     }, done);
   });
 });

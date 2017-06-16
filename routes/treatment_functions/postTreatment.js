@@ -46,6 +46,13 @@ const postTreatment = (req, res) => {
   })
   .then((result) => {
     treatment.id = result[0];
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileStepCompleted: 'treatment',
+    })
+  })
+  .then(() => {
     res.status(200).json(treatment);
   })
   .catch((err) => {

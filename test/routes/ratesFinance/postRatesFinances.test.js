@@ -20,7 +20,7 @@ afterEach((done) => {
   });
 });
 
-describe('POST /distribution-system', () => {
+describe('POST /rates-finances', () => {
   let token;
 
   it('requires a token', (done) => {

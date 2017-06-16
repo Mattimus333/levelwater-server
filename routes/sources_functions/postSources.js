@@ -50,6 +50,13 @@ const postSources = (req, res) => {
   })
   .then((result) => {
     source.id = result[0];
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileStepCompleted: 'source',
+    })
+  })
+  .then(() => {
     res.status(200).json(source);
   })
   .catch((err) => {

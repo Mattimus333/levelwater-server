@@ -78,7 +78,7 @@ const getInfoFromTables = (req, res) => {
     return knex('users')
     .where('id', req.claim.userId)
     .update({
-      profileCompleted: 'true',
+      profileStepCompleted: 'algorithm',
     })
   })
   .then(() => {

@@ -39,6 +39,13 @@ const postDistributionSystem = (req, res) => {
   })
   .then((result) => {
     distributionSystem.id = result[0];
+    return knex('users')
+    .where('id', req.claim.userId)
+    .update({
+      profileStepCompleted: 'distribution',
+    })
+  })
+  .then(() => {
     res.status(200).json(distributionSystem);
   })
   .catch((err) => {

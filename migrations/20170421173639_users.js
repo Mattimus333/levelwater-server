@@ -7,7 +7,7 @@ exports.up = function (knex, Promise) {
     table.string('email', 'char(60)').notNullable().unique();
     table.string('hashed_password', 'char(60)').notNullable();
     table.enum('superuser', ['true', 'false']).defaultTo('false');
-    table.enum('profileCompleted', ['true', 'false']).defaultTo('false');
+    table.enum('profileStepCompleted', ['none', 'basic', 'revenue', 'source', 'treatment', 'storage', 'distribution', 'algorithm']).defaultTo('none');
   });
 };
 

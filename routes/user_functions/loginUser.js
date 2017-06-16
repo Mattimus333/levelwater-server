@@ -15,7 +15,7 @@ const loginUsers = (req, res) => {
   }
   return knex('users')
   .where('email', req.body.email)
-  .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id', 'profileCompleted')
+  .select('hashed_password', 'first_name', 'last_name', 'id', 'email', 'superUser', 'water_systems_id', 'profileStepCompleted')
   .then((users) => {
     user = users[0];
     if (users.length === 0) {

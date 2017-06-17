@@ -38,7 +38,7 @@ const oAuthUser = (req, res) => {
             'Content-Type': 'text/plain',
             'Token': `${token}`
           });
-          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none&wsi=${water_systems_id}&ft=t`)
+          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none&wsi=null&ft=t`)
           // res.status(200).json({ userId, token });
           res.end();
         });

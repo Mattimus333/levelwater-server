@@ -3,10 +3,10 @@ exports.seed = function (knex, Promise) {
   return knex('water_systems').del()
     .then(() => knex('water_systems').insert([{
       id: 1,
-      pws_name: 'West Bay Mud',
+      pws_name: 'West Bay MUD',
       pws_id: 1234567,
       population: 1000,
-      connections: 444,
+      connections: 5000,
     },
     {
       id: 2,

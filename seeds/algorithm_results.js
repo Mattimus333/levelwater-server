@@ -20,7 +20,7 @@ exports.seed = function (knex, Promise) {
    [ [ 'First Street Well', 500000, 32, 15625 ],
      [ 'Main Street Tank', 800000, 5, 76080 ],
      [ 'First Street Tank', 1050000, 11, 95455 ],
-     [ 'Distribution System', 1980000, 40, 51238 ] ],
+     [ 'Distribution System', 1980000, 40, 31238 ] ],
   noncriticalInfrastructure:
    [ [ 'Main Street Well', 435000, 5, 87000 ],
      [ 'First Street Treatment Plant', 220000, 9, 24444 ] ] }),

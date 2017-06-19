@@ -6,7 +6,7 @@ exports.seed = function (knex, Promise) {
       pws_name: 'West Bay MUD',
       pws_id: 1234567,
       population: 1000,
-      connections: 5000,
+      connections: 700,
     },
     {
       id: 2,

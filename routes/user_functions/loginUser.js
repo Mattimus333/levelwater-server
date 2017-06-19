@@ -8,10 +8,10 @@ const router = express.Router();
 const loginUsers = (req, res) => {
   let user;
   if (req.body.email === undefined) {
-    return res.send({ status: 400, errorMessage: 'Email must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Email must not be blank' });
   }
   if (req.body.password === undefined) {
-    return res.send({ status: 400, errorMessage: 'Password must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Password must not be blank' });
   }
   return knex('users')
   .where('email', req.body.email)

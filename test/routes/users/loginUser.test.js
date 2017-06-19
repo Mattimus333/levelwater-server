@@ -31,7 +31,7 @@ describe('POST /login', () => {
     .send({
       password: 'something',
     })
-    .expect({ status: 400, errorMessage: 'Email must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Email must not be blank' }, done);
   });
 
   it('requires a password', (done) => {
@@ -40,7 +40,7 @@ describe('POST /login', () => {
     .send({
       email: 'alex83@gmail.com',
     })
-    .expect({ status: 400, errorMessage: 'Password must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Password must not be blank' }, done);
   });
 
 

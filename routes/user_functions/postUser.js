@@ -13,10 +13,10 @@ const postUsers = (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !email.trim()) {
-    return res.send({ status: 400, errorMessage: 'Email must not be blank' });
+    return res.send({ status: 400, ErrorMessage: 'Email must not be blank' });
   }
   if (!password || password.length < 8) {
-    return res.send({ status: 400, errorMessage: 'Password must be at least 8 characters long' });
+    return res.send({ status: 400, ErrorMessage: 'Password must be at least 8 characters long' });
   }
 
   knex('users')

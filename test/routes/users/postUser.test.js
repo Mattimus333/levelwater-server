@@ -31,7 +31,7 @@ describe('POST /users', () => {
     .send({
       password: 'something',
     })
-    .expect({ status: 400, errorMessage: 'Email must not be blank' }, done);
+    .expect({ status: 400, ErrorMessage: 'Email must not be blank' }, done);
   });
 
   it('requires a password', (done) => {
@@ -40,7 +40,7 @@ describe('POST /users', () => {
     .send({
       email: 'alex82@gmail.com',
     })
-    .expect({ status: 400, errorMessage: 'Password must be at least 8 characters long' }, done);
+    .expect({ status: 400, ErrorMessage: 'Password must be at least 8 characters long' }, done);
   });
 
   it('responds with JSON', done => {
@@ -80,7 +80,7 @@ describe('POST /users', () => {
       last_name: 'K-Daddy',
       superuser: 'true',
     })
-    .expect({ status: 400, errorMessage: 'Password must be at least 8 characters long' }, done);
+    .expect({ status: 400, ErrorMessage: 'Password must be at least 8 characters long' }, done);
   });
 
   it('rejects a post if the email is not valid email format', (done) => {

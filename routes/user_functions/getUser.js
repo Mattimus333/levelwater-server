@@ -10,7 +10,7 @@ const knex = require('../../knex');
 const getUser = (req, res) => {
 
   if (Number(req.claim.userId) !== Number(req.params.user_id)) {
-    return res.send({ status:401, ErrorMessage: 'Unauthorized' });
+    return res.send({ status: 401, ErrorMessage: 'Unauthorized' });
   }
   return knex('users')
   .where('id', req.params.user_id)

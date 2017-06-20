@@ -50,7 +50,7 @@ const postTreatment = (req, res) => {
     .where('id', req.claim.userId)
     .update({
       profileStepCompleted: 'treatment',
-    })
+    });
   })
   .then(() => {
     res.status(200).json(treatment);

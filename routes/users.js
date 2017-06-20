@@ -1,7 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// const configAuth = require('../config/auth');
 const test = require('./user_functions/test');
 const postUser = require('./user_functions/postUser');
 const getUser = require('./user_functions/getUser');

@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off", camelcase: "off"*/
 
 /**
 * GET function to make request to Storage Reservoir table. Returns JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.

@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off"*/
 
 /**
 * GET function to make request to Sources table. Returns JSON object with water_systems_id, source_name, source_type, treatment, critical_to_operations, year_constructed, capacity, condition, and continuous_chlorination.

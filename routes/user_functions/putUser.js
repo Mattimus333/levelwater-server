@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off"*/
 
 /**
 * PUT function to make request to Users table. Puts and returns JSON object with water_systems_id, first_name, last_name, email, hashed_password, and superuser.

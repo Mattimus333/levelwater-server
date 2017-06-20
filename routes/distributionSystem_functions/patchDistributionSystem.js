@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off" */
 
 /**
 * PATCH function to make request to Distribution Systems table. Returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, and average_main_diameter_inches.

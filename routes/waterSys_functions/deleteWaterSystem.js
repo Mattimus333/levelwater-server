@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off"*/
 
 /**
 * DELETE function to make request to Water Systems table. Deletes and returns JSON object with pws_name, pws_id, population, and connections.

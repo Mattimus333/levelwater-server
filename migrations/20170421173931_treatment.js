@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     table.increments();
     table.integer('water_systems_id').notNullable().defaultTo(0);
     table.string('treatment_name', 'char(60)').notNullable().defaultTo('');
-    table.enum('treatment_type', ['conventional-sw', 'ion-exchange', 'corrosion-control'])
+    table.enum('treatment_type', ['conventional-sw', 'ion-exchange', 'corrosion-control']);
     table.integer('year_constructed').notNullable().defaultTo(0);
     table.integer('capacity').notNullable().defaultTo(0);
     table.enum('condition', ['great', 'fair', 'poor']).defaultTo('great');

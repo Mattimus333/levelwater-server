@@ -21,10 +21,10 @@ const postDistributionSystem = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Average age of pipes must not be blank and must be a number' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.send({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` });
+    return res.send({ status: 400, ErrorMessage: 'Condition must not be blank and must be "great", "fair", or "poor"' });
   }
   if (average_main_diameter_inches !== '4' && average_main_diameter_inches !== '6' && average_main_diameter_inches !== '8' && average_main_diameter_inches !== '12' && average_main_diameter_inches !== '24') {
-    return res.send({ status: 400, ErrorMessage: `Average main diameter must be a valid length in inches` });
+    return res.send({ status: 400, ErrorMessage: 'Average main diameter must be a valid length in inches' });
   }
 
   knex('users')
@@ -43,7 +43,7 @@ const postDistributionSystem = (req, res) => {
     .where('id', req.claim.userId)
     .update({
       profileStepCompleted: 'distribution',
-    })
+    });
   })
   .then(() => {
     res.status(200).json(distributionSystem);

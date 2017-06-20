@@ -21,10 +21,10 @@ const postSources = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Source type must not be blank' });
   }
   if (treatment !== 'true' && treatment !== 'false') {
-    return res.send({ status: 400, ErrorMessage: `Treatment must not be blank and must be blank and must be 'true' or 'false'` });
+    return res.send({ status: 400, ErrorMessage: 'Treatment must not be blank and must be blank and must be "true" or "false"' });
   }
   if (critical_to_operations !== 'true' && critical_to_operations !== 'false') {
-    return res.send({ status: 400, ErrorMessage: `Critical to operations must not be blank and must be 'true' or 'false'` });
+    return res.send({ status: 400, ErrorMessage: 'Critical to operations must not be blank and must be "true" or "false"' });
   }
   if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
     return res.send({ status: 400, ErrorMessage: 'Year constructed must not be blank and must be a valid year' });
@@ -33,16 +33,16 @@ const postSources = (req, res) => {
     return res.send({ status: 400, ErrorMessage: 'Capacity must not be blank' });
   }
   if (condition !== 'great' && condition !== 'fair' && condition !== 'poor') {
-    return res.send({ status: 400, ErrorMessage: `Condition must not be blank and must be 'great', 'fair', or 'poor'` });
+    return res.send({ status: 400, ErrorMessage: 'Condition must not be blank and must be "great", "fair", or "poor"' });
   }
   if (continuous_chlorination !== 'true' && continuous_chlorination !== 'false') {
-    return res.send({ status: 400, ErrorMessage: `Continuous chlorination name must not be blank and must be 'true' or 'false'` });
+    return res.send({ status: 400, ErrorMessage: 'Continuous chlorination name must not be blank and must be "true" or "false"' });
   }
   knex('users')
   .where('id', req.claim.userId)
   .select('water_systems_id')
   .then((result) => {
-    if (Number(source.water_systems_id) !== result[0].water_systems_id || result.length === 0 ) {
+    if (Number(source.water_systems_id) !== result[0].water_systems_id || result.length === 0) {
       return res.send({ status: 400, ErrorMessage: 'Water system not found!' });
     }
     return knex('sources')
@@ -54,7 +54,7 @@ const postSources = (req, res) => {
     .where('id', req.claim.userId)
     .update({
       profileStepCompleted: 'source',
-    })
+    });
   })
   .then(() => {
     res.status(200).json(source);

@@ -31,7 +31,7 @@ class FinancialAnalysis {
 	}
 
 	getSourceCosts() {
-		for (let i =0; i < this.algorithmSourceResults.length; i++) {
+		for (let i = 0; i < this.algorithmSourceResults.length; i++) {
 			// console.log('this is algorithmSourceResults', this.algorithmSourceResults);
 			// console.log('this is algorithmSourceResults:', this.algorithmSourceResults);
 			this.total_source_replacement_costs += this.algorithmSourceResults[i][1].total_replacement_cost;

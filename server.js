@@ -16,8 +16,6 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 
-// finish below
-// import login from './routes/something/login';
 const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
@@ -25,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const config = {
-  appRoot: __dirname // required config
+  appRoot: __dirname, // required config
 };
 
 switch (app.get('env')) {

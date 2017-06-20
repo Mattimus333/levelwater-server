@@ -21,7 +21,7 @@ const getInfoFromTables = (req, res) => {
   .select('water_systems_id')
   .then((result) => {
     if (Number(req.params.water_systems_id) !== result[0].water_systems_id) {
-      return res.send({ status: 400, ErrorMessage: 'Water system not found'})
+      return res.send({ status: 400, ErrorMessage: 'Water system not found' });
     }
     return Promise.all([
       knex('sources')
@@ -63,8 +63,8 @@ const getInfoFromTables = (req, res) => {
               ratesFinancesObjectArray.push(ratesFinancesResult[i]);
             }
           }),
-      ]);
-    })
+    ]);
+  })
   .then(() => {
     return (startAlgorithm(sourceObjectArray, treatmentObjectArray, storageObjectArray, distributionObjectArray, ratesFinancesObjectArray));
   })
@@ -87,6 +87,6 @@ const getInfoFromTables = (req, res) => {
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });
   });
-}
+};
 
 module.exports = getInfoFromTables;

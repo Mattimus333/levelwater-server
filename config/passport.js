@@ -15,9 +15,9 @@ module.exports = (passport) => {
           first_name: profile.name.givenName,
           last_name: profile.name.familyName,
           email: profile.emails[0].value,
-        }
+        };
         done(null, user);
       });
-    }
+    },
   ));
 };

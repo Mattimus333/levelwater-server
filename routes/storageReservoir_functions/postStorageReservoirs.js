@@ -17,7 +17,7 @@ const postStorageReservoirs = (req, res) => {
   if (!reservoir_name || !reservoir_name.trim()) {
     return res.send({ status: 400, ErrorMessage: 'Reservoir name must not be blank' });
   }
-  if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !==  'plastic') {
+  if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !== 'plastic') {
     return res.send({ status: 400, ErrorMessage: 'Reservoir type must be valid' });
   }
   if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {
@@ -48,7 +48,7 @@ const postStorageReservoirs = (req, res) => {
     .where('id', req.claim.userId)
     .update({
       profileStepCompleted: 'storage',
-    })
+    });
   })
   .then((result) => {
     reservoir.id = result[0];

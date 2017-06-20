@@ -7,7 +7,7 @@ const oAuthUser = (req, res) => {
   knex('users')
   .where('email', req.session.passport.user.email)
   .then((results) => {
-    if (results.length > 0){
+    if (results.length > 0) {
       result = results[0];
       const claim = { userId: result.id };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
@@ -15,13 +15,13 @@ const oAuthUser = (req, res) => {
       });
       delete result.hashed_password;
       result.token = token;
-      let water_systems_id = result.water_systems_id || null;
-      let profileStepCompleted = result.profileStepCompleted;
+      const water_systems_id = result.water_systems_id || null;
+      const profileStepCompleted = result.profileStepCompleted;
       res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=${profileStepCompleted}&wsi=${water_systems_id}&ft=f`);
       // res.status(200).json(result);
       res.end();
     } else {
-      const password = req.session.passport.user.first_name + 99999999
+      const password = req.session.passport.user.first_name + 99999999;
       const user = req.session.passport.user;
       bcrypt.hash(password, 12)
       .then((hashed_password) => {
@@ -30,7 +30,7 @@ const oAuthUser = (req, res) => {
         .insert(user, '*')
         .then((userResult) => {
           const userId = userResult[0];
-          const claim = { userId: userId };
+          const claim = { userId };
           const token = jwt.sign(claim, process.env.JWT_KEY, {
             expiresIn: '7 days',
           });
@@ -38,7 +38,7 @@ const oAuthUser = (req, res) => {
             'Content-Type': 'text/plain',
             'Token': `${token}`
           });
-          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none&wsi=null&ft=t`)
+          res.redirect(`https://levelwaterio.herokuapp.com/?t=${token}&psc=none&wsi=null&ft=t`);
           // res.status(200).json({ userId, token });
           res.end();
         });

@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off", camelcase: "off"*/
 
 /**
 * POST function to make request to Distribution Systems table. Posts and returns JSON object with water_systems_id, total_length_miles, average_age_of_pipes, condition, distribution_name, and average_main_diameter_inches.
@@ -10,7 +11,6 @@ const postDistributionSystem = (req, res) => {
   const { water_systems_id, total_length_miles, average_age_of_pipes, average_main_diameter_inches, condition } = req.body;
   const distributionSystem = { water_systems_id, total_length_miles, average_age_of_pipes, condition, average_main_diameter_inches };
 
-  const currentdate = new Date();
   if (typeof water_systems_id !== 'number') {
     return res.send({ status: 400, ErrorMessage: 'Water systems id must not be blank' });
   }

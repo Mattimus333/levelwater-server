@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off", camelcase: "off"*/
 
 /**
 * POST function to make request to Storage Reservoir table. Posts JSON object with water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, and critical_to_operations.
@@ -7,7 +8,7 @@ const knex = require('../../knex');
 * @route {POST} /storage-reservoirs
 */
 const postStorageReservoirs = (req, res) => {
-  const { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations } = req.body
+  const { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations } = req.body;
   const reservoir = { water_systems_id, reservoir_type, reservoir_name, year_constructed, capacity, condition, critical_to_operations };
 
   const currentdate = new Date();
@@ -17,7 +18,7 @@ const postStorageReservoirs = (req, res) => {
   if (!reservoir_name || !reservoir_name.trim()) {
     return res.send({ status: 400, ErrorMessage: 'Reservoir name must not be blank' });
   }
-  if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !==  'redwood' && reservoir_type !== 'plastic') {
+  if (reservoir_type !== 'concrete' && reservoir_type !== 'steel' && reservoir_type !== 'redwood' && reservoir_type !== 'plastic') {
     return res.send({ status: 400, ErrorMessage: 'Reservoir type must be valid' });
   }
   if (typeof year_constructed !== 'number' || (year_constructed > currentdate.getFullYear())) {

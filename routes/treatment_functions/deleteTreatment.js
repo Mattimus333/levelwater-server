@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off"*/
 
 /**
 * DELETE function to make request to Treatment table. Deletes and returns JSON object with water_systems_id, treatment_name, treatment_type, year_constructed, capacity, and condition, critical_to_operations

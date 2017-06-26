@@ -1,7 +1,5 @@
 const knex = require('../../knex');
 
-// this code works for the actual get.  below line 22 is a test
-
 /**
 * GET function to make request to return JSON object from Algorithm Results table
 * @module getAlgorithm

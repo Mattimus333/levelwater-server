@@ -1,6 +1,7 @@
 const knex = require('../../knex');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-as-promised');
+/* eslint camelcase: "off"*/
 
 const oAuthUser = (req, res) => {
   let result;

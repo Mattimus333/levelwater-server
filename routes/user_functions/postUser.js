@@ -2,6 +2,7 @@ const knex = require('../../knex');
 const Joi = require('joi');
 const bcrypt = require('bcrypt-as-promised');
 const jwt = require('jsonwebtoken');
+/* eslint max-len: "off", camelcase: "off"*/
 
 /**
 * POST function to make request to Users table. Posts JSON object with water_systems_id, first_name, last_name, email, hashed_password, and superuser.
@@ -11,7 +12,6 @@ const jwt = require('jsonwebtoken');
 */
 const postUsers = (req, res) => {
   const { email, password } = req.body;
-
   if (!email || !email.trim()) {
     return res.send({ status: 400, ErrorMessage: 'Email must not be blank' });
   }

@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off"*/
 
 /**
 * DELETE function to make request to Users table. Deletes and returns JSON object with water_systems_id, first_name, last_name, email, hashed_password, and superuser.
@@ -15,8 +16,9 @@ const deleteUser = (req, res) => {
   .where('id', req.params.user_id)
   .del()
   .then((user) => {
-    delete user.hashed_password;
-    res.status(200).json(user);
+    const returnUser = user;
+    delete returnUser.hashed_password;
+    res.status(200).json(returnUser);
   })
   .catch((err) => {
     res.send({ status: 400, ErrorMessage: err });

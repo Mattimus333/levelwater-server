@@ -1,4 +1,5 @@
 const knex = require('../../knex');
+/* eslint max-len: "off", camelcase: "off"*/
 
 /**
 * POST function to make request to Water Systems table. Posts and returns JSON object with pws_name, pws_id, population, and connections.
